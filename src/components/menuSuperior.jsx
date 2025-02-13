@@ -5,5 +5,4 @@ function MenuSuperior() {
     </div>
   );
 }
-
 export default MenuSuperior;
