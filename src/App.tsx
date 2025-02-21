@@ -1,14 +1,13 @@
 import React from "react";
 import "./App.css";
 
-import MenuSuperior from "./components/MenuSuperior/index";
+import GeneralInfo from "./screens/GeneralInfo/index";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <MenuSuperior />
+      <GeneralInfo></GeneralInfo>
     </div>
   );
 }
 
-export default App;
