@@ -6,6 +6,13 @@ export const Title = styled.h1`
   text-align: center;
   color: #000000;
 `
+export const Image = styled.img`
+    height:75px;
+    width:90px;
+    left:96px;
+    top:34px;
+    position: absolute;
+`
 
 export const Wrapper = styled.section`
     background-color: #f6f6f6;
