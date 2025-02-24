@@ -1,5 +1,5 @@
 // Estilo
-import {Title, Image, Wrapper} from './style'
+import {Title, Image, Wrapper, DateDisplay} from './style'
 
 // Imagens
 import lifLogo from "./../../assets/lif-logo.svg"
@@ -9,6 +9,7 @@ function MenuSuperior() {
     <Wrapper>
         <Image src={lifLogo} /> 
       <Title>Rastreador POF LUX</Title>
+      <DateDisplay> 2025, 24 de Fevereiro </DateDisplay>
     </Wrapper>
   );
 }

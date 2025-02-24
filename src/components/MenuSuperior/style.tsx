@@ -1,12 +1,31 @@
 import styled from 'styled-components';
 
 export const Title = styled.h1`
+  text-align:left;
+  vertical-align:text-top;
+  left:22.875rem;
+  top:0.125rem;
+  position:absolute;
+  width:29.8125rem;
   font-size: 3rem;
   font-weight: 500;
-  text-align: center;
   color: var(--primaryText);
   font-family: var(--primaryFont);
 `
+
+export const DateDisplay = styled.h2`
+  text-align:center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  left:58.19rem;
+  top:2.125rem;
+  width:15rem;
+  height:2.8125rem;
+  position:absolute;
+  color: var(--primaryText);
+  font-family: var(--primaryFont);
+`
+
 export const Image = styled.img`
     height:4.6875rem;
     width:5.625rem;
