@@ -74,8 +74,7 @@ function MenuSuperior() {
       <Image src={lifLogo} />
       <Title>Rastreador POF LUX</Title>
       <DateDisplay>
-        {" "}
-        {year}, {day} de {month}{" "}
+        {year}, {day} de {month}
       </DateDisplay>
       <TrackerConnectionIcon onClick={toggleIcon}>
         {isOn ? (
