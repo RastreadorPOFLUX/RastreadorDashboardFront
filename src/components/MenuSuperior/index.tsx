@@ -42,17 +42,40 @@ const Offline = () => (
 );
 
 function MenuSuperior() {
+  // Lógica para ícone de conexão de internet
   const [isOn, setIsOn] = useState(false);
 
   const toggleIcon = () => {
     setIsOn(!isOn);
   };
 
+  // Lógica de Data
+  const date = new Date();
+  const months = [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agusto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
+  ];
+  let year = date.getFullYear();
+  let day = date.getDate();
+  let month = months[date.getMonth()];
+
   return (
     <Wrapper>
       <Image src={lifLogo} />
       <Title>Rastreador POF LUX</Title>
-      <DateDisplay> 2025, 24 de Fevereiro </DateDisplay>
+      <DateDisplay>
+        {year}, {day} de {month}
+      </DateDisplay>
       <TrackerConnectionIcon onClick={toggleIcon}>
         {isOn ? (
           <div className="Online">
