@@ -8,3 +8,28 @@ export const Wrapper = styled.section`
     top:7.785rem;
     position:absolute;
 `;
+
+export const Divider = styled.div`
+    background-color: var(--secondaryColor);
+    height:0.04875rem;
+    width:14.8125rem;
+    border-radius: 0.3125rem;
+    margin-left: 1.8125rem;
+`
+
+export const Pages = styled.h3`
+    color: var(--primaryText);
+    text-align: left;
+    vertical-align: text-top;
+    font-size: 1.25rem;
+    font-family: var(--primaryFont);
+    font-weight: 500;
+    width: 12rem;
+    margin-left: 2.6875rem;
+    transition-duration: 0.4s;
+
+    &:hover {
+        color: var(--secondaryColor);
+        font-weight: 540;
+    }
+`;

@@ -1,11 +1,17 @@
 import React, {useState} from "react";
 
 // Estilo
-import {Wrapper} from "./style";
+import {Wrapper, Pages, Divider} from "./style";
 
 function MenuLateral () {
     return (
-        <Wrapper></Wrapper>
+        <Wrapper>
+            <Pages> Informações Gerais </Pages>
+            <Divider></Divider>
+            <Pages> Elétrica </Pages>
+            <Divider></Divider>
+            <Pages> Controlador </Pages>
+        </Wrapper>
     )
 }
 
