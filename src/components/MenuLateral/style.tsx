@@ -33,3 +33,28 @@ export const Pages = styled.h3`
         font-weight: 540;
     }
 `;
+
+export const Space = styled.div`
+    margin-top: 4rem;
+`
+
+export const Text = styled.h3`
+    color: var(--primaryText);
+    text-align: left;
+    vertical-align: text-top;
+    font-size: 1.25rem;
+    font-family: var(--primaryFont);
+    font-weight: 500;
+    width: 12rem;
+    margin-left: 2.6875rem;
+`
+
+export const Contribuitions = styled.h3`
+    color: var(--primaryText);
+    text-align: left;
+    font-size: 1rem;
+    font-family: var(--primaryFont);
+    font-weight: 500;
+    width: 12rem;
+    margin-left: 2.6875rem;
+`
