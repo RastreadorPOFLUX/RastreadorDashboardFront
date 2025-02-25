@@ -9,6 +9,7 @@ export const Wrapper = styled.section`
   left: 0rem;
   filter: drop-shadow(0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
 `;
+
 export const Image = styled.img`
   height: 4.6875rem;
   width: 5.625rem;
@@ -42,6 +43,7 @@ export const DateDisplay = styled.h2`
   color: var(--primaryText);
   font-family: var(--primaryFont);
 `;
+
 export const TrackerConnectionIcon = styled.div`
   background-color: var(--lightGray);
   height: 1.5rem;
