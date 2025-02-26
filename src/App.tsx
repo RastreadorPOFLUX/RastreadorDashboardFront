@@ -16,7 +16,7 @@ export default function App() {
       <Routes>
         <Route index path="*" element={<GeneralInfo />} />
         <Route path="/electricalInfo" element={<ElectricalInfo />} />
-        <Route path="/controlInfo" element={<ControlInfo />} />        
+        <Route path="/controlInfo" element={<ControlInfo />} />
       </Routes>
     </div>
   );

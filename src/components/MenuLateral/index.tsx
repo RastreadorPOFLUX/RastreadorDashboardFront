@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 // Estilo
 import {
@@ -11,27 +11,54 @@ import {
   Contribuitions,
 } from "./style";
 
-
 function MenuLateral() {
+  const location = useLocation();
+
+  const getColor = (pathname: string) => {
+    let textColors: string[] = [];
+    switch (pathname) {
+      case "/":
+        textColors = [
+          "var(--primaryColor)",
+          "var(--primaryText)",
+          "var(--primaryText)",
+        ];
+        return textColors;
+      case "/electricalInfo":
+        textColors = [
+          "var(--primaryText)",
+          "var(--primaryColor)",
+          "var(--primaryText)",
+        ];
+        return textColors;
+      case "/controlInfo":
+        textColors = [
+          "var(--primaryText)",
+          "var(--primaryText)",
+          "var(--primaryColor)",
+        ];
+        return textColors;
+      default:
+        return "var(--primaryText)";
+    }
+  };
+
   return (
     <Wrapper>
-        <Pages>  
-          <Link to="/">
-            Informações Gerais
-          </Link> 
+      <Link to="/">
+        <Pages color={getColor(location.pathname)[0]}>
+          {" "}
+          Informações Gerais{" "}
         </Pages>
+      </Link>
       <Divider></Divider>
-      <Pages>      
-        <Link to="/electricalInfo">
-          Elétrica
-        </Link>  
-      </Pages>
+      <Link to="/electricalInfo">
+        <Pages color={getColor(location.pathname)[1]}> Elétrica </Pages>
+      </Link>
       <Divider></Divider>
-      <Pages> 
-        <Link to="/controlInfo">
-          Controlador
-        </Link> 
-      </Pages>
+      <Link to="/controlInfo">
+        <Pages color={getColor(location.pathname)[2]}> Controlador </Pages>
+      </Link>
       <Space></Space>
       <Text> Período de Análise: </Text>
       <Text>

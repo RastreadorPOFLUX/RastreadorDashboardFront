@@ -18,7 +18,7 @@ export const Divider = styled.div`
 `;
 
 export const Pages = styled.h3`
-  color: var(--primaryText);
+  color: ${(props) => props.color};
   text-align: left;
   vertical-align: text-top;
   font-size: 1.25rem;
@@ -29,7 +29,7 @@ export const Pages = styled.h3`
   transition-duration: 0.4s;
 
   &:hover {
-    color: var(--secondaryColor);
+    color: var(--primaryColor);
     font-weight: 540;
   }
 `;
