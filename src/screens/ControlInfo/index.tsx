@@ -5,7 +5,7 @@ import MenuLateral from "../../components/MenuLateral/index";
 // Estilo
 import { GeneralInfoBackground } from "./style";
 
-export default function GeneralInfo() {
+export default function ElectricalInfo() {
   return (
     <GeneralInfoBackground>
       <MenuSuperior></MenuSuperior>
