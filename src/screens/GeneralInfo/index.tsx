@@ -1,5 +1,3 @@
-import React from "react";
-
 // Componentes
 import MenuSuperior from "./../../components/MenuSuperior/index";
 import MenuLateral from "../../components/MenuLateral/index";
