@@ -35,7 +35,7 @@ export const Pages = styled.h3`
 `;
 
 export const Space = styled.div`
-  margin-top: 3rem;
+  margin-top: 4rem;
 `;
 
 export const Text = styled.h3`

@@ -7,4 +7,5 @@ export const GeneralInfoBackground = styled.body`
   width: 100%;
   top: 0rem;
   left: 0rem;
+  margin: 0rem;
 `;
