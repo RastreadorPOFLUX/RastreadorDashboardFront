@@ -17,18 +17,17 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   border-radius: 0.3125rem;
 `;
 
-
 export const Text = styled.h3<Props>`
-    color: var(--primaryText);
-    text-align:left;
-    font-size:1.5rem;
-    font-family:var(--primaryFont);
-    font-weight: 500;
-    position:absolute;
-    width: ${(props) => props.width};
-    left: ${(props) => props.left};
-    margin-top: ${(props) => props.top};
-`
+  color: var(--primaryText);
+  text-align: left;
+  font-size: 1.5rem;
+  font-family: var(--primaryFont);
+  font-weight: 500;
+  position: absolute;
+  width: ${(props) => props.width};
+  left: ${(props) => props.left};
+  margin-top: ${(props) => props.top};
+`;
 
 export const WeatherIcon = styled.div`
   height: 3.625rem;
