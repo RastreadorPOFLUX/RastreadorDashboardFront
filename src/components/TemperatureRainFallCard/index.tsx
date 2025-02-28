@@ -2,7 +2,7 @@
 import {StyledWrapper} from "./style";
 
 
-function TemperatureRainFall() {
+function TemperatureRainFallCard() {
     return (
         <StyledWrapper
           width={"65.3125rem"}
@@ -13,4 +13,4 @@ function TemperatureRainFall() {
     )
 }
 
-export default TemperatureRainFall;
+export default TemperatureRainFallCard;

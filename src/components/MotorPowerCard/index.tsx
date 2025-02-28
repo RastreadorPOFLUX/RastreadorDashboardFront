@@ -2,7 +2,7 @@
 import {StyledWrapper} from "./style";
 
 
-function MotorPower() {
+function MotorPowerCard() {
     return (
         <StyledWrapper
           width={"65.3125rem"}
@@ -13,4 +13,4 @@ function MotorPower() {
     )
 }
 
-export default MotorPower;
+export default MotorPowerCard;

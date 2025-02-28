@@ -4,7 +4,7 @@ import MenuLateral from "./../../components/MenuLateral/index";
 import ClimateCard from "./../../components/ClimateCard/index";
 import DataCard from "../../components/DataCard";
 import OperationModeCard from "../../components/OperationModeCard";
-import TemperatureRainFall from "../../components/TemperatureRainFall";
+import TemperatureRainFallCard from "../../components/TemperatureRainFallCard";
 
 // Estilo
 import { GeneralInfoBackground } from "./style";
@@ -17,7 +17,7 @@ export default function GeneralInfo() {
       <OperationModeCard></OperationModeCard>
       <ClimateCard></ClimateCard>
       <DataCard></DataCard>
-      <TemperatureRainFall></TemperatureRainFall>
+      <TemperatureRainFallCard></TemperatureRainFallCard>
     </GeneralInfoBackground>
   );
 }

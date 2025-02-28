@@ -2,8 +2,8 @@
 import MenuSuperior from "./../../components/MenuSuperior/index";
 import MenuLateral from "../../components/MenuLateral/index";
 import ClimateCard from "../../components/ClimateCard";
-import LuminousPowerCard from "../../components/LuminousPower";
-import MotorPower from "../../components/MotorPower";
+import LuminousPowerCard from "../../components/LuminousPowerCard";
+import MotorPowerCard from "../../components/MotorPowerCard";
 
 // Estilo
 import { GeneralInfoBackground } from "./style";
@@ -15,7 +15,7 @@ export default function ElectricalInfo() {
       <MenuLateral></MenuLateral>
       <LuminousPowerCard></LuminousPowerCard>
       <ClimateCard></ClimateCard>
-      <MotorPower></MotorPower>
+      <MotorPowerCard></MotorPowerCard>
     </GeneralInfoBackground>
   );
 }
