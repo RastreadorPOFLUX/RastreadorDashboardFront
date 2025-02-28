@@ -5,7 +5,7 @@ function AnglesCard() {
   return (
     <StyledWrapper
       width={"32.625rem"}
-      height={"17.775rem"}
+      height={"15.775rem"}
       left={"21.5625rem"}
       top={"9.4375rem"}
     ></StyledWrapper>

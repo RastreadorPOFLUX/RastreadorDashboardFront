@@ -5,7 +5,7 @@ function PIDParametersCard() {
   return (
     <StyledWrapper
       width={"31.375rem"}
-      height={"10.125rem"}
+      height={"8.125rem"}
       left={"55.5rem"}
       top={"17rem"}
     ></StyledWrapper>
