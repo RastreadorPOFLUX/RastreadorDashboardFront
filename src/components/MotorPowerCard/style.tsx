@@ -14,5 +14,5 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   height: ${(props) => props.height};
   left: ${(props) => props.left};
   top: ${(props) => props.top};
-  border-radius: 50%;
+  border-radius: 0.3125rem;
 `;
