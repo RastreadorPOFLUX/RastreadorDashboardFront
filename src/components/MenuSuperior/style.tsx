@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.section`
+export const Wrapper = styled.div`
   background-color: var(--lightGray);
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 7.875rem;
   top: 0rem;

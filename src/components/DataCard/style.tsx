@@ -24,8 +24,8 @@ export const Button = styled.button<Props>`
   top: ${(props) => props.top};
   background-color: ${(props) => props.color};
   border-radius: 0.3125rem;
-  position:absolute;
-  filter:drop-shadow(0rem 0.25rem 0.25rem rgba(0,0,0,0.25));
+  position: absolute;
+  filter: drop-shadow(0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
 `;
 
 export const Text = styled.h3`
@@ -35,5 +35,5 @@ export const Text = styled.h3`
   font-family: var(--primaryFont);
   font-weight: 500;
   width: 8rem;
-  margin-top:3px;
-`
+  margin-top: 3px;
+`;

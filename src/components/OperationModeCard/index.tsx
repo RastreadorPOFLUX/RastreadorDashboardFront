@@ -1,5 +1,5 @@
 //Estilo
-import { StyledWrapper } from "./style";
+import { StyledWrapper, Button, Text } from "./style";
 
 function OperationModeCard() {
   return (
@@ -8,7 +8,26 @@ function OperationModeCard() {
       height={"13.875rem"}
       left={"21.5625rem"}
       top={"9.4375rem"}
-    ></StyledWrapper>
+    >
+            <Button
+              color={"var(--primaryColor)"}
+              left={"3.0156rem"}
+            >
+              <Text color={"var(--white)"}>Auto</Text>
+            </Button>
+            <Button
+              color={"var(--secondaryColor)"}
+              left={"12.46875rem"}
+            >
+              <Text color={"var(--white)"}>Manual</Text>
+            </Button>
+            <Button
+              color={"var(--secondaryColor)"}
+              left={"21.921875rem"}
+            >
+              <Text color={"var(--white)"}>Halt</Text>
+            </Button>
+    </StyledWrapper>
   );
 }
 

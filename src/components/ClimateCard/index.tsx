@@ -71,11 +71,11 @@ function ClimateCard() {
   const [time, setTime] = useState(new Date().toLocaleTimeString("pt-BR"));
 
   useEffect(() => {
-    const time = () => {
+    const Time = () => {
       const event = new Date();
       setTime(event.toLocaleTimeString("pt-BR"));
     };
-    const intervalId = setInterval(time, 1000);
+    const intervalId = setInterval(Time, 1000);
 
     return () => {
       clearInterval(intervalId);
