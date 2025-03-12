@@ -13,9 +13,9 @@ const Sun = () => (
     <path fill="#e6e818" d="M18 12a6 6 0 1 1-12 0a6 6 0 0 1 12 0" />
     <path
       fill="#c6d04e"
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M12 1.25a.75.75 0 0 1 .75.75v1a.75.75 0 0 1-1.5 0V2a.75.75 0 0 1 .75-.75M4.399 4.399a.75.75 0 0 1 1.06 0l.393.392a.75.75 0 0 1-1.06 1.061l-.393-.393a.75.75 0 0 1 0-1.06m15.202 0a.75.75 0 0 1 0 1.06l-.393.393a.75.75 0 0 1-1.06-1.06l.393-.393a.75.75 0 0 1 1.06 0M1.25 12a.75.75 0 0 1 .75-.75h1a.75.75 0 0 1 0 1.5H2a.75.75 0 0 1-.75-.75m19 0a.75.75 0 0 1 .75-.75h1a.75.75 0 0 1 0 1.5h-1a.75.75 0 0 1-.75-.75m-2.102 6.148a.75.75 0 0 1 1.06 0l.393.393a.75.75 0 1 1-1.06 1.06l-.393-.393a.75.75 0 0 1 0-1.06m-12.296 0a.75.75 0 0 1 0 1.06l-.393.393a.75.75 0 1 1-1.06-1.06l.392-.393a.75.75 0 0 1 1.061 0M12 20.25a.75.75 0 0 1 .75.75v1a.75.75 0 0 1-1.5 0v-1a.75.75 0 0 1 .75-.75"
-      clip-rule="evenodd"
+      clipRule="evenodd"
     />
   </svg>
 );
@@ -67,6 +67,16 @@ const RainLightning = () => (
   </svg>
 );
 
+interface WeatherData {
+  name: string;
+  main: {
+    temp: number;
+  };
+  weather:{
+    main: string;
+  }
+}
+
 function ClimateCard() {
   const [time, setTime] = useState(new Date().toLocaleTimeString("pt-BR"));
 
@@ -82,6 +92,88 @@ function ClimateCard() {
     };
   }, []);
 
+  // State variables to store city name, weather data, forecast data, loading state, and errors
+  const [city, setCity] = useState<string>(""); // City input value
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null); // Current weather data
+  const [loading, setLoading] = useState<boolean>(false); // Loading state
+  const [error, setError] = useState<string | null>(null); // Error message
+
+  // Function to fetch weather and forecast data from OpenWeather API
+  const fetchWeatherData = async (cityName: string) => {
+    const apiKey = process.env.WEATHER_API_KEY; // Fetching the API key from environment variables
+    const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`; // API URL for current weather
+
+    try {
+      setLoading(true); // Setting loading state
+      setError(null); // Resetting error state
+
+      // Fetching current weather data
+      const weatherResponse = await fetch(currentWeatherUrl);
+      if (!weatherResponse.ok) {
+        throw new Error("City not found! Try another one"); // Error if city not found
+      }
+      const weatherData: WeatherData = await weatherResponse.json(); // Parsing weather data
+      setWeatherData(weatherData); // Setting the fetched weather data
+
+    } catch (error) {
+      // Handling any errors that occur during the fetch
+      if (error instanceof Error) {
+        setError(error.message); // Displaying error message
+      }
+      setWeatherData(null); // Resetting weather data
+    } finally {
+      setLoading(false); // Resetting loading state
+    }
+  };
+
+  // useEffect to fetch the user's location and display the weather for the current location
+  useEffect(() => {
+    const getUserLocation = async () => {
+      if (navigator.geolocation) {
+        // Checking if geolocation is available
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const { latitude, longitude } = position.coords; // Getting user's device location
+            const apiKey = process.env.WEATHER_API_KEY;
+            const reverseGeocodeUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`; // API URL for reverse geocoding (get location by lat/lon
+
+            try {
+              setLoading(true);
+              const response = await fetch(reverseGeocodeUrl); // Fetching weather data by geolocation
+              if (!response.ok) {
+                throw new Error("Unable to fetch location data"); // Error if location data fetch fails
+              }
+              const data: WeatherData = await response.json(); // Parsing weather data
+              setWeatherData(data); // Setting the fetched weather data
+              setCity(data.name); // Setting the city based on fetched location
+              await fetchWeatherData(data.name); // Fetching weather data for the fetched city
+            } catch (error) {
+              // Handling any errors that occur during the fetch
+              if (error instanceof Error) {
+                setError(error.message); // Displaying error message
+              }
+              setWeatherData(null); // Resetting weather data
+            } finally {
+              setLoading(false); // Resetting loading state
+            }
+          },
+          () => {
+            // Handling geolocation errors (e.g., if user denies location access)
+            setError("Unable to retrieve your location");
+            setWeatherData(null);
+          }
+        );
+      } else {
+        // Handling case where geolocation is not supported by the browser
+        setError("Geolocation is not supported by this browser.");
+        setWeatherData(null);
+      }
+    };
+
+    getUserLocation(); // Invoking the function to get user location on page load
+  }, []); // Empty dependency array to run effect once on component mount
+
+
   return (
     <StyledWrapper
       width={"31.375rem"}
@@ -90,8 +182,7 @@ function ClimateCard() {
       top={"9.4375rem"}
     >
       <Text width={"20rem"} left={"3rem"} top={"1rem"}>
-        {" "}
-        Cidade Universitária, 25°C
+        {weatherData?.name}, {weatherData?.main.temp}°C
       </Text>
       <Text width={"6.45rem"} left={"9.25rem"} top={"3.5rem"}>
         {time}
