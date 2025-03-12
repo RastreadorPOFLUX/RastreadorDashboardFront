@@ -30,9 +30,7 @@ export const Text = styled.h3<Props>`
 `;
 
 export const WeatherIcon = styled.div`
-  height: 3.625rem;
-  width: 3.8125rem;
-  top: 1.75rem;
-  left: 25rem;
+  top: 0.4rem;
+  left: 22rem;
   position: absolute;
 `;
