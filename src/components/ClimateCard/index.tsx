@@ -133,9 +133,9 @@ function ClimateCard() {
         // Checking if geolocation is available
         navigator.geolocation.getCurrentPosition(
           async (position) => {
-            const { latitude, longitude } = position.coords; // Getting user's device location
+            //const { latitude, longitude } = position.coords; // Getting user's device location
             const apiKey = process.env.WEATHER_API_KEY;
-            const reverseGeocodeUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`; // API URL for reverse geocoding (get location by lat/lon
+            const reverseGeocodeUrl = `https://api.openweathermap.org/data/2.5/weather?q=Rio de Janeiro,br&appid=${apiKey}&units=metric`; // API URL for reverse geocoding (get location by lat/lon
 
             try {
               setLoading(true);
@@ -182,7 +182,7 @@ function ClimateCard() {
       top={"9.4375rem"}
     >
       <Text width={"20rem"} left={"3rem"} top={"1rem"}>
-        {weatherData?.name}, {weatherData?.main.temp}°C
+        {weatherData?.name}, {weatherData?.main.temp != null ? Math.trunc(weatherData?.main.temp): '-'}°C
       </Text>
       <Text width={"6.45rem"} left={"9.25rem"} top={"3.5rem"}>
         {time}
