@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Wrapper } from "../MenuLateral/style";
+import { Wrapper } from "../Cards/style";
 
 interface Props {
   width: string;
@@ -30,7 +30,7 @@ export const Text = styled.h3<Props>`
 `;
 
 export const WeatherIcon = styled.div`
-  top: 0.4rem;
+  top: 0.1rem;
   left: 22rem;
   position: absolute;
 `;
