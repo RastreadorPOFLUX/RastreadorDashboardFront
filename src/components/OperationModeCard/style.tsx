@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Wrapper } from "../MenuLateral/style";
+import { Wrapper } from "../Cards/style";
 
 interface Props {
   width?: string;
