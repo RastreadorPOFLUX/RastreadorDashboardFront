@@ -16,3 +16,15 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   top: ${(props) => props.top};
   border-radius: 50%;
 `;
+
+export const Text = styled.h3<Props>`
+  color: ${(props) => props.color};
+  text-align: left;
+  font-size: 0.875rem;
+  font-family: var(--primaryFont);
+  font-weight: 500;
+  position: absolute;
+  width: ${(props) => props.width};
+  left: ${(props) => props.left};
+  margin-top: ${(props) => props.top};
+`;
