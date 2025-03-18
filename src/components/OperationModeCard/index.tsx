@@ -1,6 +1,6 @@
 //Estilo
 import { useState } from "react";
-import { StyledWrapper, Button, Text } from "./style";
+import { StyledWrapper, Button, Text, Title } from "./style";
 
 function OperationModeCard() {
   const [isActivedAuto, setActivatedAuto] = useState(true);
@@ -36,6 +36,7 @@ function OperationModeCard() {
       left={"21.5625rem"}
       top={"9.4375rem"}
     >
+      <Title color={'var(--primaryText)'}> Modos de Operação</Title>
       <Button
         onClick={handleClickButtonAuto}
         color={isActivedAuto ? "var(--primaryColor)" : "var(--secondaryColor)"}
