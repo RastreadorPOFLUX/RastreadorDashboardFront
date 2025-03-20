@@ -1,7 +1,8 @@
+
 //Estilo
 import { StyledWrapper } from "./style";
 
-function TemperatureRainFallCard() {
+function CloudinessPluviosityCard() {
   return (
     <StyledWrapper
       width={"65.3125rem"}
@@ -12,4 +13,4 @@ function TemperatureRainFallCard() {
   );
 }
 
-export default TemperatureRainFallCard;
+export default CloudinessPluviosityCard;
