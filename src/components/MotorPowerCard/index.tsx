@@ -37,7 +37,7 @@ function MotorPowerCard() {
     },
     title: {
       text: "Potência do Motor",
-      fontSize: 20
+      fontSize: 20,
     },
     padding: {
       top: 10,

@@ -36,33 +36,6 @@ function ClimateCard() {
   const [loading, setLoading] = useState<boolean>(false); // Loading state
   const [error, setError] = useState<string | null>(null); // Error message
 
-  // Function to fetch weather and forecast data from OpenWeather API
-  const fetchWeatherData = async (cityName: string) => {
-    const apiKey = process.env.WEATHER_API_KEY; // Fetching the API key from environment variables
-    const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`; // API URL for current weather
-
-    try {
-      setLoading(true); // Setting loading state
-      setError(null); // Resetting error state
-
-      // Fetching current weather data
-      const weatherResponse = await fetch(currentWeatherUrl);
-      if (!weatherResponse.ok) {
-        throw new Error("City not found! Try another one"); // Error if city not found
-      }
-      const weatherData: WeatherData = await weatherResponse.json(); // Parsing weather data
-      setWeatherData(weatherData); // Setting the fetched weather data
-    } catch (error) {
-      // Handling any errors that occur during the fetch
-      if (error instanceof Error) {
-        setError(error.message); // Displaying error message
-      }
-      setWeatherData(null); // Resetting weather data
-    } finally {
-      setLoading(false); // Resetting loading state
-    }
-  };
-
   // useEffect to fetch the user's location and display the weather for the current location
   useEffect(() => {
     const getUserLocation = async () => {

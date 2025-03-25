@@ -7,15 +7,24 @@ import getData from "./Data";
 import { StyledWrapper } from "./style";
 
 function LuminousPowerCard() {
-
-  const intervalTime =  getData()[0].day + "/" + getData()[0].month + "/" + getData()[0].year + " - " +
-  getData()[getData().length-1].day + "/" + getData()[getData().length-1].month + "/" + getData()[getData().length-1].year;
+  const intervalTime =
+    getData()[0].day +
+    "/" +
+    getData()[0].month +
+    "/" +
+    getData()[0].year +
+    " - " +
+    getData()[getData().length - 1].day +
+    "/" +
+    getData()[getData().length - 1].month +
+    "/" +
+    getData()[getData().length - 1].year;
 
   const Average = 1300;
 
   const [options, setOptions] = useState<AgChartOptions>({
     title: {
-      text: "Potência Luminosa - (" + intervalTime + ")"
+      text: "Potência Luminosa - (" + intervalTime + ")",
     },
     subtitle: {
       text: "Captada pelo Piranômetro",
@@ -24,23 +33,23 @@ function LuminousPowerCard() {
     navigator: {
       enabled: true,
     },
-    background:{
-      visible: false
-    }, 
+    background: {
+      visible: false,
+    },
     series: [
       {
         type: "bar",
         xKey: "hour",
         yKey: "value",
-        yName: "Potência Luminosa", 
+        yName: "Potência Luminosa",
         fill: "#DD702C",
-        cornerRadius: 10
-      }
+        cornerRadius: 10,
+      },
     ],
     zoom: {
       enabled: true,
       scrollingStep: 0.4,
-  }
+    },
   });
 
   return (
@@ -50,7 +59,7 @@ function LuminousPowerCard() {
       left={"21.5625rem"}
       top={"9.4375rem"}
     >
-      <AgCharts options={options} style={{height: 385}}/>
+      <AgCharts options={options} style={{ height: 385 }} />
     </StyledWrapper>
   );
 }

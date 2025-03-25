@@ -36,7 +36,7 @@ function OperationModeCard() {
       left={"21.5625rem"}
       top={"9.4375rem"}
     >
-      <Title color={'var(--primaryText)'}> Modos de Operação</Title>
+      <Title color={"var(--primaryText)"}> Modos de Operação</Title>
       <Button
         onClick={handleClickButtonAuto}
         color={isActivedAuto ? "var(--primaryColor)" : "var(--secondaryColor)"}
