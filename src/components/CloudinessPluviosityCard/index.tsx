@@ -9,8 +9,9 @@ import { StyledWrapper } from "./style";
 
 interface WeatherData {
   date: string;
-  hour: string;
   cloudiness: number;
+  hour: string;
+  time: string;
 }
 
 function CloudinessPluviosityCard() {
@@ -24,6 +25,7 @@ function CloudinessPluviosityCard() {
         date: new Date (result[index].dt*1000).toLocaleDateString(),
         cloudiness: result[index].clouds.all,
         hour: new Date (result[index].dt*1000).getHours() + "h",
+        time: new Date (result[index].dt*1000).toLocaleDateString() + "-" +new Date (result[index].dt*1000).getHours() + "h"
       }),
     );
       setData(fetchedData);
@@ -44,17 +46,45 @@ function CloudinessPluviosityCard() {
     series: [
       {
         type: "bar",
-        xKey: "hour",
+        xKey: "time",
         yKey: "cloudiness",
         yName: "Nebulosidade",
         fill: "#DD702C",
-        cornerRadius: 10,
+        cornerRadius: 10,   
+        tooltip:{
+          renderer: (params: { datum: WeatherData }) => {
+            // Customize the tooltip content
+            return {
+              title: ` ${params.datum.hour}`,  // Title for the tooltip
+              heading:` ${params.datum.date}`,
+            }
+        }     
       },
-    ],
+  }],
     zoom: {
       enabled: true,
       scrollingStep: 0.4,
     },
+    axes: [
+      {
+        type: 'category',
+        position: 'bottom',
+        title: {
+          text: 'Horário',
+        },
+        label: {
+          formatter: ({ value }) => `${value.split('-')[1]}`,
+        },
+      },
+      {
+        type: 'number',
+        position: 'left',
+        title: {
+          text: '(%)',
+        },
+        max: 100,
+      },
+    ],
     title: {
       text: "Pluviosidade e Nebulosidade - ("  + Title + ")",
     }
