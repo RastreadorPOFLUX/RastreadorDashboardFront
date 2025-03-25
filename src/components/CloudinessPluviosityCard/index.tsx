@@ -23,14 +23,12 @@ function CloudinessPluviosityCard() {
         cloudiness: result[index].clouds.all,
       }),
     );
-      
-        setData(fetchedData);
+      setData(fetchedData);
     };
     fetchData();
   }, []);
   
-
-  const [options, setOptions] = useState<AgChartOptions>({
+  const options: AgChartOptions = {
     title: {
       text: "Pluviosidade e Nebulosidade - (" + ")",
     },
@@ -55,7 +53,7 @@ function CloudinessPluviosityCard() {
       enabled: true,
       scrollingStep: 0.4,
     },
-  });
+  };
 
   return (
     <StyledWrapper
