@@ -8,36 +8,28 @@ import { StyledWrapper } from "./style";
 
 
 interface WeatherData {
-  date: string;
+  date: number;
   cloudiness: number;
 }
 
 function CloudinessPluviosityCard() {
   const [data, setData] = useState<WeatherData[]>([]);
-  const numberOfRecords: number = 1;
 
   useEffect(() => {
     const fetchData = async () => {
-
-      const Index = Array.from(Array(numberOfRecords), (e, i) => i);
-
-      const fetchedData = await Promise.all(
-        Index.map(async (Index) => {
-          const result = await fetchHistoricalCloudiness();
-          return {
-            date: result[Index].dt,
-            cloudiness: result[Index].clouds.all, // Assuming 'clouds' contains cloudiness percentage
-          };
-        })
-      );
-
-      setData(fetchedData);
+      const result = await fetchHistoricalCloudiness();
+      const fetchedData = result.map((dt: number, index: number) => ({
+        date: result[index].dt,
+        cloudiness: result[index].clouds.all,
+      }),
+    );
       
+        setData(fetchedData);
     };
     fetchData();
   }, []);
-
   
+
   const [options, setOptions] = useState<AgChartOptions>({
     title: {
       text: "Pluviosidade e Nebulosidade - (" + ")",
