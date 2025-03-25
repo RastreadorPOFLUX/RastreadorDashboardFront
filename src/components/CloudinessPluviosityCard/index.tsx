@@ -8,31 +8,33 @@ import { StyledWrapper } from "./style";
 
 
 interface WeatherData {
-  date: number;
+  date: string;
+  hour: string;
   cloudiness: number;
 }
 
 function CloudinessPluviosityCard() {
-  const [data, setData] = useState<WeatherData[]>([]);
+  const [Data, setData] = useState<WeatherData[]>([]);
+  const [Title, setTitle] = useState<string>();
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetchHistoricalCloudiness();
-      const fetchedData = result.map((dt: number, index: number) => ({
-        date: result[index].dt,
+      const fetchedData = result.map((dt: string, index: number) => ({
+        date: new Date (result[index].dt*1000).toLocaleDateString(),
         cloudiness: result[index].clouds.all,
+        hour: new Date (result[index].dt*1000).getHours() + "h",
       }),
     );
       setData(fetchedData);
+      setTitle(fetchedData[0]?.date + "-" + fetchedData[fetchedData.length-1]?.date);
     };
     fetchData();
-  }, []);
-  
+    
+  }, [])
+ 
   const options: AgChartOptions = {
-    title: {
-      text: "Pluviosidade e Nebulosidade - (" + ")",
-    },
-    data: data,
+    data: Data,
     navigator: {
       enabled: true,
     },
@@ -42,7 +44,7 @@ function CloudinessPluviosityCard() {
     series: [
       {
         type: "bar",
-        xKey: "date",
+        xKey: "hour",
         yKey: "cloudiness",
         yName: "Nebulosidade",
         fill: "#DD702C",
@@ -53,6 +55,9 @@ function CloudinessPluviosityCard() {
       enabled: true,
       scrollingStep: 0.4,
     },
+    title: {
+      text: "Pluviosidade e Nebulosidade - ("  + Title + ")",
+    }
   };
 
   return (
