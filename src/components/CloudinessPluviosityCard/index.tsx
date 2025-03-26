@@ -29,7 +29,7 @@ function CloudinessPluviosityCard() {
       }),
     );
       setData(fetchedData);
-      setTitle(fetchedData[0]?.date + "-" + fetchedData[fetchedData.length-1]?.date);
+      setTitle(fetchedData[0].date + "-" + fetchedData[fetchedData.length-1].date);
     };
     fetchData();
     
