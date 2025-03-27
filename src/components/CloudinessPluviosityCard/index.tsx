@@ -6,7 +6,6 @@ import { fetchHistoricalCloudiness } from "./Data";
 //Estilo
 import { StyledWrapper } from "./style";
 
-
 interface WeatherData {
   date: string;
   cloudiness: number;
@@ -22,19 +21,23 @@ function CloudinessPluviosityCard() {
     const fetchData = async () => {
       const result = await fetchHistoricalCloudiness();
       const fetchedData = result.map((dt: string, index: number) => ({
-        date: new Date (result[index].dt*1000).toLocaleDateString(),
+        date: new Date(result[index].dt * 1000).toLocaleDateString(),
         cloudiness: result[index].clouds.all,
-        hour: new Date (result[index].dt*1000).getHours() + "h",
-        time: new Date (result[index].dt*1000).toLocaleDateString() + "-" +new Date (result[index].dt*1000).getHours() + "h"
-      }),
-    );
+        hour: new Date(result[index].dt * 1000).getHours() + "h",
+        time:
+          new Date(result[index].dt * 1000).toLocaleDateString() +
+          "-" +
+          new Date(result[index].dt * 1000).getHours() +
+          "h",
+      }));
       setData(fetchedData);
-      setTitle(fetchedData[0].date + "-" + fetchedData[fetchedData.length-1].date);
+      setTitle(
+        fetchedData[0].date + "-" + fetchedData[fetchedData.length - 1].date,
+      );
     };
     fetchData();
-    
-  }, [])
- 
+  }, []);
+
   const options: AgChartOptions = {
     data: Data,
     navigator: {
@@ -50,44 +53,45 @@ function CloudinessPluviosityCard() {
         yKey: "cloudiness",
         yName: "Nebulosidade",
         fill: "#DD702C",
-        cornerRadius: 10,   
-        tooltip:{
+        cornerRadius: 10,
+        tooltip: {
           renderer: (params: { datum: WeatherData }) => {
             // Customize the tooltip content
             return {
-              title: ` ${params.datum.hour}`,  // Title for the tooltip
-              heading:` ${params.datum.date}`,
-            }
-        }     
+              title: ` ${params.datum.hour}`, // Title for the tooltip
+              heading: ` ${params.datum.date}`,
+            };
+          },
+        },
       },
-  }],
+    ],
     zoom: {
       enabled: true,
       scrollingStep: 0.4,
     },
     axes: [
       {
-        type: 'category',
-        position: 'bottom',
+        type: "category",
+        position: "bottom",
         title: {
-          text: 'Horário',
+          text: "Horário",
         },
         label: {
-          formatter: ({ value }) => `${value.split('-')[1]}`,
+          formatter: ({ value }) => `${value.split("-")[1]}`,
         },
       },
       {
-        type: 'number',
-        position: 'left',
+        type: "number",
+        position: "left",
         title: {
-          text: '(%)',
+          text: "(%)",
         },
         max: 100,
       },
     ],
     title: {
-      text: "Pluviosidade e Nebulosidade - ("  + Title + ")",
-    }
+      text: "Pluviosidade e Nebulosidade - (" + Title + ")",
+    },
   };
 
   return (

@@ -1,5 +1,5 @@
-import  { useEffect, useState } from "react";
-import { fetchLocalWeatherConditions} from "./Data";
+import { useEffect, useState } from "react";
+import { fetchLocalWeatherConditions } from "./Data";
 
 //Estilo
 import { StyledWrapper, Text, WeatherIcon } from "./style";
@@ -32,22 +32,21 @@ function ClimateCard() {
     };
   }, []);
 
-   const [Data, setData] = useState<WeatherData>();
-   const [Icon, setIcon] = useState<WeatherData>();
+  const [Data, setData] = useState<WeatherData>();
+  const [Icon, setIcon] = useState<WeatherData>();
 
   // useEffect to fetch the user's location and display the weather for the current location
   useEffect(() => {
     const fetchData = async () => {
-      const weatherResult = await fetchLocalWeatherConditions(); 
+      const weatherResult = await fetchLocalWeatherConditions();
       const iconCode = weatherResult.weather[0].icon;
-      setData(weatherResult); 
+      setData(weatherResult);
       setIcon(iconCode);
     };
-      fetchData();
-    }, [])
-    
+    fetchData();
+  }, []);
 
-    const iconUrl = `https://openweathermap.org/img/wn/${Icon}@2x.png`;
+  const iconUrl = `https://openweathermap.org/img/wn/${Icon}@2x.png`;
 
   return (
     <StyledWrapper
@@ -58,9 +57,7 @@ function ClimateCard() {
     >
       <Text width={"20rem"} left={"6rem"} top={"1rem"}>
         {Data?.name},{" "}
-        {Data?.main.temp != null
-          ? Math.trunc(Data?.main.temp)
-          : "-"}
+        {Data?.main.temp != null ? Math.trunc(Data?.main.temp) : "-"}
         °C
       </Text>
       <Text width={"6.45rem"} left={"9.25rem"} top={"3.5rem"}>

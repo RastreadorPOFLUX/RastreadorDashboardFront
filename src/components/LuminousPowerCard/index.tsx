@@ -22,7 +22,6 @@ function LuminousPowerCard() {
 
   const Average = 1300;
 
-
   const [options, setOptions] = useState<AgChartOptions>({
     title: {
       text: "Potência Luminosa - (" + intervalTime + ")",
