@@ -1,49 +1,65 @@
-import React, { useState } from "react";
-import { AgGauge } from "ag-charts-react";
-import { AgLinearGaugeOptions } from "ag-charts-enterprise";
+import { useState } from "react";
+import { Bar } from 'react-chartjs-2';
+import { ChartOptions } from 'chart.js/auto';
+
+
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
 
 //Estilo
 import { StyledWrapper } from "./style";
 
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
 function MotorPowerCard() {
-  const [options, setOptions] = useState<AgLinearGaugeOptions>({
-    type: "linear-gauge",
-    value: 90,
-    scale: {
-      min: 0,
-      max: 100,
-      label: {
-        formatter({ value }) {
-          return `${value.toFixed(0)}%`;
+
+  const [value, setValue] = useState<number>(70); // Initial value of 50
+  const max = 100; // Maximum value for the gauge
+
+  const data = {
+    labels: [''],
+    datasets: [
+      {
+        label: 'Potência do Motor',
+        data: [value], // The current value will be displayed
+        backgroundColor: '#3f51b5',
+        maxBarThickness: 40,
+        borderRadius: 99,
+      },
+    ],
+  };
+  
+
+  const options: ChartOptions<'bar'> = ({
+    indexAxis: 'y',
+    scales: {
+      x: {
+        grid: {
+          display: false, // Hide gridlines for a cleaner look
         },
+        max: max,
+        beginAtZero: true,
       },
+      y:{
+        grid: {
+          display: false, // Hide gridlines for a cleaner look
+        },
+      }
     },
-    thickness: 30,
-    bar: {
-      thickness: 30,
-    },
-    direction: "horizontal",
-    segmentation: {
-      enabled: true,
-      interval: {
-        count: 4,
-      },
-      spacing: 2,
-    },
-    cornerRadius: 99,
-    cornerMode: "container",
-    background: {
-      visible: false,
-    },
-    title: {
-      text: "Potência do Motor",
-      fontSize: 20,
-    },
-    padding: {
-      top: 10,
-      left: 90,
-    },
-  });
+    plugins: {
+      legend: { display: false },
+      tooltip: { enabled: true },
+    }
+  }
+  );
 
   return (
     <StyledWrapper
@@ -52,10 +68,13 @@ function MotorPowerCard() {
       left={"21.5625rem"}
       top={"34.75rem"}
     >
-      <AgGauge
-        options={options}
-        style={{ width: "60.1875rem", height: "8.1875rem" }}
-      />
+      <div style={{ width: "60.1875rem", height: "5.1875rem" }}>
+        <Bar
+          data={data}
+          options={options}
+        />
+      </div>
+      
     </StyledWrapper>
   );
 }
