@@ -17,17 +17,18 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   border-radius: 1.5625rem;
 `;
 
-export const BorderLinearProgress = styled(LinearProgress)(() => ({
-  borderRadius: 25,
+export const GradientLinearProgress = styled(LinearProgress)(() => ({
+  borderRadius: 5,
   [`&.${linearProgressClasses.colorPrimary}`]: {
     backgroundColor: 'var(--secondaryColor)',
     height: 15,
   },
   [`& .${linearProgressClasses.bar}`]: {
     borderRadius: 55,
-    backgroundColor: 'var(--primaryColor)',
-    height: 15,
-  },
+    background: `linear-gradient(-90deg, var(--acceptColor) ${0}% , var(--primaryColor) ${60}%, var(--alertColor) ${100}%)`,
+    backgroundSize: `100%`,
+    height: 15
+  }
 }));
 
 export const Text = styled.h2`
@@ -40,3 +41,4 @@ export const Text = styled.h2`
   width: 15rem;
   margin-left: 24rem;
 `;
+
