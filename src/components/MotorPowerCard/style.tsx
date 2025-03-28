@@ -1,6 +1,6 @@
 import styled from "styled-components";
-
 import { Wrapper } from "../Cards/style";
+import { LinearProgress, linearProgressClasses } from "@mui/material";
 
 interface Props {
   width: string;
@@ -16,3 +16,19 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   top: ${(props) => props.top};
   border-radius: 1.5625rem;
 `;
+
+export const BorderLinearProgress = styled(LinearProgress)(() => ({
+  top: 80,
+  left: 75,
+  width: 885,
+  borderRadius: 25,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: 'var(--secondaryColor)',
+    height: 15,
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 55,
+    backgroundColor: 'var(--primaryColor)',
+    height: 15,
+  },
+}));
