@@ -29,3 +29,14 @@ export const BorderLinearProgress = styled(LinearProgress)(() => ({
     height: 15,
   },
 }));
+
+export const Text = styled.h2`
+  color: var(--primaryText);
+  text-align: center;
+  vertical-align: text-top;
+  font-size: 1.5rem;
+  font-family: var(--primaryFont);
+  font-weight: 500;
+  width: 15rem;
+  margin-left: 24rem;
+`;

@@ -13,7 +13,7 @@ interface WeatherData {
   time: string;
 }
 
-function CloudinessPluviosityCard() {
+function CloudinessCard() {
   const [Data, setData] = useState<WeatherData[]>([]);
   const [Title, setTitle] = useState<string>();
 
@@ -55,10 +55,9 @@ function CloudinessPluviosityCard() {
         fill: "#DD702C",
         cornerRadius: 10,
         tooltip: {
-          renderer: (params: { datum: WeatherData }) => {
-            // Customize the tooltip content
+          renderer: (params: { datum: WeatherData }) => {    
             return {
-              title: ` ${params.datum.hour}`, // Title for the tooltip
+              title: ` ${params.datum.hour}`, 
               heading: ` ${params.datum.date}`,
             };
           },
@@ -90,7 +89,7 @@ function CloudinessPluviosityCard() {
       },
     ],
     title: {
-      text: "Pluviosidade e Nebulosidade - (" + Title + ")",
+      text: "Nebulosidade - (" + Title + ")",
     },
   };
 
@@ -106,4 +105,4 @@ function CloudinessPluviosityCard() {
   );
 }
 
-export default CloudinessPluviosityCard;
+export default CloudinessCard;

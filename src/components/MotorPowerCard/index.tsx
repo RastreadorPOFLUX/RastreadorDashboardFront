@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import getData from "./Data";
 
 //Estilo
-import { StyledWrapper, BorderLinearProgress } from "./style";
-import { Box, LinearProgress, Typography } from "@mui/material";
-
+import { StyledWrapper, BorderLinearProgress, Text } from "./style";
+import { Box, Typography } from "@mui/material";
 
 
 function MotorPowerCard() {
@@ -18,13 +17,14 @@ function MotorPowerCard() {
       left={"21.5625rem"}
       top={"34.75rem"}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center' }}  height={180} paddingLeft={10} width={885}>
+      <Text> Potência do Motor </Text>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}  height={25} paddingLeft={10} width={885}>
       <Box sx={{ width: '100%', mr: 1 }}>
         <BorderLinearProgress variant="determinate" value={progress} />
       </Box>
       <Box sx={{ minWidth: 35 }} >
         <Typography
-        fontFamily={'sans-serif'}
+        fontFamily={'var(--primaryFont)'}
           variant="body1"
           sx={{ color: 'var(--primaryText)' }}
         >{`${Math.round(progress)}%`}
