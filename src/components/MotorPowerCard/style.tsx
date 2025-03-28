@@ -18,9 +18,6 @@ export const StyledWrapper = styled(Wrapper)<Props>`
 `;
 
 export const BorderLinearProgress = styled(LinearProgress)(() => ({
-  top: 80,
-  left: 75,
-  width: 885,
   borderRadius: 25,
   [`&.${linearProgressClasses.colorPrimary}`]: {
     backgroundColor: 'var(--secondaryColor)',
