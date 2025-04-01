@@ -13,10 +13,22 @@ import {
 } from "./style";
 
 function MenuLateral() {
-  const location = useLocation();
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
 
-  const [BeginDate, setBeginDate] = useState("");
-  const [EndDate, setEndDate] = useState("");
+  const formatDate = (date: Date) => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const todayFormatted = formatDate(today);
+  const yesterdayFormatted = formatDate(yesterday);
+
+  const [BeginDate, setBeginDate] = useState(yesterdayFormatted);
+  const [EndDate, setEndDate] = useState(todayFormatted);
 
   const handleBeginDateChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -26,6 +38,8 @@ function MenuLateral() {
   const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEndDate(event.target.value);
   };
+
+  const location = useLocation();
 
   const getColor = (pathname: string) => {
     let textColors: string[] = [];
