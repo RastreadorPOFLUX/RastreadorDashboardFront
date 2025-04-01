@@ -1,7 +1,5 @@
 export default function getData() {
-    return (
-        {
-            value: 70
-        }
-    )
-  }
+  return {
+    value: 70,
+  };
+}

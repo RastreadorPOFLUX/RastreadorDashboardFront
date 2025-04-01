@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router";
+import { useEffect, useState } from "react";
 
 // Estilo
 import {
@@ -13,6 +14,18 @@ import {
 
 function MenuLateral() {
   const location = useLocation();
+
+  const [BeginDate, setBeginDate] = useState("");
+  const [EndDate, setEndDate] = useState("");
+
+  const handleBeginDateChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setBeginDate(event.target.value);
+  };
+  const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEndDate(event.target.value);
+  };
 
   const getColor = (pathname: string) => {
     let textColors: string[] = [];
@@ -63,9 +76,18 @@ function MenuLateral() {
       <Text> Período de Análise: </Text>
       <Text>
         Início
-        <DateInput></DateInput>
+        <DateInput
+          id="begin"
+          type="text"
+          value={BeginDate}
+          onChange={handleBeginDateChange}
+        ></DateInput>
         Fim
-        <DateInput></DateInput>
+        <DateInput
+          id="end"
+          value={EndDate}
+          onChange={handleEndDateChange}
+        ></DateInput>
       </Text>
       <Space></Space>
       <Contribuitions>

@@ -1,8 +1,7 @@
 import styled, { css, keyframes } from "styled-components";
-import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
+import { Gauge, gaugeClasses } from "@mui/x-charts/Gauge";
 
 import { Wrapper } from "../Cards/style";
-
 
 interface Props {
   width: string;
@@ -31,15 +30,13 @@ export const Text = styled.h3<Props>`
   margin-top: ${(props) => props.top};
 `;
 
-export const CircularProgress = styled(Gauge)(() => (
-  {
-      [`& .${gaugeClasses.valueText}`]: {
-        fontSize: 40,
-        fontFamily: 'var(--primaryFont)'
-      },
-      [`& .${gaugeClasses.valueArc}`]: {
-        fill: 'var(--primaryColor)',
-      },
-      [`& .${gaugeClasses.referenceArc}`]: {
-      }
-      }));
+export const CircularProgress = styled(Gauge)(() => ({
+  [`& .${gaugeClasses.valueText}`]: {
+    fontSize: 40,
+    fontFamily: "var(--primaryFont)",
+  },
+  [`& .${gaugeClasses.valueArc}`]: {
+    fill: "var(--primaryColor)",
+  },
+  [`& .${gaugeClasses.referenceArc}`]: {},
+}));

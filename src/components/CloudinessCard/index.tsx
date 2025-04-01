@@ -55,9 +55,9 @@ function CloudinessCard() {
         fill: "#DD702C",
         cornerRadius: 10,
         tooltip: {
-          renderer: (params: { datum: WeatherData }) => {    
+          renderer: (params: { datum: WeatherData }) => {
             return {
-              title: ` ${params.datum.hour}`, 
+              title: ` ${params.datum.hour}`,
               heading: ` ${params.datum.date}`,
             };
           },
