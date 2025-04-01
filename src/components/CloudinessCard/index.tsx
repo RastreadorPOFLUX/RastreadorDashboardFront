@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { AgCharts } from "ag-charts-react";
 import { AgChartOptions } from "ag-charts-enterprise";
+import "ag-charts-enterprise";
 import { fetchHistoricalCloudiness } from "./Data";
 
 //Estilo
