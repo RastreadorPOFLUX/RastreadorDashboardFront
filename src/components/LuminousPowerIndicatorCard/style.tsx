@@ -1,6 +1,8 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
+import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
 
 import { Wrapper } from "../Cards/style";
+
 
 interface Props {
   width: string;
@@ -20,7 +22,7 @@ export const StyledWrapper = styled(Wrapper)<Props>`
 export const Text = styled.h3<Props>`
   color: ${(props) => props.color};
   text-align: left;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-family: var(--primaryFont);
   font-weight: 500;
   position: absolute;
@@ -28,3 +30,16 @@ export const Text = styled.h3<Props>`
   left: ${(props) => props.left};
   margin-top: ${(props) => props.top};
 `;
+
+export const CircularProgress = styled(Gauge)(() => (
+  {
+      [`& .${gaugeClasses.valueText}`]: {
+        fontSize: 40,
+        fontFamily: 'var(--primaryFont)'
+      },
+      [`& .${gaugeClasses.valueArc}`]: {
+        fill: 'var(--primaryColor)',
+      },
+      [`& .${gaugeClasses.referenceArc}`]: {
+      }
+      }));

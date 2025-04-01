@@ -1,58 +1,20 @@
-import React, { useState } from "react";
-import { AgGauge } from "ag-charts-react";
-import "ag-charts-enterprise";
-import { AgRadialGaugeOptions } from "ag-charts-enterprise";
+import { useSpring, animated } from '@react-spring/web';
+import React, { useEffect, useState } from 'react';
 
 //Estilo
-import { StyledWrapper, Text } from "./style";
+import { StyledWrapper, Text, CircularProgress} from "./style";
 
 function LuminousPowerIndicatorCard() {
-  const [options, setOptions] = useState<AgRadialGaugeOptions>({
-    type: "radial-gauge",
-    value: 1000,
-    scale: {
-      min: 0,
-      max: 1300,
-      fill: "#FFFFFF",
-      label: {
-        enabled: false,
-      },
-    },
-    targets: [
-      {
-        value: 1050,
-        placement: "outside",
-        shape: "triangle",
-        fill: "#000000",
-      },
-    ],
-    bar: {
-      fill: "#DD702C",
-    },
-    background: {
-      visible: false,
-    },
-    cornerRadius: 99,
-    cornerMode: "container",
-    segmentation: {
-      enabled: false,
-      interval: {
-        count: 4,
-      },
-      spacing: 2,
-    },
-    startAngle: 0,
-    endAngle: 0,
-    label: {},
-    secondaryLabel: {
-      text: "Kwh",
-      color: "#000000",
-    },
-    padding: {
-      top: 10,
-      right: 30,
-    },
-  });
+  const [value, setValue] = useState<number>(1000);
+
+    // Function to change the gauge value
+  const handleChangeValue = () => {
+    setValue(value); // example change
+  };
+
+   useEffect(() => {
+    handleChangeValue()
+    }, [value]);
 
   return (
     <StyledWrapper
@@ -63,17 +25,22 @@ function LuminousPowerIndicatorCard() {
     >
       <Text
         width={"9rem"}
-        left={"6.275rem"}
+        left={"5.975rem"}
         top={"10.975rem"}
         color={"var(--primaryText)"}
       >
-        {" "}
-        Valor Atual{" "}
+        Valor Atual
       </Text>
-      <AgGauge
-        options={options}
-        style={{ width: "17.1875rem", height: "17.1875rem" }}
-      />
+        <CircularProgress 
+          value={value}
+          startAngle={0}
+          endAngle={360}
+          valueMin={0} 
+          valueMax={1500}
+          innerRadius="80%"
+          outerRadius="100%"
+          cornerRadius= "50%"
+        />
     </StyledWrapper>
   );
 }
