@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useFunctionThatUsesDate } from "../CloudinessCard/Data";
 
 // Estilo
 import {
@@ -12,21 +13,24 @@ import {
   Contribuitions,
 } from "./style";
 
+
+
+export const formatDate = (date: Date) => {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+
 function MenuLateral() {
+
   const today = new Date();
   const yesterday = new Date(today);
   yesterday.setDate(today.getDate() - 1);
 
-  const formatDate = (date: Date) => {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  };
-
   const todayFormatted = formatDate(today);
   const yesterdayFormatted = formatDate(yesterday);
-
   const [BeginDate, setBeginDate] = useState(yesterdayFormatted);
   const [EndDate, setEndDate] = useState(todayFormatted);
 
@@ -35,11 +39,14 @@ function MenuLateral() {
   ) => {
     setBeginDate(event.target.value);
   };
+
   const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEndDate(event.target.value);
   };
-
+  
   const location = useLocation();
+
+  useFunctionThatUsesDate(BeginDate, EndDate);
 
   const getColor = (pathname: string) => {
     let textColors: string[] = [];

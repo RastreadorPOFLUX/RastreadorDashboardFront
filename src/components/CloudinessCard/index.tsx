@@ -14,6 +14,7 @@ interface WeatherData {
   time: string;
 }
 
+
 function CloudinessCard() {
   const [Data, setData] = useState<WeatherData[]>([]);
   const [Title, setTitle] = useState<string>();
