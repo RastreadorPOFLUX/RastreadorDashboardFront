@@ -26,7 +26,6 @@ export const useFunctionThatUsesDate = (beginDate: string, endDate: string) => {
 };
 
 
-
 export const fetchHistoricalCloudiness = async () => {
   let numberOfRecords: number = 24;
   const historicalWeatherUrl = `https://history.openweathermap.org/data/2.5/history/city?q=Rio de Janeiro,br&type=hour&cnt=${numberOfRecords}&appid=${apiKey}`;
