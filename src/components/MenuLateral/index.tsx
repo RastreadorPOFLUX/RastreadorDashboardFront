@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router";
-import { useState } from "react";
-import { useFunctionThatUsesDate } from "../CloudinessCard/Data";
+import { useEffect, useState } from "react";
+import { analysisCycle } from "../CloudinessCard/Data";
 
 // Estilo
 import {
@@ -12,6 +12,7 @@ import {
   DateInput,
   Contribuitions,
 } from "./style";
+import CloudinessCard from "../CloudinessCard";
 
 
 
@@ -43,10 +44,9 @@ function MenuLateral() {
   const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEndDate(event.target.value);
   };
+
   
   const location = useLocation();
-
-  useFunctionThatUsesDate(BeginDate, EndDate);
 
   const getColor = (pathname: string) => {
     let textColors: string[] = [];

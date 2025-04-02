@@ -4,12 +4,15 @@ import { formatDate } from "../MenuLateral";
 
 const apiKey = process.env.WEATHER_API_KEY; 
 
-export const useFunctionThatUsesDate = (beginDate: string, endDate: string) => {
-  // Corrigindo fuso horário do Brasil (3h = 10800000ms)
-  let begin = Date.parse(beginDate) + 10800000;
-  let end = Date.parse(endDate) + 10800000;
+export const analysisCycle = () => {
+  let beginDate = (document.getElementById("begin") as HTMLInputElement).value;
+  let endDate = (document.getElementById("end") as HTMLInputElement).value;
+  console.log(beginDate)
+
+  // Corrigindo fuso horário do Brasil 
+  let begin = Date.parse(beginDate) + 14400000;
+  let end = Date.parse(endDate) + 14400000;
   let diaAtual = new Date();
-  useEffect(() => {
     if((begin && end <= Date.now()) && end-begin >= 0) { // Verificando se a data de início é menor que a de fim e se ambas as datas não estão no futuro.
       if(formatDate(new Date(end)) == formatDate(diaAtual)){
         // Corrigindo horário de final (h -> ms)
@@ -21,13 +24,13 @@ export const useFunctionThatUsesDate = (beginDate: string, endDate: string) => {
         end += 82800000;
       }
     }  
-  }, [beginDate, endDate]); 
   return (Math.trunc(((Date.now()-begin)/3600000)))
 };
 
 
 export const fetchHistoricalCloudiness = async () => {
-  let numberOfRecords: number = 24;
+  let numberOfRecords: number = analysisCycle();
+  console.log(numberOfRecords)
   const historicalWeatherUrl = `https://history.openweathermap.org/data/2.5/history/city?q=Rio de Janeiro,br&type=hour&cnt=${numberOfRecords}&appid=${apiKey}`;
   const response = await axios.get(`${historicalWeatherUrl}`);
   return response.data.list;
