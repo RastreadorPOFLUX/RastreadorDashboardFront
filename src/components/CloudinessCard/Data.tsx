@@ -1,6 +1,5 @@
 import axios from "axios";
-import { useEffect } from "react";
-import { formatDate } from "../MenuLateral";
+import { formatDate } from "../MenuLateral/DateContext";
 
 const apiKey = process.env.WEATHER_API_KEY; 
 

@@ -3,6 +3,7 @@ import { AgCharts } from "ag-charts-react";
 import { AgChartOptions } from "ag-charts-enterprise";
 import "ag-charts-enterprise";
 import { fetchHistoricalCloudiness } from "./Data";
+import { useDateContext } from './../MenuLateral/DateContext';
 
 //Estilo
 import { StyledWrapper } from "./style";
@@ -18,6 +19,8 @@ interface WeatherData {
 function CloudinessCard() {
   const [Data, setData] = useState<WeatherData[]>([]);
   const [Title, setTitle] = useState<string>();
+
+  const {BeginDate, EndDate} = useDateContext()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +41,7 @@ function CloudinessCard() {
       );
     };
     fetchData();
-  }, []);
+  }, [BeginDate, EndDate]);
 
   const options: AgChartOptions = {
     data: Data,

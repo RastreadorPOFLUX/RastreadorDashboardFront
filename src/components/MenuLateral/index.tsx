@@ -1,6 +1,5 @@
-import { Link, useLocation } from "react-router";
-import { useEffect, useState } from "react";
-import { analysisCycle } from "../CloudinessCard/Data";
+import { Link, useLocation } from "react-router";;
+import { useDateContext } from './DateContext';
 
 // Estilo
 import {
@@ -12,28 +11,11 @@ import {
   DateInput,
   Contribuitions,
 } from "./style";
-import CloudinessCard from "../CloudinessCard";
-
-
-
-export const formatDate = (date: Date) => {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
-  return `${year}-${month}-${day}`;
-};
 
 
 function MenuLateral() {
 
-  const today = new Date();
-  const yesterday = new Date(today);
-  yesterday.setDate(today.getDate() - 1);
-
-  const todayFormatted = formatDate(today);
-  const yesterdayFormatted = formatDate(yesterday);
-  const [BeginDate, setBeginDate] = useState(yesterdayFormatted);
-  const [EndDate, setEndDate] = useState(todayFormatted);
+  const {BeginDate, setBeginDate, EndDate, setEndDate} = useDateContext();
 
   const handleBeginDateChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -45,7 +27,6 @@ function MenuLateral() {
     setEndDate(event.target.value);
   };
 
-  
   const location = useLocation();
 
   const getColor = (pathname: string) => {
@@ -81,8 +62,7 @@ function MenuLateral() {
     <Wrapper>
       <Link to="/">
         <Pages color={getColor(location.pathname)[0]}>
-          {" "}
-          Informações Gerais{" "}
+          Informações Gerais
         </Pages>
       </Link>
       <Divider></Divider>
