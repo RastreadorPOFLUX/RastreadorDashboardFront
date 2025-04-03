@@ -20,11 +20,15 @@ function MenuLateral() {
   const handleBeginDateChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setBeginDate(event.target.value);
+    if(new Date(event.target.value) <= new Date()){
+      setBeginDate(event.target.value);
+    }
   };
 
   const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEndDate(event.target.value);
+    if(new Date(event.target.value) <= new Date()){
+      setEndDate(event.target.value);
+    }
   };
 
   const location = useLocation();

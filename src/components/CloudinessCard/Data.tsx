@@ -21,7 +21,7 @@ export const analysisCycle = () => {
         // Corrigindo horário de final (23h = 82800000ms)
         end += 82800000;
       }
-    }  
+    } 
   return (Math.trunc(((Date.now()-begin)/3600000)))
 };
 
