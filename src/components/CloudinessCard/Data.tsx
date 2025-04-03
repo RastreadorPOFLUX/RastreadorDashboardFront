@@ -6,7 +6,6 @@ const apiKey = process.env.WEATHER_API_KEY;
 export const analysisCycle = () => {
   let beginDate = (document.getElementById("begin") as HTMLInputElement).value;
   let endDate = (document.getElementById("end") as HTMLInputElement).value;
-  console.log(beginDate)
 
   // Corrigindo fuso horário do Brasil 
   let begin = Date.parse(beginDate) + 14400000;
@@ -29,7 +28,6 @@ export const analysisCycle = () => {
 
 export const fetchHistoricalCloudiness = async () => {
   let numberOfRecords: number = analysisCycle();
-  console.log(numberOfRecords)
   const historicalWeatherUrl = `https://history.openweathermap.org/data/2.5/history/city?q=Rio de Janeiro,br&type=hour&cnt=${numberOfRecords}&appid=${apiKey}`;
   const response = await axios.get(`${historicalWeatherUrl}`);
   return response.data.list;

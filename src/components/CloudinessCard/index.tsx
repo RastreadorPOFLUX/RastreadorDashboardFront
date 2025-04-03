@@ -20,7 +20,8 @@ function CloudinessCard() {
   const [Data, setData] = useState<WeatherData[]>([]);
   const [Title, setTitle] = useState<string>();
 
-  const {BeginDate, EndDate} = useDateContext()
+  const {BeginDate, setBeginDate, EndDate, setEndDate} = useDateContext()
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,6 +42,7 @@ function CloudinessCard() {
       );
     };
     fetchData();
+    console.log('BeginDate:', BeginDate, 'EndDate:', EndDate);
   }, [BeginDate, EndDate]);
 
   const options: AgChartOptions = {
