@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { AgCharts } from "ag-charts-react";
 import { AgChartOptions } from "ag-charts-enterprise";
-import "ag-charts-enterprise";
 import { fetchHistoricalCloudiness } from "./Data";
 import { useDateContext } from './../MenuLateral/DateContext';
 
@@ -20,7 +19,7 @@ function CloudinessCard() {
   const [Data, setData] = useState<WeatherData[]>([]);
   const [Title, setTitle] = useState<string>();
 
-  const {BeginDate, setBeginDate, EndDate, setEndDate} = useDateContext()
+  const {BeginDate, EndDate} = useDateContext()
 
 
   useEffect(() => {
@@ -42,14 +41,10 @@ function CloudinessCard() {
       );
     };
     fetchData();
-    console.log('BeginDate:', BeginDate, 'EndDate:', EndDate);
   }, [BeginDate, EndDate]);
 
   const options: AgChartOptions = {
     data: Data,
-    navigator: {
-      enabled: true,
-    },
     background: {
       visible: false,
     },
@@ -71,10 +66,6 @@ function CloudinessCard() {
         },
       },
     ],
-    zoom: {
-      enabled: true,
-      scrollingStep: 0.4,
-    },
     axes: [
       {
         type: "category",
