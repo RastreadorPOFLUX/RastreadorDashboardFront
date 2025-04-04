@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router";;
-import { useDateContext } from './DateContext';
+import { formatDate, useDateContext } from './DateContext';
 
 // Estilo
 import {
@@ -20,14 +20,25 @@ function MenuLateral() {
   const handleBeginDateChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    if(new Date(event.target.value) <= new Date()){
+    if(new Date(event.target.value) <= new Date() &&  new Date(event.target.value) <= new Date(EndDate)){
       setBeginDate(event.target.value);
+      //Valor em milisegundos de 1 semana e correção de fuso horário
+      if(new Date(EndDate).getTime() + 93600000 - new Date(event.target.value).getTime() + 10800000 > 612000000) {
+        let date = new Date(new Date(event.target.value).getTime() + 612000000);
+        setEndDate(formatDate(date));
+      }
     }
   };
 
   const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if(new Date(event.target.value) <= new Date()){
+    if(new Date(event.target.value) <= new Date()  &&  new Date(event.target.value) >= new Date(BeginDate)){
       setEndDate(event.target.value);
+      
+      if(new Date(event.target.value).getTime() + 93600000 - new Date(BeginDate).getTime() + 10800000  > 612000000) {
+        let date = new Date(new Date(event.target.value).getTime() - 507600000);
+        setBeginDate(formatDate(date));
+      }
+      
     }
   };
 
