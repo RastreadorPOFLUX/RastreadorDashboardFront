@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router";
 import GeneralInfo from "./pages/GeneralInfo/index";
 import ElectricalInfo from "./pages/ElectricalInfo/index";
 import ControlInfo from "./pages/ControlInfo/index";
+import CameraDisplay from "./pages/CameraDisplay/index";
 
 // Estilo
 import { GlobalStyle } from "./global";
@@ -17,6 +18,7 @@ export default function App() {
         <Route index path="*" element={<GeneralInfo />} />
         <Route path="/electricalInfo" element={<ElectricalInfo />} />
         <Route path="/controlInfo" element={<ControlInfo />} />
+        <Route path="/cameraDisplay" element={<CameraDisplay />} />
       </Routes>
     </div>
   );

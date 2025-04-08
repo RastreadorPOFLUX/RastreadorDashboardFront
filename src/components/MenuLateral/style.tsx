@@ -20,6 +20,7 @@ export const Divider = styled.div`
 export const Pages = styled.h3`
   color: ${(props) => props.color};
   text-align: left;
+  margin-top: 1rem;
   vertical-align: text-top;
   font-size: 1.25rem;
   font-family: var(--primaryFont);
@@ -35,7 +36,7 @@ export const Pages = styled.h3`
 `;
 
 export const Space = styled.div`
-  margin-top: 3rem;
+  margin-top: 2rem;
 `;
 
 export const Text = styled.h3`
@@ -73,7 +74,7 @@ export const DateInput = styled.input.attrs({ type: "date" })`
 export const Contribuitions = styled.h3`
   color: var(--primaryText);
   text-align: left;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-family: var(--primaryFont);
   font-weight: 500;
   width: 12rem;
