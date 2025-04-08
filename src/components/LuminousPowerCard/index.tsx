@@ -54,10 +54,10 @@ function LuminousPowerCard() {
 
   return (
     <StyledWrapper
-      width={"31.375rem"}
-      height={"23.9375rem"}
+      width={"38.375rem"}
+      height={"24.9375rem"}
       left={"21.5625rem"}
-      top={"9.4375rem"}
+      top={"8.4375rem"}
     >
       <AgCharts options={options} style={{ height: 385 }} />
     </StyledWrapper>

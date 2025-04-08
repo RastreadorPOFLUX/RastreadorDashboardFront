@@ -53,7 +53,7 @@ function ClimateCard() {
       width={"31.375rem"}
       height={"6.25rem"}
       left={"55.5rem"}
-      top={"9.4375rem"}
+      top={"8.4375rem"}
     >
       <Text width={"20rem"} left={"6rem"} top={"1rem"}>
         {Data?.name},{" "}

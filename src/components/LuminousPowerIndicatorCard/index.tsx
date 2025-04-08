@@ -17,14 +17,14 @@ function LuminousPowerIndicatorCard() {
 
   return (
     <StyledWrapper
-      width={"16.625rem"}
-      height={"16.625rem"}
-      left={"63.1875rem"}
-      top={"16.875rem"}
+      width={"20rem"}
+      height={"20rem"}
+      left={"65.1875rem"}
+      top={"10.875rem"}
     >
       <Text
         width={"9rem"}
-        left={"5.975rem"}
+        left={"7.75rem"}
         top={"10.975rem"}
         color={"var(--primaryText)"}
       >

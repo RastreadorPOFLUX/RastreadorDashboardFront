@@ -1,7 +1,6 @@
 // Componentes
 import MenuSuperior from "./../../components/MenuSuperior/index";
 import MenuLateral from "../../components/MenuLateral/index";
-import ClimateCard from "../../components/ClimateCard";
 import PIDParametersCard from "../../components/PIDParametersCard";
 import AnglesCard from "../../components/AnglesCard";
 import LensAngleIndicatorCard from "../../components/LensAngleIndicatorCard";
@@ -19,7 +18,6 @@ export default function ControlInfo() {
         <MenuLateral></MenuLateral>
       </DateProvider>
       <AnglesCard></AnglesCard>
-      <ClimateCard></ClimateCard>
       <PIDParametersCard></PIDParametersCard>
       <LensAngleIndicatorCard></LensAngleIndicatorCard>
       <ControlSignalsCard></ControlSignalsCard>
