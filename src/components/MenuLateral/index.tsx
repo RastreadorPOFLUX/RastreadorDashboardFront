@@ -1,5 +1,5 @@
-import { Link, useLocation } from "react-router";;
-import { formatDate, useDateContext } from './DateContext';
+import { Link, useLocation } from "react-router";
+import { formatDate, useDateContext } from "./DateContext";
 
 // Estilo
 import {
@@ -12,18 +12,25 @@ import {
   Contribuitions,
 } from "./style";
 
-
 function MenuLateral() {
-
-  const {BeginDate, setBeginDate, EndDate, setEndDate} = useDateContext();
+  const { BeginDate, setBeginDate, EndDate, setEndDate } = useDateContext();
 
   const handleBeginDateChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    if(new Date(event.target.value) <= new Date() &&  new Date(event.target.value) <= new Date(EndDate)){
+    if (
+      new Date(event.target.value) <= new Date() &&
+      new Date(event.target.value) <= new Date(EndDate)
+    ) {
       setBeginDate(event.target.value);
       //Valor em milisegundos de 1 semana e correção de fuso horário
-      if(new Date(EndDate).getTime() + 93600000 - new Date(event.target.value).getTime() + 10800000 > 612000000) {
+      if (
+        new Date(EndDate).getTime() +
+          93600000 -
+          new Date(event.target.value).getTime() +
+          10800000 >
+        612000000
+      ) {
         let date = new Date(new Date(event.target.value).getTime() + 612000000);
         setEndDate(formatDate(date));
       }
@@ -31,14 +38,22 @@ function MenuLateral() {
   };
 
   const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if(new Date(event.target.value) <= new Date()  &&  new Date(event.target.value) >= new Date(BeginDate)){
+    if (
+      new Date(event.target.value) <= new Date() &&
+      new Date(event.target.value) >= new Date(BeginDate)
+    ) {
       setEndDate(event.target.value);
-      
-      if(new Date(event.target.value).getTime() + 93600000 - new Date(BeginDate).getTime() + 10800000  > 612000000) {
+
+      if (
+        new Date(event.target.value).getTime() +
+          93600000 -
+          new Date(BeginDate).getTime() +
+          10800000 >
+        612000000
+      ) {
         let date = new Date(new Date(event.target.value).getTime() - 507600000);
         setBeginDate(formatDate(date));
       }
-      
     }
   };
 
@@ -76,9 +91,7 @@ function MenuLateral() {
   return (
     <Wrapper>
       <Link to="/">
-        <Pages color={getColor(location.pathname)[0]}>
-          Informações Gerais
-        </Pages>
+        <Pages color={getColor(location.pathname)[0]}>Informações Gerais</Pages>
       </Link>
       <Divider></Divider>
       <Link to="/electricalInfo">

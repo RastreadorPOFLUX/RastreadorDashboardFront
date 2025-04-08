@@ -15,11 +15,11 @@ export default function GeneralInfo() {
     <GeneralInfoBackground>
       <MenuSuperior></MenuSuperior>
       <DateProvider>
-      <MenuLateral></MenuLateral>
-      <OperationModeCard></OperationModeCard>
-      <ClimateCard></ClimateCard>
-      <DataCard></DataCard>
-      <CloudinessCard></CloudinessCard>
+        <MenuLateral></MenuLateral>
+        <OperationModeCard></OperationModeCard>
+        <ClimateCard></ClimateCard>
+        <DataCard></DataCard>
+        <CloudinessCard></CloudinessCard>
       </DateProvider>
     </GeneralInfoBackground>
   );

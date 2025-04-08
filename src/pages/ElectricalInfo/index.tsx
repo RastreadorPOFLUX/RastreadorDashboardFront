@@ -15,7 +15,7 @@ export default function ElectricalInfo() {
     <GeneralInfoBackground>
       <MenuSuperior></MenuSuperior>
       <DateProvider>
-      <MenuLateral></MenuLateral>
+        <MenuLateral></MenuLateral>
       </DateProvider>
       <LuminousPowerCard></LuminousPowerCard>
       <ClimateCard></ClimateCard>
