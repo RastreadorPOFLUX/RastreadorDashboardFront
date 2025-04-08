@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     --backgroundColor: #d9d9d9;
     --acceptColor: #34A853;
     --alertColor: #C62E2E;
+    --backgroundCards: #E8E8E8;
 
     /* Fonts */
     --primaryFont: 'Lato', sans-serif;

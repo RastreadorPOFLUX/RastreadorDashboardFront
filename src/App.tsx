@@ -2,9 +2,9 @@ import "./App.css";
 import { Routes, Route } from "react-router";
 
 // Páginas
-import GeneralInfo from "./screens/GeneralInfo/index";
-import ElectricalInfo from "./screens/ElectricalInfo/index";
-import ControlInfo from "./screens/ControlInfo/index";
+import GeneralInfo from "./pages/GeneralInfo/index";
+import ElectricalInfo from "./pages/ElectricalInfo/index";
+import ControlInfo from "./pages/ControlInfo/index";
 
 // Estilo
 import { GlobalStyle } from "./global";

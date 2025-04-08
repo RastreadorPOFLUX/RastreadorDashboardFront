@@ -37,3 +37,12 @@ export const Text = styled.h3<Props>`
   margin-top: 2px;
   top: 0.625rem;
 `;
+
+export const Title = styled.h2<Props>`
+  color: ${(props) => props.color};
+  text-align: center;
+  font-size: 2rem;
+  font-family: var(--primaryFont);
+  font-weight: 500;
+  margin-top: 1rem;
+`;

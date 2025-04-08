@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router";
+import { formatDate, useDateContext } from "./DateContext";
 
 // Estilo
 import {
@@ -12,6 +13,50 @@ import {
 } from "./style";
 
 function MenuLateral() {
+  const { BeginDate, setBeginDate, EndDate, setEndDate } = useDateContext();
+
+  const handleBeginDateChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    if (
+      new Date(event.target.value) <= new Date() &&
+      new Date(event.target.value) <= new Date(EndDate)
+    ) {
+      setBeginDate(event.target.value);
+      //Valor em milisegundos de 1 semana e correção de fuso horário
+      if (
+        new Date(EndDate).getTime() +
+          93600000 -
+          new Date(event.target.value).getTime() +
+          10800000 >
+        612000000
+      ) {
+        let date = new Date(new Date(event.target.value).getTime() + 612000000);
+        setEndDate(formatDate(date));
+      }
+    }
+  };
+
+  const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (
+      new Date(event.target.value) <= new Date() &&
+      new Date(event.target.value) >= new Date(BeginDate)
+    ) {
+      setEndDate(event.target.value);
+
+      if (
+        new Date(event.target.value).getTime() +
+          93600000 -
+          new Date(BeginDate).getTime() +
+          10800000 >
+        612000000
+      ) {
+        let date = new Date(new Date(event.target.value).getTime() - 507600000);
+        setBeginDate(formatDate(date));
+      }
+    }
+  };
+
   const location = useLocation();
 
   const getColor = (pathname: string) => {
@@ -46,10 +91,7 @@ function MenuLateral() {
   return (
     <Wrapper>
       <Link to="/">
-        <Pages color={getColor(location.pathname)[0]}>
-          {" "}
-          Informações Gerais{" "}
-        </Pages>
+        <Pages color={getColor(location.pathname)[0]}>Informações Gerais</Pages>
       </Link>
       <Divider></Divider>
       <Link to="/electricalInfo">
@@ -63,9 +105,18 @@ function MenuLateral() {
       <Text> Período de Análise: </Text>
       <Text>
         Início
-        <DateInput></DateInput>
+        <DateInput
+          id="begin"
+          type="text"
+          value={BeginDate}
+          onChange={handleBeginDateChange}
+        ></DateInput>
         Fim
-        <DateInput></DateInput>
+        <DateInput
+          id="end"
+          value={EndDate}
+          onChange={handleEndDateChange}
+        ></DateInput>
       </Text>
       <Space></Space>
       <Contribuitions>

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { fetchLocalWeatherConditions } from "./Data";
 
 //Estilo
 import { StyledWrapper, Text, WeatherIcon } from "./style";
@@ -31,84 +32,21 @@ function ClimateCard() {
     };
   }, []);
 
-  // State variables to store city name, weather data, forecast data, loading state, and errors
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null); // Current weather data
-  const [loading, setLoading] = useState<boolean>(false); // Loading state
-  const [error, setError] = useState<string | null>(null); // Error message
-
-  // Function to fetch weather and forecast data from OpenWeather API
-  const fetchWeatherData = async (cityName: string) => {
-    const apiKey = process.env.WEATHER_API_KEY; // Fetching the API key from environment variables
-    const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`; // API URL for current weather
-
-    try {
-      setLoading(true); // Setting loading state
-      setError(null); // Resetting error state
-
-      // Fetching current weather data
-      const weatherResponse = await fetch(currentWeatherUrl);
-      if (!weatherResponse.ok) {
-        throw new Error("City not found! Try another one"); // Error if city not found
-      }
-      const weatherData: WeatherData = await weatherResponse.json(); // Parsing weather data
-      setWeatherData(weatherData); // Setting the fetched weather data
-    } catch (error) {
-      // Handling any errors that occur during the fetch
-      if (error instanceof Error) {
-        setError(error.message); // Displaying error message
-      }
-      setWeatherData(null); // Resetting weather data
-    } finally {
-      setLoading(false); // Resetting loading state
-    }
-  };
+  const [Data, setData] = useState<WeatherData>();
+  const [Icon, setIcon] = useState<WeatherData>();
 
   // useEffect to fetch the user's location and display the weather for the current location
   useEffect(() => {
-    const getUserLocation = async () => {
-      if (navigator.geolocation) {
-        // Checking if geolocation is available
-        navigator.geolocation.getCurrentPosition(
-          async (position) => {
-            //const { latitude, longitude } = position.coords; // Getting user's device location
-            const apiKey = process.env.WEATHER_API_KEY;
-            const reverseGeocodeUrl = `https://api.openweathermap.org/data/2.5/weather?q=Rio de Janeiro,br&appid=${apiKey}&units=metric`; // API URL for reverse geocoding (get location by cityname)
-            try {
-              setLoading(true);
-              const response = await fetch(reverseGeocodeUrl); // Fetching weather data by geolocation
-              if (!response.ok) {
-                throw new Error("Unable to fetch location data"); // Error if location data fetch fails
-              }
-              const data: WeatherData = await response.json(); // Parsing weather data
-              setWeatherData(data); // Setting the fetched weather data
-            } catch (error) {
-              // Handling any errors that occur during the fetch
-              if (error instanceof Error) {
-                setError(error.message); // Displaying error message
-              }
-              setWeatherData(null); // Resetting weather data
-            } finally {
-              setLoading(false); // Resetting loading state
-            }
-          },
-          () => {
-            // Handling geolocation errors (e.g., if user denies location access)
-            setError("Unable to retrieve your location");
-            setWeatherData(null);
-          },
-        );
-      } else {
-        // Handling case where geolocation is not supported by the browser
-        setError("Geolocation is not supported by this browser.");
-        setWeatherData(null);
-      }
+    const fetchData = async () => {
+      const weatherResult = await fetchLocalWeatherConditions();
+      const iconCode = weatherResult.weather[0].icon;
+      setData(weatherResult);
+      setIcon(iconCode);
     };
+    fetchData();
+  }, []);
 
-    getUserLocation(); // Invoking the function to get user location on page load
-  }, []); // Empty dependency array to run effect once on component mount
-
-  const iconCode = weatherData?.weather[0].icon;
-  const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+  const iconUrl = `https://openweathermap.org/img/wn/${Icon}@2x.png`;
 
   return (
     <StyledWrapper
@@ -118,10 +56,8 @@ function ClimateCard() {
       top={"9.4375rem"}
     >
       <Text width={"20rem"} left={"6rem"} top={"1rem"}>
-        {weatherData?.name},{" "}
-        {weatherData?.main.temp != null
-          ? Math.trunc(weatherData?.main.temp)
-          : "-"}
+        {Data?.name},{" "}
+        {Data?.main.temp != null ? Math.trunc(Data?.main.temp) : "-"}
         °C
       </Text>
       <Text width={"6.45rem"} left={"9.25rem"} top={"3.5rem"}>
