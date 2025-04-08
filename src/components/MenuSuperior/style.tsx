@@ -11,15 +11,16 @@ export const Wrapper = styled.div`
 `;
 
 export const Image = styled.img`
-  height: 4.6875rem;
-  width: 5.625rem;
-  left: 6rem;
-  top: 1.625rem;
+  height: 4.875rem;
+  width: 8.625rem;
+  left: 5rem;
+  top: 0.925rem;
   position: absolute;
 `;
 
 export const Title = styled.h1`
   text-align: left;
+  margin-top: 1.75rem;
   vertical-align: text-top;
   left: 22.875rem;
   position: absolute;
