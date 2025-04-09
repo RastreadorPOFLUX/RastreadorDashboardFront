@@ -1,10 +1,12 @@
 // Componentes
 import MenuSuperior from "./../../components/MenuSuperior/index";
 import MenuLateral from "./../../components/MenuLateral/index";
+import CameraCard from "../../components/CameraCard";
 
 // Estilo
 import { GeneralInfoBackground } from "./style";
 import { DateProvider } from "../../components/MenuLateral/DateContext";
+
 
 export default function CameraDisplay() {
   return (
@@ -13,6 +15,7 @@ export default function CameraDisplay() {
         <DateProvider>
         <MenuLateral></MenuLateral>
         </DateProvider>
+        <CameraCard></CameraCard>
     </GeneralInfoBackground>
   );
 }
