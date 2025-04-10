@@ -8,6 +8,7 @@ function CameraCard() {
       height={"34.025rem"}
       left={"21.5625rem"}
       top={"8.4375rem"}
+      backgroundcolor="var(--backgroundCards)"
     ></StyledWrapper>
   );
 }

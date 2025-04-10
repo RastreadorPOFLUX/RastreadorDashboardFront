@@ -8,6 +8,7 @@ function DataCard() {
       height={"6.25rem"}
       left={"55.5rem"}
       top={"16rem"}
+      backgroundcolor="var(--backgroundCards)"
     >
       <Button
         width={"10.625rem"}

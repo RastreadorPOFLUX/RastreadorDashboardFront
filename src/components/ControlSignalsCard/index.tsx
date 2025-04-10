@@ -8,6 +8,7 @@ function ControlSignalsCard() {
       height={"17rem"}
       left={"38.7375rem"}
       top={"25.5375rem"}
+      backgroundcolor="var(--backgroundCards)"
     ></StyledWrapper>
   );
 }
