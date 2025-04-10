@@ -55,6 +55,7 @@ function LuminousPowerIndicatorCard() {
       height={"20rem"}
       left={"65.1875rem"}
       top={"10.875rem"}
+      backgroundcolor="var(--backgroundCards)"
     >
       <Text
         width={"17rem"}

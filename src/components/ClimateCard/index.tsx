@@ -54,6 +54,7 @@ function ClimateCard() {
       height={"6.25rem"}
       left={"55.5rem"}
       top={"8.4375rem"}
+      backgroundcolor="var(--backgroundCards)"
     >
       <Text width={"20rem"} left={"6rem"} top={"1rem"}>
         {Data?.name},{" "}

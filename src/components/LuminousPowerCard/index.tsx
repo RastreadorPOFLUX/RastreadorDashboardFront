@@ -58,6 +58,7 @@ function LuminousPowerCard() {
       height={"24.9375rem"}
       left={"21.5625rem"}
       top={"8.4375rem"}
+      backgroundcolor="var(--backgroundCards)"
     >
       <AgCharts options={options} style={{ height: 385 }} />
     </StyledWrapper>
