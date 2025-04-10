@@ -8,21 +8,22 @@ import { useGaugeState } from "@mui/x-charts";
 const valueMax: number = 1500;
 
 function GaugePointer() {
-  const {valueAngle, outerRadius, innerRadius, cx, cy } = useGaugeState();
-  const [expectedValue, setExpectedValue] = useState<number>(getData()[getData().length-1].expected);
+  const { valueAngle, outerRadius, innerRadius, cx, cy } = useGaugeState();
+  const [expectedValue, setExpectedValue] = useState<number>(
+    getData()[getData().length - 1].expected,
+  );
 
   if (valueAngle === null) {
-    // No value to display
     return null;
   }
 
   const start = {
-    x: cx + (innerRadius) * Math.sin(expectedValue*2*Math.PI/valueMax),
-    y: cy - (innerRadius) * Math.cos(expectedValue*2*Math.PI/valueMax),
+    x: cx + innerRadius * Math.sin((expectedValue * 2 * Math.PI) / valueMax),
+    y: cy - innerRadius * Math.cos((expectedValue * 2 * Math.PI) / valueMax),
   };
   const target = {
-    x: cx + (outerRadius) * Math.sin(expectedValue*2*Math.PI/valueMax),
-    y: cy - (outerRadius) * Math.cos(expectedValue*2*Math.PI/valueMax),
+    x: cx + outerRadius * Math.sin((expectedValue * 2 * Math.PI) / valueMax),
+    y: cy - outerRadius * Math.cos((expectedValue * 2 * Math.PI) / valueMax),
   };
   return (
     <g>
@@ -35,18 +36,18 @@ function GaugePointer() {
   );
 }
 
-
 function LuminousPowerIndicatorCard() {
-  const [value, setValue] = useState<number>(getData()[getData().length-1].value);
+  const [value, setValue] = useState<number>(
+    getData()[getData().length - 1].value,
+  );
 
   const handleChangeValue = () => {
-    setValue(value); 
+    setValue(value);
   };
 
   useEffect(() => {
     handleChangeValue();
   }, [value]);
-
 
   return (
     <StyledWrapper
@@ -56,23 +57,32 @@ function LuminousPowerIndicatorCard() {
       top={"10.875rem"}
     >
       <Text
-        width={"9rem"}
-        left={"7.75rem"}
+        width={"17rem"}
+        left={"9.25rem"}
         top={"10.975rem"}
         color={"var(--primaryText)"}
       >
-        Valor Atual
+        Kwh
+      </Text>
+      <Text
+        width={"12rem"}
+        left={"4.15rem"}
+        top={"12.975rem"}
+        color={"var(--primaryText)"}
+      >
+        Valor esperado: {getData()[getData().length - 1].expected} Kwh
       </Text>
       <CircularProgress
-      value={value}
-      startAngle={0}
-      endAngle={360}
-      valueMin={0}
-      valueMax={valueMax}
-      innerRadius="80%"
-      outerRadius="100%"
-      cornerRadius="50%">
-        <GaugePointer/>
+        value={value}
+        startAngle={0}
+        endAngle={360}
+        valueMin={0}
+        valueMax={valueMax}
+        innerRadius="80%"
+        outerRadius="100%"
+        cornerRadius="50%"
+      >
+        <GaugePointer />
       </CircularProgress>
     </StyledWrapper>
   );

@@ -67,7 +67,7 @@ function MenuLateral() {
           "var(--primaryColor)",
           "var(--primaryText)",
           "var(--primaryText)",
-          "var(--primaryText)"
+          "var(--primaryText)",
         ];
         return textColors;
       case "/electricalInfo":
@@ -86,14 +86,14 @@ function MenuLateral() {
           "var(--primaryText)",
         ];
         return textColors;
-        case "/cameraDisplay":
-          textColors = [
-            "var(--primaryText)",
-            "var(--primaryText)",
-            "var(--primaryText)",
-            "var(--primaryColor)"
-          ];
-          return textColors;
+      case "/cameraDisplay":
+        textColors = [
+          "var(--primaryText)",
+          "var(--primaryText)",
+          "var(--primaryText)",
+          "var(--primaryColor)",
+        ];
+        return textColors;
       default:
         return "var(--primaryText)";
     }

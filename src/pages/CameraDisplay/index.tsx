@@ -7,15 +7,14 @@ import CameraCard from "../../components/CameraCard";
 import { GeneralInfoBackground } from "./style";
 import { DateProvider } from "../../components/MenuLateral/DateContext";
 
-
 export default function CameraDisplay() {
   return (
     <GeneralInfoBackground>
       <MenuSuperior></MenuSuperior>
-        <DateProvider>
+      <DateProvider>
         <MenuLateral></MenuLateral>
-        </DateProvider>
-        <CameraCard></CameraCard>
+      </DateProvider>
+      <CameraCard></CameraCard>
     </GeneralInfoBackground>
   );
 }

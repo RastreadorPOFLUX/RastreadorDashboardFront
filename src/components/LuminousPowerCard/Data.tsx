@@ -1,11 +1,11 @@
 interface Data {
-  dateTime: string,
-  hour: string,
-  day: number,
-  month: number,
-  year: number,
-  value: number,
-  expected: number
+  dateTime: string;
+  hour: string;
+  day: number;
+  month: number;
+  year: number;
+  value: number;
+  expected: number;
 }
 
 export default function getData(): Data[] {
@@ -17,7 +17,7 @@ export default function getData(): Data[] {
       month: 1,
       year: 2025,
       value: 1300,
-      expected: 1200
+      expected: 1200,
     },
     {
       dateTime: "1-1-2025-16:00:00",
@@ -26,7 +26,7 @@ export default function getData(): Data[] {
       month: 1,
       year: 2025,
       value: 100,
-      expected: 1200
+      expected: 1200,
     },
     {
       dateTime: "1-1-2025-17:00:00",
@@ -35,7 +35,7 @@ export default function getData(): Data[] {
       month: 1,
       year: 2025,
       value: 1100,
-      expected: 1200
+      expected: 1200,
     },
     {
       dateTime: "1-1-2025-18:00:00",
@@ -44,7 +44,7 @@ export default function getData(): Data[] {
       month: 1,
       year: 2025,
       value: 1250,
-      expected: 1200
+      expected: 1200,
     },
     {
       dateTime: "1-1-2025-19:00:00",
@@ -53,7 +53,7 @@ export default function getData(): Data[] {
       month: 1,
       year: 2025,
       value: 1300,
-      expected: 1200
+      expected: 1200,
     },
     {
       dateTime: "1-1-2025-20:00:00",
@@ -62,7 +62,7 @@ export default function getData(): Data[] {
       month: 1,
       year: 2025,
       value: 1000,
-      expected: 1200
+      expected: 1200,
     },
     {
       dateTime: "1-1-2025-21:00:00",
@@ -71,7 +71,7 @@ export default function getData(): Data[] {
       month: 1,
       year: 2025,
       value: 1100,
-      expected: 1200
+      expected: 1200,
     },
     {
       dateTime: "1-1-2025-22:00:00",
@@ -80,7 +80,7 @@ export default function getData(): Data[] {
       month: 1,
       year: 2025,
       value: 1250,
-      expected: 1200
+      expected: 1200,
     },
     {
       dateTime: "1-1-2025-23:00:00",
@@ -89,7 +89,7 @@ export default function getData(): Data[] {
       month: 1,
       year: 2025,
       value: 1200,
-      expected: 1100
+      expected: 1000,
     },
   ];
 }
