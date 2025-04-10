@@ -69,7 +69,7 @@ function LuminousPowerIndicatorCard() {
         width={"12rem"}
         left={"4.15rem"}
         top={"12.975rem"}
-        color={"var(--primaryText)"}
+        color={"var(--secondaryColor)"}
       >
         Valor esperado: {getData()[getData().length - 1].expected} Kwh
       </Text>
