@@ -67,6 +67,7 @@ function MenuLateral() {
           "var(--primaryColor)",
           "var(--primaryText)",
           "var(--primaryText)",
+          "var(--primaryText)",
         ];
         return textColors;
       case "/electricalInfo":
@@ -74,10 +75,20 @@ function MenuLateral() {
           "var(--primaryText)",
           "var(--primaryColor)",
           "var(--primaryText)",
+          "var(--primaryText)",
         ];
         return textColors;
       case "/controlInfo":
         textColors = [
+          "var(--primaryText)",
+          "var(--primaryText)",
+          "var(--primaryColor)",
+          "var(--primaryText)",
+        ];
+        return textColors;
+      case "/cameraDisplay":
+        textColors = [
+          "var(--primaryText)",
           "var(--primaryText)",
           "var(--primaryText)",
           "var(--primaryColor)",
@@ -100,6 +111,10 @@ function MenuLateral() {
       <Divider></Divider>
       <Link to="/controlInfo">
         <Pages color={getColor(location.pathname)[2]}> Controlador </Pages>
+      </Link>
+      <Divider></Divider>
+      <Link to="/cameraDisplay">
+        <Pages color={getColor(location.pathname)[3]}> Câmera </Pages>
       </Link>
       <Space></Space>
       <Text> Período de Análise: </Text>

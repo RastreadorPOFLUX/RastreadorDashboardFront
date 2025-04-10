@@ -1,7 +1,6 @@
 // Componentes
 import MenuSuperior from "./../../components/MenuSuperior/index";
 import MenuLateral from "../../components/MenuLateral/index";
-import ClimateCard from "../../components/ClimateCard";
 import LuminousPowerCard from "../../components/LuminousPowerCard";
 import LuminousPowerIndicatorCard from "../../components/LuminousPowerIndicatorCard";
 import MotorPowerCard from "../../components/MotorPowerCard";
@@ -18,7 +17,6 @@ export default function ElectricalInfo() {
         <MenuLateral></MenuLateral>
       </DateProvider>
       <LuminousPowerCard></LuminousPowerCard>
-      <ClimateCard></ClimateCard>
       <LuminousPowerIndicatorCard></LuminousPowerIndicatorCard>
       <MotorPowerCard></MotorPowerCard>
     </GeneralInfoBackground>

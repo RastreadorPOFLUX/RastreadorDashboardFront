@@ -5,7 +5,7 @@ export const Wrapper = styled.section`
   height: 100%;
   width: 18.4375rem;
   filter: drop-shadow(0.25rem 0.25rem 0.15rem rgba(0, 0, 0, 0.25));
-  top: 7.785rem;
+  top: 6.285rem;
   position: absolute;
 `;
 
@@ -20,6 +20,7 @@ export const Divider = styled.div`
 export const Pages = styled.h3`
   color: ${(props) => props.color};
   text-align: left;
+  margin-top: 1rem;
   vertical-align: text-top;
   font-size: 1.25rem;
   font-family: var(--primaryFont);
@@ -35,7 +36,7 @@ export const Pages = styled.h3`
 `;
 
 export const Space = styled.div`
-  margin-top: 3rem;
+  margin-top: 2rem;
 `;
 
 export const Text = styled.h3`
@@ -73,7 +74,7 @@ export const DateInput = styled.input.attrs({ type: "date" })`
 export const Contribuitions = styled.h3`
   color: var(--primaryText);
   text-align: left;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-family: var(--primaryFont);
   font-weight: 500;
   width: 12rem;

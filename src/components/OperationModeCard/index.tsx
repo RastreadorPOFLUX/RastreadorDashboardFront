@@ -34,7 +34,7 @@ function OperationModeCard() {
       width={"31.375rem"}
       height={"13.875rem"}
       left={"21.5625rem"}
-      top={"9.4375rem"}
+      top={"8.4375rem"}
     >
       <Title color={"var(--primaryText)"}> Modos de Operação</Title>
       <Button

@@ -4,10 +4,10 @@ import { StyledWrapper } from "./style";
 function LensAngleIndicatorCard() {
   return (
     <StyledWrapper
-      width={"16rem"}
-      height={"16rem"}
+      width={"16.5rem"}
+      height={"16.5rem"}
       left={"21.5625rem"}
-      top={"26.5375rem"}
+      top={"25.5375rem"}
     ></StyledWrapper>
   );
 }
