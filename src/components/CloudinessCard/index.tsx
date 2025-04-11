@@ -76,33 +76,33 @@ function CloudinessCard() {
         position: "bottom",
         title: {
           text: "Horário",
-          fontFamily: 'Lato, sans-serif',
+          fontFamily: "Lato, sans-serif",
         },
         label: {
           formatter: ({ value }) => `${value.split("-")[1]}`,
         },
         gridLine: {
           enabled: false,
-        }
+        },
       },
       {
         type: "number",
         position: "left",
         title: {
           text: "(%)",
-          fontFamily: 'Lato, sans-serif',
+          fontFamily: "Lato, sans-serif",
         },
         max: 100,
         gridLine: {
           enabled: false,
-        }
+        },
       },
     ],
     title: {
       text: "Nebulosidade - (" + Title + ")",
       fontSize: 24,
-      fontFamily: 'Lato, sans-serif',
-      color: 'var(--primaryText)'
+      fontFamily: "Lato, sans-serif",
+      color: "var(--primaryText)",
     },
   };
 

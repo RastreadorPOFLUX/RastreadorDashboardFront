@@ -24,14 +24,14 @@ function LuminousPowerCard() {
     title: {
       text: "Potência Luminosa - (" + intervalTime + ")",
       fontSize: 24,
-      fontFamily: 'Lato, sans-serif',
-      color: 'var(--primaryText)'
+      fontFamily: "Lato, sans-serif",
+      color: "var(--primaryText)",
     },
     subtitle: {
       text: "Captada pelo Piranômetro",
       fontSize: 16,
-      fontFamily: 'Lato, sans-serif',
-      color: 'var(--primaryText)'
+      fontFamily: "Lato, sans-serif",
+      color: "var(--primaryText)",
     },
     data: getData(),
     background: {
@@ -53,26 +53,26 @@ function LuminousPowerCard() {
         position: "bottom",
         title: {
           text: "Horário",
-          fontFamily: 'Lato, sans-serif',
+          fontFamily: "Lato, sans-serif",
         },
         label: {
           formatter: ({ value }) => `${value}`,
         },
         gridLine: {
-          enabled: false
-        }
+          enabled: false,
+        },
       },
       {
         type: "number",
         position: "left",
         title: {
           text: "(%)",
-          fontFamily: 'Lato, sans-serif',
+          fontFamily: "Lato, sans-serif",
         },
         max: 1500,
         gridLine: {
           enabled: false,
-        }
+        },
       },
     ],
   });
