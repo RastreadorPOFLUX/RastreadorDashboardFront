@@ -20,19 +20,20 @@ function LuminousPowerCard() {
     "/" +
     getData()[getData().length - 1].year;
 
-  const Average = 1300;
-
   const [options, setOptions] = useState<AgChartOptions>({
     title: {
       text: "Potência Luminosa - (" + intervalTime + ")",
+      fontSize: 24,
+      fontFamily: 'Lato, sans-serif',
+      color: 'var(--primaryText)'
     },
     subtitle: {
       text: "Captada pelo Piranômetro",
+      fontSize: 16,
+      fontFamily: 'Lato, sans-serif',
+      color: 'var(--primaryText)'
     },
     data: getData(),
-    navigator: {
-      enabled: true,
-    },
     background: {
       visible: false,
     },
@@ -46,10 +47,34 @@ function LuminousPowerCard() {
         cornerRadius: 10,
       },
     ],
-    zoom: {
-      enabled: true,
-      scrollingStep: 0.4,
-    },
+    axes: [
+      {
+        type: "category",
+        position: "bottom",
+        title: {
+          text: "Horário",
+          fontFamily: 'Lato, sans-serif',
+        },
+        label: {
+          formatter: ({ value }) => `${value}`,
+        },
+        gridLine: {
+          enabled: false
+        }
+      },
+      {
+        type: "number",
+        position: "left",
+        title: {
+          text: "(%)",
+          fontFamily: 'Lato, sans-serif',
+        },
+        max: 1500,
+        gridLine: {
+          enabled: false,
+        }
+      },
+    ],
   });
 
   return (
