@@ -34,6 +34,7 @@ export const CircularProgress = styled(Gauge)(() => ({
   [`& .${gaugeClasses.valueText}`]: {
     fontSize: 40,
     fontFamily: "var(--primaryFont)",
+    transform: "translate(0px, -10px)",
   },
   [`& .${gaugeClasses.valueArc}`]: {
     fill: "var(--primaryColor)",

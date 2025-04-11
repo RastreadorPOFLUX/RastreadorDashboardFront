@@ -1,5 +1,5 @@
 export default function getData() {
   return {
-    value: 70,
+    value: 90,
   };
 }

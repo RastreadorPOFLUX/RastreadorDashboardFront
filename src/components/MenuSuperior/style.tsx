@@ -20,12 +20,12 @@ export const Image = styled.img`
 
 export const Title = styled.h1`
   text-align: left;
-  margin-top: 1.75rem;
+  margin-top: 2rem;
   vertical-align: text-top;
-  left: 22.875rem;
+  left: 24.875rem;
   position: absolute;
   width: 29.8125rem;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 500;
   color: var(--primaryText);
   font-family: var(--primaryFont);

@@ -20,10 +20,10 @@ export const StyledWrapper = styled(Wrapper)<Props>`
 export const Title = styled.h2<Props>`
   color: ${(props) => props.color};
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-family: var(--primaryFont);
   font-weight: 500;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 `;
 
 export const Text = styled.h3<Props>`
