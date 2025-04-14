@@ -66,7 +66,7 @@ function LuminousPowerCard() {
         type: "number",
         position: "left",
         title: {
-          text: "(%)",
+          text: "Kwh",
           fontFamily: "Lato, sans-serif",
         },
         max: 1500,
