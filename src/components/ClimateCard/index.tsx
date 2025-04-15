@@ -18,7 +18,6 @@ interface WeatherData {
 }
 
 function ClimateCard() {
-
   const [isPending, startTransition] = useTransition();
   const [Data, setData] = useState<WeatherData>();
   const [Icon, setIcon] = useState<WeatherData>();
@@ -40,33 +39,35 @@ function ClimateCard() {
     const fetchData = async () => {
       const weatherResult = await fetchLocalWeatherConditions();
       startTransition(() => {
-      setData(weatherResult);
-      setIcon(weatherResult.weather[0].icon);
-    });
+        setData(weatherResult);
+        setIcon(weatherResult.weather[0].icon);
+      });
     };
     fetchData();
   }, []);
 
-  const iconUrl = Icon ? `https://openweathermap.org/img/wn/${Icon}@2x.png` : "";
+  const iconUrl = Icon
+    ? `https://openweathermap.org/img/wn/${Icon}@2x.png`
+    : "";
 
   return (
     <StyledWrapper
       width={"31.375rem"}
       height={"6.25rem"}
-      left={"55.5rem"}
-      top={"8.4375rem"}
-      backgroundcolor="var(--backgroundCards)"
+      $left={"55.5rem"}
+      $top={"8.4375rem"}
+      $backgroundcolor="var(--backgroundCards)"
     >
-      <Text width={"20rem"} left={"6rem"} top={"1rem"}>
+      <Text width={"20rem"} $left={"6rem"} $top={"1rem"}>
         {Data?.name},{" "}
         {Data?.main.temp != null ? Math.trunc(Data?.main.temp) : "-"}
         °C
       </Text>
-      <Text width={"6.45rem"} left={"9.25rem"} top={"3.5rem"}>
+      <Text width={"6.45rem"} $left={"9.25rem"} $top={"3.5rem"}>
         {time}
       </Text>
       <WeatherIcon>
-      {Icon &&< img src={iconUrl} alt="Weather Icon" />}
+        {Icon && <img src={iconUrl} alt="Weather Icon" />}
       </WeatherIcon>
     </StyledWrapper>
   );

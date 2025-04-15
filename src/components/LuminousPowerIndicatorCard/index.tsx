@@ -53,22 +53,22 @@ function LuminousPowerIndicatorCard() {
     <StyledWrapper
       width={"20rem"}
       height={"20rem"}
-      left={"65.1875rem"}
-      top={"10.875rem"}
-      backgroundcolor="var(--backgroundCards)"
+      $left={"65.1875rem"}
+      $top={"10.875rem"}
+      $backgroundcolor="var(--backgroundCards)"
     >
       <Text
         width={"17rem"}
-        left={"9.25rem"}
-        top={"10.975rem"}
+        $left={"9.25rem"}
+        $top={"10.975rem"}
         color={"var(--primaryText)"}
       >
         Kwh
       </Text>
       <Text
         width={"12rem"}
-        left={"4.15rem"}
-        top={"12.975rem"}
+        $left={"4.15rem"}
+        $top={"12.975rem"}
         color={"var(--secondaryColor)"}
       >
         Valor esperado: {getData()[getData().length - 1].expected} Kwh

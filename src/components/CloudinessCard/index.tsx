@@ -37,16 +37,16 @@ function CloudinessCard() {
         }))
         .filter((item: WeatherData) => item.date <= EndDate);
       startTransition(() => {
-      setData(fetchedData);
-    });
+        setData(fetchedData);
+      });
     };
     fetchData();
   }, [BeginDate, EndDate]);
 
   const titleRange =
-  Data.length > 0
-    ? `${Data[0].time.slice(0, 10)} - ${Data[Data.length - 1].time.slice(0, 10)}`
-    : "Carregando...";
+    Data.length > 0
+      ? `${Data[0].time.slice(0, 10)} - ${Data[Data.length - 1].time.slice(0, 10)}`
+      : "Carregando...";
 
   const options: AgChartOptions = {
     data: Data,
@@ -111,9 +111,9 @@ function CloudinessCard() {
     <StyledWrapper
       width={"65.3125rem"}
       height={"18.5625rem"}
-      left={"21.5625rem"}
-      top={"23.5625rem"}
-      backgroundcolor="var(--backgroundCards)"
+      $left={"21.5625rem"}
+      $top={"23.5625rem"}
+      $backgroundcolor="var(--backgroundCards)"
     >
       <AgCharts options={options} style={{ height: 302 }} />
     </StyledWrapper>

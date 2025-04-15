@@ -6,9 +6,9 @@ function AnglesCard() {
     <StyledWrapper
       width={"32.625rem"}
       height={"15.775rem"}
-      left={"21.5625rem"}
-      top={"8.4375rem"}
-      backgroundcolor="var(--backgroundCards)"
+      $left={"21.5625rem"}
+      $top={"8.4375rem"}
+      $backgroundcolor="var(--backgroundCards)"
     ></StyledWrapper>
   );
 }

@@ -89,9 +89,9 @@ function ControlSignalsCard() {
     <StyledWrapper
       width={"46.1375rem"}
       height={"17rem"}
-      left={"40.5375rem"}
-      top={"25.5375rem"}
-      backgroundcolor="var(--backgroundCards)"
+      $left={"40.5375rem"}
+      $top={"25.5375rem"}
+      $backgroundcolor="var(--backgroundCards)"
     >
       <AgCharts options={options} style={{ height: 285 }} />
     </StyledWrapper>

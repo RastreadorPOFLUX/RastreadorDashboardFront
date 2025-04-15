@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 interface Props {
-  backgroundcolor: string;
+  $backgroundcolor: string;
 }
 
 export const Wrapper = styled.section<Props>`
-  background-color: ${(props) => props.backgroundcolor};
+  background-color: ${(props) => props.$backgroundcolor};
   filter: drop-shadow(0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
   position: absolute;
 `;

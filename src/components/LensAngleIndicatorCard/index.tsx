@@ -22,14 +22,14 @@ function LensAngleIndicatorCard() {
     <StyledWrapper
       width={"17.5rem"}
       height={"17.5rem"}
-      left={"21.7625rem"}
-      top={"25.3375rem"}
-      backgroundcolor="var(--backgroundCards)"
+      $left={"21.7625rem"}
+      $top={"25.3375rem"}
+      $backgroundcolor="var(--backgroundCards)"
     >
       <Text
         width={"17rem"}
-        left={"4.2rem"}
-        top={"4.775rem"}
+        $left={"4.2rem"}
+        $top={"4.775rem"}
         color={"var(--primaryText)"}
       >
         Ângulo da Lente
