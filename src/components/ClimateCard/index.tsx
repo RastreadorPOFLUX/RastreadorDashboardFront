@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { fetchLocalWeatherConditions } from "./Data";
 
 //Estilo
@@ -12,12 +12,16 @@ interface WeatherData {
   weather: [
     {
       main: string;
-      icon: string;
+      Icon: string;
     },
   ];
 }
 
 function ClimateCard() {
+
+  const [isPending, startTransition] = useTransition();
+  const [Data, setData] = useState<WeatherData>();
+  const [Icon, setIcon] = useState<WeatherData>();
   const [time, setTime] = useState(new Date().toLocaleTimeString("pt-BR"));
 
   useEffect(() => {
@@ -32,21 +36,18 @@ function ClimateCard() {
     };
   }, []);
 
-  const [Data, setData] = useState<WeatherData>();
-  const [Icon, setIcon] = useState<WeatherData>();
-
-  // useEffect to fetch the user's location and display the weather for the current location
   useEffect(() => {
     const fetchData = async () => {
       const weatherResult = await fetchLocalWeatherConditions();
-      const iconCode = weatherResult.weather[0].icon;
+      startTransition(() => {
       setData(weatherResult);
-      setIcon(iconCode);
+      setIcon(weatherResult.weather[0].icon);
+    });
     };
     fetchData();
   }, []);
 
-  const iconUrl = `https://openweathermap.org/img/wn/${Icon}@2x.png`;
+  const iconUrl = Icon ? `https://openweathermap.org/img/wn/${Icon}@2x.png` : "";
 
   return (
     <StyledWrapper
@@ -65,7 +66,7 @@ function ClimateCard() {
         {time}
       </Text>
       <WeatherIcon>
-        <img src={iconUrl} alt="Weather Icon" />
+      {Icon &&< img src={iconUrl} alt="Weather Icon" />}
       </WeatherIcon>
     </StyledWrapper>
   );
