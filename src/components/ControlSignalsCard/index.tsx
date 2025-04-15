@@ -24,7 +24,7 @@ function ControlSignalsCard() {
       text: "Sinais de Controle - (" + intervalTime + ")",
       fontSize: 24,
       fontFamily: "Lato, sans-serif",
-      color: "var(--primaryText)",
+      color: "#000000",
     },
     data: getData(),
     background: {

@@ -25,13 +25,13 @@ function LuminousPowerCard() {
       text: "Potência Luminosa - (" + intervalTime + ")",
       fontSize: 24,
       fontFamily: "Lato, sans-serif",
-      color: "var(--primaryText)",
+      color: "#000000",
     },
     subtitle: {
       text: "Captada pelo Piranômetro",
       fontSize: 16,
       fontFamily: "Lato, sans-serif",
-      color: "var(--primaryText)",
+      color: "#000000",
     },
     data: getData(),
     background: {

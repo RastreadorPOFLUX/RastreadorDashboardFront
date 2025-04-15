@@ -103,7 +103,7 @@ function CloudinessCard() {
       text: `Nebulosidade - (${titleRange})`,
       fontSize: 24,
       fontFamily: "Lato, sans-serif",
-      color: "var(--primaryText)",
+      color: "#000000",
     },
   };
 
