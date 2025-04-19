@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import getData from "./../LuminousPowerCard/Data";
+import getData from "../SolarIrrandianceCard/Data";
 
 //Estilo
 import { StyledWrapper, Text, CircularProgress } from "./style";
@@ -36,7 +36,7 @@ function GaugePointer() {
   );
 }
 
-function LuminousPowerIndicatorCard() {
+function SolarIrrandianceIndicatorCard() {
   const [value, setValue] = useState<number>(
     getData()[getData().length - 1].value,
   );
@@ -59,19 +59,20 @@ function LuminousPowerIndicatorCard() {
     >
       <Text
         width={"17rem"}
-        $left={"9.25rem"}
+        $left={"8.5rem"}
         $top={"10.975rem"}
         color={"var(--primaryText)"}
       >
-        Kwh
+        Kwh/m²
       </Text>
       <Text
         width={"12rem"}
         $left={"4.15rem"}
         $top={"12.975rem"}
         color={"var(--secondaryColor)"}
+        $fontSize={"0.9rem"}
       >
-        Valor esperado: {getData()[getData().length - 1].expected} Kwh
+        Valor esperado: {getData()[getData().length - 1].expected} Kwh/m²
       </Text>
       <CircularProgress
         value={value}
@@ -89,4 +90,4 @@ function LuminousPowerIndicatorCard() {
   );
 }
 
-export default LuminousPowerIndicatorCard;
+export default SolarIrrandianceIndicatorCard;

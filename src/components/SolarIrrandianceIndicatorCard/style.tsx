@@ -8,6 +8,7 @@ interface Props {
   height?: string;
   $left: string;
   $top: string;
+  $fontSize?: string;
 }
 
 export const StyledWrapper = styled(Wrapper)<Props>`
@@ -21,7 +22,7 @@ export const StyledWrapper = styled(Wrapper)<Props>`
 export const Text = styled.h3<Props>`
   color: ${(props) => props.color};
   text-align: left;
-  font-size: 1rem;
+  font-size: ${(props) => props.$fontSize};
   font-family: var(--primaryFont);
   font-weight: 500;
   position: absolute;

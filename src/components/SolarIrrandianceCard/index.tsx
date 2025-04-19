@@ -6,7 +6,7 @@ import getData from "./Data";
 //Estilo
 import { StyledWrapper } from "./style";
 
-function LuminousPowerCard() {
+function SolarIrrandianceCard() {
   const intervalTime =
     getData()[0].day +
     "/" +
@@ -22,7 +22,7 @@ function LuminousPowerCard() {
 
   const [options, setOptions] = useState<AgChartOptions>({
     title: {
-      text: "Potência Luminosa - (" + intervalTime + ")",
+      text: "Irradiação Solar - (" + intervalTime + ")",
       fontSize: 24,
       fontFamily: "Lato, sans-serif",
       color: "#000000",
@@ -42,7 +42,7 @@ function LuminousPowerCard() {
         type: "bar",
         xKey: "hour",
         yKey: "value",
-        yName: "Potência Luminosa",
+        yName: "Irradiação Solar",
         fill: "#DD702C",
         cornerRadius: 10,
       },
@@ -66,7 +66,7 @@ function LuminousPowerCard() {
         type: "number",
         position: "left",
         title: {
-          text: "Kwh",
+          text: "Kwh/m²",
           fontFamily: "Lato, sans-serif",
         },
         max: 1500,
@@ -90,4 +90,4 @@ function LuminousPowerCard() {
   );
 }
 
-export default LuminousPowerCard;
+export default SolarIrrandianceCard;
