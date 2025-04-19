@@ -6,7 +6,7 @@ import getData from "./Data";
 //Estilo
 import { StyledWrapper } from "./style";
 
-function SolarIrrandianceCard() {
+function SolarIrradiationCard() {
   const intervalTime =
     getData()[0].day +
     "/" +
@@ -90,4 +90,4 @@ function SolarIrrandianceCard() {
   );
 }
 
-export default SolarIrrandianceCard;
+export default SolarIrradiationCard;

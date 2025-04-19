@@ -1,8 +1,8 @@
 // Componentes
 import MenuSuperior from "./../../components/MenuSuperior/index";
 import MenuLateral from "../../components/MenuLateral/index";
-import SolarIrrandianceCard from "../../components/SolarIrrandianceCard";
-import SolarIrrandianceIndicatorCard from "../../components/SolarIrrandianceIndicatorCard";
+import SolarIrradiationCard from "../../components/SolarIrradiationCard";
+import SolarIrradiationIndicatorCard from "../../components/SolarIrradiationIndicatorCard";
 import MotorPowerCard from "../../components/MotorPowerCard";
 import { DateProvider } from "../../components/MenuLateral/DateContext";
 
@@ -16,8 +16,8 @@ export default function ElectricalInfo() {
       <DateProvider>
         <MenuLateral></MenuLateral>
       </DateProvider>
-      <SolarIrrandianceCard></SolarIrrandianceCard>
-      <SolarIrrandianceIndicatorCard></SolarIrrandianceIndicatorCard>
+      <SolarIrradiationCard></SolarIrradiationCard>
+      <SolarIrradiationIndicatorCard></SolarIrradiationIndicatorCard>
       <MotorPowerCard></MotorPowerCard>
     </GeneralInfoBackground>
   );

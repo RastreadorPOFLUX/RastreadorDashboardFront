@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import getData from "../SolarIrrandianceCard/Data";
+import getData from "../SolarIrradiationCard/Data";
 
 //Estilo
 import { StyledWrapper, Text, CircularProgress } from "./style";
@@ -36,7 +36,7 @@ function GaugePointer() {
   );
 }
 
-function SolarIrrandianceIndicatorCard() {
+function SolarIrradiationIndicatorCard() {
   const [value, setValue] = useState<number>(
     getData()[getData().length - 1].value,
   );
@@ -90,4 +90,4 @@ function SolarIrrandianceIndicatorCard() {
   );
 }
 
-export default SolarIrrandianceIndicatorCard;
+export default SolarIrradiationIndicatorCard;
