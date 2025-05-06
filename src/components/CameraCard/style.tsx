@@ -16,3 +16,11 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   top: ${(props) => props.$top};
   border-radius: 1.5625rem;
 `;
+
+export const Stream = styled.video<Props>`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  left: ${(props) => props.$left};
+  margin-top: ${(props) => props.$top};
+  border-radius: 1.5625rem;
+`;
