@@ -1,5 +1,8 @@
-//Estilo
+// Estilo
 import { StyledWrapper} from "./style";
+
+// Dados
+import getData from "./Data";
 
 interface Angles{
   sunPosition: number;
@@ -69,7 +72,8 @@ function AnglesCard() {
       $backgroundcolor="var(--backgroundCards)"
     >
       
-      <AngleDisplay sunPosition={90} lensAngle={0} manualSetpoint={180} />
+      <AngleDisplay sunPosition={getData().sunPosition} lensAngle={getData().lensAngle} manualSetpoint={getData().manualSetpoint} />
+
     </StyledWrapper>
   );
 }

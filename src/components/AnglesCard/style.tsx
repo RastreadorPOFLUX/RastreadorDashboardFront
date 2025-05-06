@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { Wrapper } from "../Cards/style";
 
 interface Props {
-  width: string;
+  width?: string;
   height?: string;
-  $left: string;
-  $top: string;
+  $left?: string;
+  $top?: string;
 }
 
 export const StyledWrapper = styled(Wrapper)<Props>`
@@ -16,4 +16,3 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   top: ${(props) => props.$top};
   border-radius: 1.5625rem;
 `;
-
