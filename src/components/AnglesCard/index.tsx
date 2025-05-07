@@ -32,17 +32,31 @@ const AngleDisplay: React.FC<Angles> = ({
   };
 
   const referenceRadius = 150;
+
   const angleLines = [0, 30, 60, 90, 120, 150, 180].map((deg) => {
-    const { x, y } = toXY(deg, referenceRadius);
+    const lineEnd = toXY(deg, referenceRadius);
+    const labelPos = toXY(deg, referenceRadius + 15); // coloca o texto mais distante
+  
     return (
-      <line
-        key={deg}
-        x1={centerX}
-        y1={centerY}
-        x2={x}
-        y2={y}
-        stroke="#ccc"
-      />
+      <g key={deg}>
+        <line
+          x1={centerX}
+          y1={centerY}
+          x2={lineEnd.x}
+          y2={lineEnd.y}
+          stroke="#ccc"
+        />
+        <text
+          x={labelPos.x}
+          y={labelPos.y}
+          fontSize={12}
+          fill="#555"
+          textAnchor="middle"
+          dominantBaseline="middle"
+        >
+          {deg}°
+        </text>
+      </g>
     );
   });
 
@@ -57,16 +71,6 @@ const AngleDisplay: React.FC<Angles> = ({
 
       {/* Linhas de ângulo */}
       {angleLines}
-
-      {/* Arcos auxiliares (opcional: só se quiser ver as pistas) */}
-      {layers.map(({ radius }, i) => (
-        <path
-          key={`arc-${i}`}
-          d={`M ${centerX - radius} ${centerY} A ${radius} ${radius} 0 0 1 ${centerX + radius} ${centerY}`}
-          fill="none"
-          stroke="#eee"
-        />
-      ))}
 
       {/* Marcadores */}
       {layers.map(({ angle, color, radius }, idx) => {
