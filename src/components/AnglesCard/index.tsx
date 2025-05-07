@@ -19,9 +19,9 @@ const AngleDisplay: React.FC<Angles> = ({
   const centerY = 200;
 
   const layers = [
-    { angle: sunPosition, color: "orange", label: "Posição do Sol", radius: 130 },
-    { angle: lensAngle, color: "red", label: "Ângulo da Lente", radius: 110 },
-    { angle: manualSetpoint, color: "deepskyblue", label: "SetPoint Manual", radius: 90 },
+    { angle: sunPosition, color: "orange", label: "Posição do Sol", radius: 110 },
+    { angle: lensAngle, color: "red", label: "Ângulo da Lente", radius: 70 },
+    { angle: manualSetpoint, color: "deepskyblue", label: "SetPoint Manual", radius: 30 },
   ];
 
   const toXY = (angleDeg: number, radius: number) => {
@@ -69,7 +69,7 @@ const AngleDisplay: React.FC<Angles> = ({
       ))}
 
       {/* Marcadores */}
-      {layers.map(({ angle, color, label, radius }, idx) => {
+      {layers.map(({ angle, color, radius }, idx) => {
         const { x, y } = toXY(angle, radius);
         return (
           <g key={idx}>

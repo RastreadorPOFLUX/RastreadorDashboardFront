@@ -1,8 +1,8 @@
 export default function getData() {
     return {
-      sunPosition: 170,
-      lensAngle: 160,
-      manualSetpoint: 150
+      sunPosition: 90,
+      lensAngle: 90,
+      manualSetpoint: 90
     };
   }
   
