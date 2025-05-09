@@ -67,7 +67,7 @@ function ControlSignalsCard() {
         type: "category",
         position: "bottom",
         title: {
-          text: "Tempo",
+          text: "Horário",
           fontFamily: "Lato, sans-serif",
         },
         label: {

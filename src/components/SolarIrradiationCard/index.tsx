@@ -51,9 +51,24 @@ function SolarIrradiationCard() {
         xKey: "hour",
         yKey: "value",
         yName: "Fotodetector",
-        fill: "#625C5C",
+        fill: "#C62E2E",
         cornerRadius: 10,
       },
+      {
+        type: 'line', 
+        xKey: 'hour',
+        yKey: 'eficiency',
+        yName: "Eficiência",
+        stroke: "black",
+        marker: {
+          fill: "yellow",
+          size: 10,
+          stroke: "black",
+          strokeWidth: 3,
+          shape: "diamond",
+        },
+    },
+
     ],
     axes: [
       {
@@ -77,6 +92,7 @@ function SolarIrradiationCard() {
           text: "Kwh/m²",
           fontFamily: "Lato, sans-serif",
         },
+        keys: ["value", "expected"],
         max: 1500,
         gridLine: {
           enabled: false,
@@ -89,6 +105,7 @@ function SolarIrradiationCard() {
           text: "(%)",
           fontFamily: "Lato, sans-serif",
         },
+        keys: ["eficiency"],
         max: 100,
         gridLine: {
           enabled: false,
