@@ -28,7 +28,7 @@ function SolarIrradiationCard() {
       color: "#000000",
     },
     subtitle: {
-      text: "Captada pelo Piranômetro",
+      text: "Captada pelo Piranômetro e Fotodetector",
       fontSize: 16,
       fontFamily: "Lato, sans-serif",
       color: "#000000",
@@ -41,10 +41,32 @@ function SolarIrradiationCard() {
       {
         type: "bar",
         xKey: "hour",
-        yKey: "value",
-        yName: "Irradiação Solar",
+        yKey: "expected",
+        yName: "Piranômetro",
         fill: "#DD702C",
         cornerRadius: 10,
+      },
+      {
+        type: "bar",
+        xKey: "hour",
+        yKey: "value",
+        yName: "Fotodetector",
+        fill: "#C62E2E",
+        cornerRadius: 10,
+      },
+      {
+        type: "line",
+        xKey: "hour",
+        yKey: "eficiency",
+        yName: "Eficiência",
+        stroke: "black",
+        marker: {
+          fill: "yellow",
+          size: 10,
+          stroke: "black",
+          strokeWidth: 3,
+          shape: "diamond",
+        },
       },
     ],
     axes: [
@@ -69,7 +91,21 @@ function SolarIrradiationCard() {
           text: "Kwh/m²",
           fontFamily: "Lato, sans-serif",
         },
+        keys: ["value", "expected"],
         max: 1500,
+        gridLine: {
+          enabled: false,
+        },
+      },
+      {
+        type: "number",
+        position: "right",
+        title: {
+          text: "(%)",
+          fontFamily: "Lato, sans-serif",
+        },
+        keys: ["eficiency"],
+        max: 100,
         gridLine: {
           enabled: false,
         },
@@ -79,7 +115,7 @@ function SolarIrradiationCard() {
 
   return (
     <StyledWrapper
-      width={"38.375rem"}
+      width={"42.375rem"}
       height={"24.9375rem"}
       $left={"21.5625rem"}
       $top={"8.4375rem"}
