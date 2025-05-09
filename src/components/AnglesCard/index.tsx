@@ -38,12 +38,6 @@ const AngleDisplay: React.FC<Angles> = ({
   const centerX = 200;
   const centerY = 200;
 
-  const layers = [
-    { angle: sunPosition, color: "orange", label: "Posição do Sol", radius: 130 },
-    { angle: lensAngle, color: "red", label: "Ângulo da Lente", radius: 90 },
-    { angle: manualSetpoint, color: "deepskyblue", label: "SetPoint Manual", radius: 50 },
-  ];
-
   const toXY = (angleDeg: number, radius: number) => {
     const angleRad = (Math.PI * angleDeg) / 180;
     const x = centerX + radius * Math.cos(Math.PI - angleRad);
@@ -51,6 +45,13 @@ const AngleDisplay: React.FC<Angles> = ({
     return { x, y };
   };
 
+  const layers = [
+    { angle: sunPosition, color: "orange", label: "Posição do Sol", radius: 130, icon: function(x:number, y:number) { return sunIcon(x,y)} },
+    { angle: lensAngle, color: "red", label: "Ângulo da Lente", radius: 90, icon: function(x:number, y:number) { return lensIcon(x,y)} },
+    { angle: manualSetpoint, color: "deepskyblue", label: "SetPoint Manual", radius: 50, icon: function(x:number, y:number) { return setPointIcon(x,y)}  },
+  ];
+
+  
   const referenceRadius = 150;
 
   const angleLines = [0, 30, 60, 90, 120, 150, 180].map((deg) => {
@@ -93,24 +94,21 @@ const AngleDisplay: React.FC<Angles> = ({
       {angleLines}
 
       {/* Marcadores */}
-      {layers.map(({ angle, color, radius }, idx) => {
+      {layers.map(({ angle, color, radius, icon}, idx) => {
         const { x, y } = toXY(angle, radius);
         return (
           <g key={idx}>   
-             {lensIcon(x,y)}
-             {sunIcon(x,y)}
-             {setPointIcon(x,y)}
+             {icon(x,y)}
             <text x={x + 10} y={y + 4} fontSize={10} fill={color}>
             </text>
           </g>
         );
       })}
 
-
       {/* Legenda */}
-      {layers.map(({ color, label }, i) => (
+      {layers.map(({icon, label }, i) => (
         <g key={`legend-${i}`} transform={`translate(${40 + i * 120}, 220)`}>
-          <rect width={10} height={10} fill={color} />
+            {icon(0,5)}
           <text x={15} y={10} fontSize={12} fill="#000">
             {label}
           </text>
