@@ -6,7 +6,7 @@ import getData from "./Data";
 //Estilo
 import { StyledWrapper } from "./style";
 
-function LuminousPowerCard() {
+function SolarIrradiationCard() {
   const intervalTime =
     getData()[0].day +
     "/" +
@@ -22,16 +22,16 @@ function LuminousPowerCard() {
 
   const [options, setOptions] = useState<AgChartOptions>({
     title: {
-      text: "Potência Luminosa - (" + intervalTime + ")",
+      text: "Irradiação Solar - (" + intervalTime + ")",
       fontSize: 24,
       fontFamily: "Lato, sans-serif",
-      color: "var(--primaryText)",
+      color: "#000000",
     },
     subtitle: {
       text: "Captada pelo Piranômetro",
       fontSize: 16,
       fontFamily: "Lato, sans-serif",
-      color: "var(--primaryText)",
+      color: "#000000",
     },
     data: getData(),
     background: {
@@ -42,7 +42,7 @@ function LuminousPowerCard() {
         type: "bar",
         xKey: "hour",
         yKey: "value",
-        yName: "Potência Luminosa",
+        yName: "Irradiação Solar",
         fill: "#DD702C",
         cornerRadius: 10,
       },
@@ -66,7 +66,7 @@ function LuminousPowerCard() {
         type: "number",
         position: "left",
         title: {
-          text: "Kwh",
+          text: "Kwh/m²",
           fontFamily: "Lato, sans-serif",
         },
         max: 1500,
@@ -81,13 +81,13 @@ function LuminousPowerCard() {
     <StyledWrapper
       width={"38.375rem"}
       height={"24.9375rem"}
-      left={"21.5625rem"}
-      top={"8.4375rem"}
-      backgroundcolor="var(--backgroundCards)"
+      $left={"21.5625rem"}
+      $top={"8.4375rem"}
+      $backgroundcolor="var(--backgroundCards)"
     >
       <AgCharts options={options} style={{ height: 385 }} />
     </StyledWrapper>
   );
 }
 
-export default LuminousPowerCard;
+export default SolarIrradiationCard;

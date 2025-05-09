@@ -11,9 +11,9 @@ function MotorPowerCard() {
     <StyledWrapper
       width={"65.3125rem"}
       height={"7.5rem"}
-      left={"21.5625rem"}
-      top={"34.75rem"}
-      backgroundcolor="var(--backgroundCards)"
+      $left={"21.5625rem"}
+      $top={"34.75rem"}
+      $backgroundcolor="var(--backgroundCards)"
     >
       <Text> Potência do Motor </Text>
       <Box

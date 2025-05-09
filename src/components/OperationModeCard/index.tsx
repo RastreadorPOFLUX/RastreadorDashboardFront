@@ -33,29 +33,29 @@ function OperationModeCard() {
     <StyledWrapper
       width={"31.375rem"}
       height={"13.875rem"}
-      left={"21.5625rem"}
-      top={"8.4375rem"}
-      backgroundcolor="var(--backgroundCards)"
+      $left={"21.5625rem"}
+      $top={"8.4375rem"}
+      $backgroundcolor="var(--backgroundCards)"
     >
       <Title color={"var(--primaryText)"}> Modos de Operação</Title>
       <Button
         onClick={handleClickButtonAuto}
         color={isActivedAuto ? "var(--primaryColor)" : "var(--secondaryColor)"}
-        left={"3.0156rem"}
+        $left={"3.0156rem"}
       >
         <Text color={"var(--white)"}>Auto</Text>
       </Button>
       <Button
         onClick={handleClickButtonManual}
         color={isActiveManual ? "var(--primaryColor)" : "var(--secondaryColor)"}
-        left={"12.46875rem"}
+        $left={"12.46875rem"}
       >
         <Text color={"var(--white)"}>Manual</Text>
       </Button>
       <Button
         onClick={handleClickButtonHalt}
         color={isActiveHalt ? "var(--primaryColor)" : "var(--secondaryColor)"}
-        left={"21.921875rem"}
+        $left={"21.921875rem"}
       >
         <Text color={"var(--white)"}>Halt</Text>
       </Button>

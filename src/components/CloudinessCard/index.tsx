@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useTransition } from "react";
 import { AgCharts } from "ag-charts-react";
 import { AgChartOptions } from "ag-charts-enterprise";
 import { fetchHistoricalCloudiness } from "./Data";
@@ -15,9 +15,8 @@ interface WeatherData {
 }
 
 function CloudinessCard() {
+  const [isPending, startTransition] = useTransition();
   const [Data, setData] = useState<WeatherData[]>([]);
-  const [Title, setTitle] = useState<string>();
-
   const { BeginDate, EndDate } = useDateContext();
 
   useEffect(() => {
@@ -37,15 +36,17 @@ function CloudinessCard() {
             "h",
         }))
         .filter((item: WeatherData) => item.date <= EndDate);
-      setData(fetchedData);
-      setTitle(
-        fetchedData[0].time.slice(0, 10) +
-          "-" +
-          fetchedData[fetchedData.length - 1].time.slice(0, 10),
-      );
+      startTransition(() => {
+        setData(fetchedData);
+      });
     };
     fetchData();
   }, [BeginDate, EndDate]);
+
+  const titleRange =
+    Data.length > 0
+      ? `${Data[0].time.slice(0, 10)} - ${Data[Data.length - 1].time.slice(0, 10)}`
+      : "Carregando...";
 
   const options: AgChartOptions = {
     data: Data,
@@ -99,10 +100,10 @@ function CloudinessCard() {
       },
     ],
     title: {
-      text: "Nebulosidade - (" + Title + ")",
+      text: `Nebulosidade - (${titleRange})`,
       fontSize: 24,
       fontFamily: "Lato, sans-serif",
-      color: "var(--primaryText)",
+      color: "#000000",
     },
   };
 
@@ -110,9 +111,9 @@ function CloudinessCard() {
     <StyledWrapper
       width={"65.3125rem"}
       height={"18.5625rem"}
-      left={"21.5625rem"}
-      top={"23.5625rem"}
-      backgroundcolor="var(--backgroundCards)"
+      $left={"21.5625rem"}
+      $top={"23.5625rem"}
+      $backgroundcolor="var(--backgroundCards)"
     >
       <AgCharts options={options} style={{ height: 302 }} />
     </StyledWrapper>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const GeneralInfoBackground = styled.body`
+export const GeneralInfoBackground = styled.div`
   background-color: var(--backgroundColor);
   position: fixed;
   height: 100%;
