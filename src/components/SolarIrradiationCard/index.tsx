@@ -28,7 +28,7 @@ function SolarIrradiationCard() {
       color: "#000000",
     },
     subtitle: {
-      text: "Captada pelo Piranômetro",
+      text: "Captada pelo Piranômetro e Fotodetector",
       fontSize: 16,
       fontFamily: "Lato, sans-serif",
       color: "#000000",
@@ -41,9 +41,17 @@ function SolarIrradiationCard() {
       {
         type: "bar",
         xKey: "hour",
-        yKey: "value",
-        yName: "Irradiação Solar",
+        yKey: "expected",
+        yName: "Piranômetro",
         fill: "#DD702C",
+        cornerRadius: 10,
+      },
+      {
+        type: "bar",
+        xKey: "hour",
+        yKey: "value",
+        yName: "Fotodetector",
+        fill: "#625C5C",
         cornerRadius: 10,
       },
     ],
@@ -74,12 +82,24 @@ function SolarIrradiationCard() {
           enabled: false,
         },
       },
+      {
+        type: "number",
+        position: "right",
+        title: {
+          text: "(%)",
+          fontFamily: "Lato, sans-serif",
+        },
+        max: 100,
+        gridLine: {
+          enabled: false,
+        },
+      },
     ],
   });
 
   return (
     <StyledWrapper
-      width={"38.375rem"}
+      width={"42.375rem"}
       height={"24.9375rem"}
       $left={"21.5625rem"}
       $top={"8.4375rem"}
