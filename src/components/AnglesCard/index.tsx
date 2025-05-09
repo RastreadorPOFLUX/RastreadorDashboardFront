@@ -47,8 +47,8 @@ const AngleDisplay: React.FC<Angles> = ({
 
   const layers = [
     { angle: sunPosition, color: "orange", label: "Posição do Sol", radius: 130, icon: function(x:number=0, y:number=0) { return sunIcon(x,y)} },
-    { angle: lensAngle, color: "red", label: "Ângulo da Lente", radius: 90, icon: function(x:number=0, y:number=0) { return lensIcon(x,y)} },
-    { angle: manualSetpoint, color: "deepskyblue", label: "SetPoint Manual", radius: 50, icon: function(x:number=0, y:number=0) { return setPointIcon(x,y)}  },
+    { angle: lensAngle,  color: "deepskyblue" , label: "Ângulo da Lente", radius: 90, icon: function(x:number=0, y:number=0) { return lensIcon(x,y)} },
+    { angle: manualSetpoint,color: "red", label: "SetPoint Manual", radius: 50, icon: function(x:number=0, y:number=0) { return setPointIcon(x,y)}  },
   ];
 
   
@@ -99,7 +99,8 @@ const AngleDisplay: React.FC<Angles> = ({
         return (
           <g key={idx}>   
              {icon(x,y)}
-            <text x={x + 10} y={y + 4} fontSize={10} fill={color}>
+            <text x={x + 12} y={y + 4} fontSize={10} fill={color}>
+              {angle + "\u00B0"}
             </text>
           </g>
         );
