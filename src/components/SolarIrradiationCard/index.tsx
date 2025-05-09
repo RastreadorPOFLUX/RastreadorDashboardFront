@@ -55,9 +55,9 @@ function SolarIrradiationCard() {
         cornerRadius: 10,
       },
       {
-        type: 'line', 
-        xKey: 'hour',
-        yKey: 'eficiency',
+        type: "line",
+        xKey: "hour",
+        yKey: "eficiency",
         yName: "Eficiência",
         stroke: "black",
         marker: {
@@ -67,8 +67,7 @@ function SolarIrradiationCard() {
           strokeWidth: 3,
           shape: "diamond",
         },
-    },
-
+      },
     ],
     axes: [
       {
