@@ -7,7 +7,7 @@ interface LandscapeCameraProps {
   streamUrl: string;
 }
 
-function CameraCard({ streamUrl = "" }: LandscapeCameraProps) {
+function CameraCard({ streamUrl}: LandscapeCameraProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {

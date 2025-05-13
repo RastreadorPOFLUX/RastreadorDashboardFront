@@ -14,7 +14,7 @@ export default function CameraDisplay() {
       <DateProvider>
         <MenuLateral></MenuLateral>
       </DateProvider>
-      <CameraCard></CameraCard>
+      <CameraCard streamUrl=""></CameraCard>
     </GeneralInfoBackground>
   );
 }
