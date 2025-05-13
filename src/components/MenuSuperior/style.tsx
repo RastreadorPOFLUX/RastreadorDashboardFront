@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   background-color: var(--lightGray);
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 6.375rem;
   filter: drop-shadow(0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
