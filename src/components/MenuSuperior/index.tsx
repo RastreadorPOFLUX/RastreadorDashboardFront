@@ -78,15 +78,15 @@ function MenuSuperior() {
       </DateDisplay>
       <TrackerConnectionIcon onClick={toggleIcon}>
         {isOn ? (
-          <div className="Online">
+          <>
             <Online />
             <ConnectionText> ON </ConnectionText>
-          </div>
+          </>
         ) : (
-          <div className="Offline">
+          <>
             <Offline />
             <ConnectionText> OFF </ConnectionText>
-          </div>
+          </>
         )}
       </TrackerConnectionIcon>
     </Wrapper>
