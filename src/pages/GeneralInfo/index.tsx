@@ -8,7 +8,7 @@ import CloudinessCard from "../../components/CloudinessCard";
 import { DateProvider } from "../../components/MenuLateral/DateContext";
 
 // Estilo
-import { GeneralInfoBackground } from "./style";
+import { GeneralInfoBackground, FirstRow, SecondRow } from "./style";
 
 export default function GeneralInfo() {
   return (
@@ -16,11 +16,15 @@ export default function GeneralInfo() {
       <MenuSuperior></MenuSuperior>
       <DateProvider>
         <MenuLateral></MenuLateral>
-        <OperationModeCard></OperationModeCard>
-        <ClimateCard></ClimateCard>
-        <DataCard></DataCard>
+        <FirstRow>
+          <OperationModeCard></OperationModeCard>
+          <ClimateCard></ClimateCard>
+          <DataCard></DataCard>
+        </FirstRow>
+        <SecondRow>
         <CloudinessCard></CloudinessCard>
-      </DateProvider>
+        </SecondRow>
+        </DateProvider>
     </GeneralInfoBackground>
   );
 }

@@ -15,27 +15,35 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   left: ${(props) => props.$left};
   top: ${(props) => props.$top};
   border-radius: 1.5625rem;
+  background-color: ${(props) => props.$backgroundcolor};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
 `;
 
 export const Button = styled.button<Props>`
-  left: ${(props) => props.$left};
   background-color: ${(props) => props.color};
-  top: 9.3175rem;
-  width: 6.4375rem;
-  height: 2.8125rem;
+  width: 22%;
+  height: 60%; 
   border-radius: 0.3125rem;
-  position: absolute;
-  filter: drop-shadow(0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
 `;
 
 export const Text = styled.h3<Props>`
   color: ${(props) => props.color};
-  text-align: center;
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
   font-family: var(--primaryFont);
   font-weight: 500;
-  margin-top: 2px;
-  top: 0.625rem;
+  margin: 0;
+  line-height: 1.2;
+  text-align: center;
 `;
 
 export const Title = styled.h2<Props>`
@@ -44,5 +52,13 @@ export const Title = styled.h2<Props>`
   font-size: 1.75rem;
   font-family: var(--primaryFont);
   font-weight: 500;
-  margin-top: 1rem;
+`;
+
+export const SecondRow = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch; /* importante: faz os botões crescerem na vertical */
+  flex-grow: 1;
+  padding-top: 8%;
+  gap: 1rem;
 `;
