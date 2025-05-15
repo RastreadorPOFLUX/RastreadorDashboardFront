@@ -115,13 +115,13 @@ function SolarIrradiationCard() {
 
   return (
     <StyledWrapper
-      width={"42.375rem"}
-      height={"24.9375rem"}
+      width={"45%"}
+      height={"50%"}
       $left={"21.5625rem"}
       $top={"8.4375rem"}
       $backgroundcolor="var(--backgroundCards)"
     >
-      <AgCharts options={options} style={{ height: 385 }} />
+      <AgCharts options={options} style={{ height: '100%'}} />
     </StyledWrapper>
   );
 }
