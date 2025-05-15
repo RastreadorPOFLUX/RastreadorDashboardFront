@@ -30,18 +30,15 @@ function CameraCard({ streamUrl}: LandscapeCameraProps) {
 
   return (
     <StyledWrapper
-      width={"65.3125rem"}
-      height={"34.025rem"}
+      width={"70%"}
+      height={"77%"}
       $left={"21.5625rem"}
       $top={"8.4375rem"}
       $backgroundcolor="var(--backgroundCards)"
     >
-      <div className="w-full max-w-4xl mx-auto p-4">
         <Stream
-          width={"60.4125rem"}
-          height={"30.025rem"}
-          $left={"21.5625rem"}
-          $top={"2rem"}
+          width={"100%"}
+          height={"100%"}
           ref={videoRef}
           controls
           autoPlay
@@ -49,7 +46,6 @@ function CameraCard({ streamUrl}: LandscapeCameraProps) {
           playsInline
           className="w-full rounded-xl shadow-lg"
         />
-      </div>
     </StyledWrapper>
   );
 }
