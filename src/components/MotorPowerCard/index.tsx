@@ -9,23 +9,23 @@ function MotorPowerCard() {
 
   return (
     <StyledWrapper
-      width={"65.3125rem"}
-      height={"7.5rem"}
+      width={"72%"}
+      height={"20%"}
       $left={"21.5625rem"}
-      $top={"34.75rem"}
+      $top={"78%"}
       $backgroundcolor="var(--backgroundCards)"
     >
       <Text> Potência do Motor </Text>
       <Box
         sx={{ display: "flex", alignItems: "center" }}
-        height={25}
-        paddingLeft={10}
-        width={885}
+        height={'15%'}
+        paddingLeft={'10%'}
+        width={'90%'}
       >
         <Box sx={{ width: "100%", mr: 1 }}>
           <GradientLinearProgress variant="determinate" value={progress} />
         </Box>
-        <Box sx={{ minWidth: 35 }}>
+        <Box sx={{ minWidth: '10%' }}>
           <Typography
             fontFamily={"var(--primaryFont)"}
             variant="body1"

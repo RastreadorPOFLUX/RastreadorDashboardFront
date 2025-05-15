@@ -15,6 +15,10 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   left: ${(props) => props.$left};
   top: ${(props) => props.$top};
   border-radius: 1.5625rem;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 `;
 
 export const GradientLinearProgress = styled(LinearProgress)(() => ({
@@ -22,22 +26,20 @@ export const GradientLinearProgress = styled(LinearProgress)(() => ({
   [`&.${linearProgressClasses.colorPrimary}`]: {
     backgroundColor: "var(--secondaryColor)",
     height: 15,
+    margin: '1rem'
   },
   [`& .${linearProgressClasses.bar}`]: {
     borderRadius: 55,
     background: `linear-gradient(-90deg, var(--acceptColor) ${0}% , var(--primaryColor) ${60}%, var(--alertColor) ${100}%)`,
     backgroundSize: `100%`,
-    height: 15,
+    height: '100%',
   },
 }));
 
 export const Text = styled.h2`
   color: var(--primaryText);
   text-align: center;
-  vertical-align: text-top;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-family: var(--primaryFont);
   font-weight: 500;
-  width: 15rem;
-  margin-left: 24rem;
 `;
