@@ -4,11 +4,10 @@ export const Wrapper = styled.section`
   background-color: var(--lightGray);
   height: 85%;
   padding-bottom: 6.8%;
-  width: 18rem;
+  width: 20%;
   display: flex; 
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: left;
   filter: drop-shadow(0.25rem 0.25rem 0.15rem rgba(0, 0, 0, 0.25));
   position: relative;
   gap: .1rem;
@@ -43,27 +42,28 @@ export const Pages = styled.h3`
 
 export const Text = styled.h3`
   margin-left: 10%;
-  color: var(--primaryText);
   text-align: left;
-  font-size: 1.15rem;
-  font-family: var(--primaryFont);
   font-weight: 500;
-  width: 12rem;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1rem;
+  font-family: var(--primaryFont);
+  color: var(--primaryText);
 
 `;
 
 export const DateInput = styled.input.attrs({ type: "date" })`
   padding: 0.625rem;
-  border: 0.0625rem solid var(--backgroundColor);
+  border: 1px solid var(--backgroundColor);
   border-radius: 0.3125rem;
   font-size: 1rem;
   font-family: var(--primaryFont);
-  width: 100%;
+  width: 80%;
+  flex: 1;
   color: var(--primaryText);
   background-color: var(--backgroundColor);
-  position: relative;
-
 
   &:focus {
     border-color: var(--secondaryColor);

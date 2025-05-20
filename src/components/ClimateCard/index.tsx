@@ -2,7 +2,7 @@ import { useEffect, useState, useTransition } from "react";
 import { fetchLocalWeatherConditions } from "./Data";
 
 //Estilo
-import { StyledWrapper, Text, WeatherIcon } from "./style";
+import { StyledWrapper, Text, TextWrapper, WeatherIcon } from "./style";
 
 interface WeatherData {
   name: string;
@@ -52,22 +52,28 @@ function ClimateCard() {
 
   return (
     <StyledWrapper
-      width={"31.375rem"}
-      height={"6.25rem"}
-      $left={"55.5rem"}
+      width={"35%"}
+      height={"15%"}
+      $left={"62%"}
       $top={"8.4375rem"}
       $backgroundcolor="var(--backgroundCards)"
     >
-      <Text width={"20rem"} $left={"6rem"} $top={"1rem"}>
+      <TextWrapper>
+        <Text width={"60%"} $left={"20%"} >
         {Data?.name},{" "}
         {Data?.main.temp != null ? Math.trunc(Data?.main.temp) : "-"}
         °C
       </Text>
-      <Text width={"6.45rem"} $left={"9.25rem"} $top={"3.5rem"}>
+      <Text width={"20%"} $left={"30%"} $top={"4%"}>
         {time}
       </Text>
+      </TextWrapper>
       <WeatherIcon>
-        {Icon && <img src={iconUrl} alt="Weather Icon" />}
+        {Icon && <img src={iconUrl} alt="Weather Icon"  style={{
+        width: "clamp(3rem, 6vw, 5rem)",
+        height: "clamp(3rem, 6vw, 5rem)",
+        objectFit: "contain",
+      }} />}
       </WeatherIcon>
     </StyledWrapper>
   );

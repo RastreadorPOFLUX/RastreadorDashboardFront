@@ -33,7 +33,7 @@ function OperationModeCard() {
     <StyledWrapper
       width={"35%"}
       height={"32%"}
-      $left={"21.5625rem"}
+      $left={"25%"}
       $top={"8.4375rem"}
       $backgroundcolor="var(--backgroundCards)"
     >

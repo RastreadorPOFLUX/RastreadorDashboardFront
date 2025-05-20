@@ -117,7 +117,8 @@ function MenuLateral() {
       </Link>
       <Text>
         Início
-        <DateInput
+        <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+            <DateInput
           id="begin"
           type="text"
           value={BeginDate}
@@ -129,6 +130,7 @@ function MenuLateral() {
           value={EndDate}
           onChange={handleEndDateChange}
         ></DateInput>
+        </div> 
       </Text>
       <Contribuitions>
         @Guilherme N. Matera

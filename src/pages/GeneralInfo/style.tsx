@@ -12,8 +12,10 @@ export const GeneralInfoBackground = styled.div`
 
 export const FirstRow = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
+  overflow: hidden;
+  gap: 1rem;
 `;
 
 export const SecondRow = styled.div`
