@@ -117,20 +117,27 @@ function MenuLateral() {
       </Link>
       <Text>
         Início
-        <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            <DateInput
-          id="begin"
-          type="text"
-          value={BeginDate}
-          onChange={handleBeginDateChange}
-        ></DateInput>
-        Fim
-        <DateInput
-          id="end"
-          value={EndDate}
-          onChange={handleEndDateChange}
-        ></DateInput>
-        </div> 
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.5rem",
+          }}
+        >
+          <DateInput
+            id="begin"
+            type="text"
+            value={BeginDate}
+            onChange={handleBeginDateChange}
+          ></DateInput>
+          Fim
+          <DateInput
+            id="end"
+            value={EndDate}
+            onChange={handleEndDateChange}
+          ></DateInput>
+        </div>
       </Text>
       <Contribuitions>
         @Guilherme N. Matera

@@ -59,21 +59,27 @@ function ClimateCard() {
       $backgroundcolor="var(--backgroundCards)"
     >
       <TextWrapper>
-        <Text width={"60%"} $left={"20%"} >
-        {Data?.name},{" "}
-        {Data?.main.temp != null ? Math.trunc(Data?.main.temp) : "-"}
-        °C
-      </Text>
-      <Text width={"20%"} $left={"30%"} $top={"4%"}>
-        {time}
-      </Text>
+        <Text width={"60%"} $left={"20%"}>
+          {Data?.name},{" "}
+          {Data?.main.temp != null ? Math.trunc(Data?.main.temp) : "-"}
+          °C
+        </Text>
+        <Text width={"20%"} $left={"30%"} $top={"4%"}>
+          {time}
+        </Text>
       </TextWrapper>
       <WeatherIcon>
-        {Icon && <img src={iconUrl} alt="Weather Icon"  style={{
-        width: "clamp(3rem, 6vw, 5rem)",
-        height: "clamp(3rem, 6vw, 5rem)",
-        objectFit: "contain",
-      }} />}
+        {Icon && (
+          <img
+            src={iconUrl}
+            alt="Weather Icon"
+            style={{
+              width: "clamp(3rem, 6vw, 5rem)",
+              height: "clamp(3rem, 6vw, 5rem)",
+              objectFit: "contain",
+            }}
+          />
+        )}
       </WeatherIcon>
     </StyledWrapper>
   );

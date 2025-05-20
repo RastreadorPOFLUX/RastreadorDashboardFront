@@ -5,12 +5,12 @@ export const Wrapper = styled.section`
   height: 85%;
   padding-bottom: 6.8%;
   width: 20%;
-  display: flex; 
+  display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   filter: drop-shadow(0.25rem 0.25rem 0.15rem rgba(0, 0, 0, 0.25));
   position: relative;
-  gap: .1rem;
+  gap: 0.1rem;
 `;
 
 export const Divider = styled.div`
@@ -39,7 +39,6 @@ export const Pages = styled.h3`
   }
 `;
 
-
 export const Text = styled.h3`
   margin-left: 10%;
   text-align: left;
@@ -51,7 +50,6 @@ export const Text = styled.h3`
   font-size: 1rem;
   font-family: var(--primaryFont);
   color: var(--primaryText);
-
 `;
 
 export const DateInput = styled.input.attrs({ type: "date" })`

@@ -24,7 +24,7 @@ export const StyledWrapper = styled(Wrapper)<Props>`
 export const Text = styled.h3<Props>`
   color: var(--primaryText);
   text-align: left;
-  font-size: clamp(1rem, 2vw, 1.5rem); 
+  font-size: clamp(1rem, 2vw, 1.5rem);
   font-family: var(--primaryFont);
   font-weight: 500;
   margin: 0;
@@ -40,7 +40,6 @@ export const TextWrapper = styled.div`
   flex-direction: column;
   align-items: left;
 `;
-
 
 export const WeatherIcon = styled.div`
   left: 75%;

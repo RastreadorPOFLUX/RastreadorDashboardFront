@@ -37,17 +37,17 @@ export const DateDisplay = styled.h2`
 `;
 
 export const TrackerConnectionIcon = styled.div`
-  display: flex;              
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;                   
+  gap: 1rem;
 `;
 
 export const ConnectionText = styled.h2`
   color: var(--primaryText);
   font-size: 1.5rem;
   font-family: var(--primaryFont);
-  font-weight: 500;                
-  text-align: center;           
-  flex: 1;                      
+  font-weight: 500;
+  text-align: center;
+  flex: 1;
 `;

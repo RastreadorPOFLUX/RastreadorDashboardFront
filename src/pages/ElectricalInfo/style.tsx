@@ -21,4 +21,3 @@ export const SecondRow = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
-

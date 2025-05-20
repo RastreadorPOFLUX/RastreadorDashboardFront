@@ -18,14 +18,14 @@ function MotorPowerCard() {
       <Text> Potência do Motor </Text>
       <Box
         sx={{ display: "flex", alignItems: "center" }}
-        height={'15%'}
-        paddingLeft={'10%'}
-        width={'90%'}
+        height={"15%"}
+        paddingLeft={"10%"}
+        width={"90%"}
       >
         <Box sx={{ width: "100%", mr: 1 }}>
           <GradientLinearProgress variant="determinate" value={progress} />
         </Box>
-        <Box sx={{ minWidth: '10%' }}>
+        <Box sx={{ minWidth: "10%" }}>
           <Typography
             fontFamily={"var(--primaryFont)"}
             variant="body1"

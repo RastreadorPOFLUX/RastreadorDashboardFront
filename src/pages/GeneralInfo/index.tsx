@@ -22,9 +22,9 @@ export default function GeneralInfo() {
           <DataCard></DataCard>
         </FirstRow>
         <SecondRow>
-        <CloudinessCard></CloudinessCard>
+          <CloudinessCard></CloudinessCard>
         </SecondRow>
-        </DateProvider>
+      </DateProvider>
     </GeneralInfoBackground>
   );
 }

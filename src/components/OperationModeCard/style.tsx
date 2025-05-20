@@ -15,7 +15,7 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   left: ${(props) => props.$left};
   top: ${(props) => props.$top};
   background-color: ${(props) => props.$backgroundcolor};
-  border-radius: 1.5625rem; 
+  border-radius: 1.5625rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -25,7 +25,7 @@ export const StyledWrapper = styled(Wrapper)<Props>`
 export const Button = styled.button<Props>`
   background-color: ${(props) => props.color};
   width: 22%;
-  height: 60%; 
+  height: 60%;
   border-radius: 0.3125rem;
   filter: drop-shadow(0 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
   display: flex;
@@ -49,7 +49,7 @@ export const Text = styled.h3<Props>`
 export const Title = styled.h2<Props>`
   color: ${(props) => props.color};
   text-align: center;
-  font-size: clamp(1rem, 2vw, 1.75rem); 
+  font-size: clamp(1rem, 2vw, 1.75rem);
   font-family: var(--primaryFont);
   font-weight: 500;
 `;

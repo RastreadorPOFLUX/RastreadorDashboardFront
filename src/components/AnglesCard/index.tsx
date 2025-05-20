@@ -141,7 +141,12 @@ const AngleDisplay: React.FC<Angles> = ({
   });
 
   return (
-    <svg width={'100%'} height={'95%'} viewBox="0 0 400 240" preserveAspectRatio="xMidYMid meet">
+    <svg
+      width={"100%"}
+      height={"95%"}
+      viewBox="0 0 400 240"
+      preserveAspectRatio="xMidYMid meet"
+    >
       {/* Semicírculo principal */}
       <path
         d={`M ${centerX - referenceRadius} ${centerY} A ${referenceRadius} ${referenceRadius} 0 0 1 ${centerX + referenceRadius} ${centerY}`}

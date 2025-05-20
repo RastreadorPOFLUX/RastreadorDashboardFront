@@ -41,13 +41,17 @@ function OperationModeCard() {
       <SecondRow>
         <Button
           onClick={handleClickButtonAuto}
-          color={isActivedAuto ? "var(--primaryColor)" : "var(--secondaryColor)"}    
+          color={
+            isActivedAuto ? "var(--primaryColor)" : "var(--secondaryColor)"
+          }
         >
           <Text color={"var(--white)"}>Auto</Text>
         </Button>
         <Button
           onClick={handleClickButtonManual}
-          color={isActiveManual ? "var(--primaryColor)" : "var(--secondaryColor)"}
+          color={
+            isActiveManual ? "var(--primaryColor)" : "var(--secondaryColor)"
+          }
         >
           <Text color={"var(--white)"}>Manual</Text>
         </Button>
@@ -56,9 +60,8 @@ function OperationModeCard() {
           color={isActiveHalt ? "var(--primaryColor)" : "var(--secondaryColor)"}
         >
           <Text color={"var(--white)"}>Halt</Text>
-      </Button>
+        </Button>
       </SecondRow>
-      
     </StyledWrapper>
   );
 }
