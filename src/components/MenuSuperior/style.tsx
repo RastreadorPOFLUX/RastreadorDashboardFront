@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   background-color: var(--lightGray);
   position: relative;
   width: 100%;
-  height: 6.375rem;
+  height: 16%;
   filter: drop-shadow(0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
   display: flex;
   justify-content: space-around;

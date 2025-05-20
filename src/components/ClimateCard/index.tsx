@@ -55,7 +55,7 @@ function ClimateCard() {
       width={"35%"}
       height={"15%"}
       $left={"62%"}
-      $top={"8.4375rem"}
+      $top={"21%"}
       $backgroundcolor="var(--backgroundCards)"
     >
       <TextWrapper>

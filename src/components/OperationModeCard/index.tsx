@@ -32,9 +32,9 @@ function OperationModeCard() {
   return (
     <StyledWrapper
       width={"35%"}
-      height={"32%"}
+      height={"33%"}
       $left={"25%"}
-      $top={"8.4375rem"}
+      $top={"21%"}
       $backgroundcolor="var(--backgroundCards)"
     >
       <Title color={"var(--primaryText)"}> Modos de Operação</Title>
