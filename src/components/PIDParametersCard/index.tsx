@@ -1,90 +1,50 @@
+import React from "react";
 import getData from "./Data";
+import { Divider, StyledWrapper, Title, Text, Line, Box } from "./style";
 
-//Estilo
-import { Divider, StyledWrapper, Title, Text } from "./style";
+const PIDParametersCard = () => {
+  const pidData = getData();
+  const params = [
+    { label: "Kp", value: pidData.Kp },
+    { label: "Ki", value: pidData.Ki },
+    { label: "Kd", value: pidData.Kd },
+  ];
 
-function PIDParametersCard() {
   return (
-    <div>
-      <StyledWrapper
-        width={"31.375rem"}
-        height={"15.775rem"}
-        $left={"55.5rem"}
-        $top={"8.4375rem"}
-        $backgroundcolor="var(--backgroundCards)"
-      >
-        <Title color={"var(--primaryText)"}>Parâmetros PID</Title>
-      </StyledWrapper>
+    <StyledWrapper
+      width="35%"
+      height="38%"
+      $left="62%"
+      $top="21%"
+      $backgroundcolor="var(--backgroundCards)"
+    >
+      <Box>
+        <Title color="var(--primaryText)">Parâmetros PID</Title>
+        {params.map((param, index) => (
+          <React.Fragment key={param.label}>
+            <Line>
+              <StyledWrapper
+                width="15%"
+                height="2rem"
+                $backgroundcolor="var(--primaryColor)"
+              >
+                <Text color="var(--white)">{param.label}</Text>
+              </StyledWrapper>
 
-      <div>
-        <StyledWrapper
-          width={"4.125rem"}
-          height={"2.5375rem"}
-          $left={"59.46rem"}
-          $top={"11.876875rem"}
-          $backgroundcolor="var(--primaryColor)"
-        >
-          <Text color={"var(--white)"}> Kp</Text>
-          <Divider></Divider>
-        </StyledWrapper>
-
-        <StyledWrapper
-          width={"8.125rem"}
-          height={"2.5375rem"}
-          $left={"74.25rem"}
-          $top={"11.876875rem"}
-          $backgroundcolor="var(--backgroundColor)"
-        >
-          <Text color={"var(--primaryText)"}> {getData().Kp}</Text>
-        </StyledWrapper>
-      </div>
-
-      <div>
-        <StyledWrapper
-          width={"4.125rem"}
-          height={"2.5375rem"}
-          $left={"59.46rem"}
-          $top={"15.876875rem"}
-          $backgroundcolor="var(--primaryColor)"
-        >
-          <Text color={"var(--white)"}> Ki</Text>
-          <Divider></Divider>
-        </StyledWrapper>
-
-        <StyledWrapper
-          width={"8.125rem"}
-          height={"2.5375rem"}
-          $left={"74.25rem"}
-          $top={"15.876875rem"}
-          $backgroundcolor="var(--backgroundColor)"
-        >
-          <Text color={"var(--primaryText)"}> {getData().Ki}</Text>
-        </StyledWrapper>
-      </div>
-
-      <div>
-        <StyledWrapper
-          width={"4.125rem"}
-          height={"2.5375rem"}
-          $left={"59.46rem"}
-          $top={"19.876875rem"}
-          $backgroundcolor="var(--primaryColor)"
-        >
-          <Text color={"var(--white)"}> Kd</Text>
-        </StyledWrapper>
-
-        <StyledWrapper
-          width={"8.125rem"}
-          height={"2.5375rem"}
-          $left={"74.25rem"}
-          $top={"19.876875rem"}
-          $backgroundcolor="var(--backgroundColor)"
-        >
-          <Text color={"var(--primaryText)"}> {getData().Kd}</Text>
-        </StyledWrapper>
-      </div>
-    </div>
+              <StyledWrapper
+                width="30%"
+                height="2rem"
+                $backgroundcolor="var(--backgroundColor)"
+              >
+                <Text color="var(--primaryText)">{param.value}</Text>
+              </StyledWrapper>
+            </Line>
+            {index < params.length - 1 && <Divider />}
+          </React.Fragment>
+        ))}
+      </Box>
+    </StyledWrapper>
   );
-}
+};
 
 export default PIDParametersCard;

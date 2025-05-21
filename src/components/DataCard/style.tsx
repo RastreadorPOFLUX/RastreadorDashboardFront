@@ -36,13 +36,11 @@ export const Button = styled.button<Props>`
   overflow: hidden;
 `;
 
-
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  align-items: center; 
+  align-items: center;
 `;
-
 
 export const Text = styled.h3`
   color: ${(props) => props.color};

@@ -19,6 +19,7 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 1rem;
   box-sizing: border-box;
 `;
 
@@ -57,7 +58,7 @@ export const Title = styled.h2<Props>`
 export const SecondRow = styled.div`
   display: flex;
   justify-content: space-around;
-  align-items: stretch; /* importante: faz os botões crescerem na vertical */
+  align-items: stretch;
   flex-grow: 1;
   padding-top: 8%;
   gap: 1rem;

@@ -186,10 +186,10 @@ const AngleDisplay: React.FC<Angles> = ({
 function AnglesCard() {
   return (
     <StyledWrapper
-      width={"32%"}
+      width={"35%"}
       height={"38%"}
-      $left={"21.5625rem"}
-      $top={"8.4375rem"}
+      $left={"25%"}
+      $top={"21%"}
       $backgroundcolor="var(--backgroundCards)"
     >
       <AngleDisplay

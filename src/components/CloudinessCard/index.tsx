@@ -115,7 +115,7 @@ function CloudinessCard() {
       $top={"55%"}
       $backgroundcolor="var(--backgroundCards)"
     >
-      <AgCharts options={options} style={{ height: '100%' }} />
+      <AgCharts options={options} style={{ height: "100%" }} />
     </StyledWrapper>
   );
 }
