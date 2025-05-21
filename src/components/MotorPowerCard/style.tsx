@@ -26,7 +26,6 @@ export const GradientLinearProgress = styled(LinearProgress)(() => ({
   [`&.${linearProgressClasses.colorPrimary}`]: {
     backgroundColor: "var(--secondaryColor)",
     height: 15,
-    margin: "1%",
   },
   [`& .${linearProgressClasses.bar}`]: {
     borderRadius: 55,
