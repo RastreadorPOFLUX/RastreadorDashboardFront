@@ -15,4 +15,5 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   left: ${(props) => props.$left};
   top: ${(props) => props.$top};
   border-radius: 1.5625rem;
+  position: absolute;
 `;
