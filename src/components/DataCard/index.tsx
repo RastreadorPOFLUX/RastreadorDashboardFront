@@ -5,9 +5,9 @@ function DataCard() {
   return (
     <StyledWrapper
       width={"35%"}
-      height={"15%"}
+      height={"14%"}
       $left={"62%"}
-      $top={"39%"}
+      $top={"38.5%"}
       $backgroundcolor="var(--backgroundCards)"
     >
       <ButtonWrapper>

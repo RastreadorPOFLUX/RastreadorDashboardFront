@@ -17,7 +17,7 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   border-radius: 1.5625rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   box-sizing: border-box;
 `;
 
@@ -41,7 +41,6 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center; 
-  padding: 3%;
 `;
 
 
