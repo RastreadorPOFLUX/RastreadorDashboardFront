@@ -32,8 +32,8 @@ function CameraCard({ streamUrl }: LandscapeCameraProps) {
     <StyledWrapper
       width={"70%"}
       height={"77%"}
-      $left={"21.5625rem"}
-      $top={"8.4375rem"}
+      $left={"25%"}
+      $top={"21%"}
       $backgroundcolor="var(--backgroundCards)"
     >
       <Stream
