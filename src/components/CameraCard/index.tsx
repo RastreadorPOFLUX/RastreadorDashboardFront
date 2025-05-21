@@ -7,7 +7,7 @@ interface LandscapeCameraProps {
   streamUrl: string;
 }
 
-function CameraCard({ streamUrl = "" }: LandscapeCameraProps) {
+function CameraCard({ streamUrl }: LandscapeCameraProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -30,26 +30,22 @@ function CameraCard({ streamUrl = "" }: LandscapeCameraProps) {
 
   return (
     <StyledWrapper
-      width={"65.3125rem"}
-      height={"34.025rem"}
-      $left={"21.5625rem"}
-      $top={"8.4375rem"}
+      width={"70%"}
+      height={"77%"}
+      $left={"25%"}
+      $top={"21%"}
       $backgroundcolor="var(--backgroundCards)"
     >
-      <div className="w-full max-w-4xl mx-auto p-4">
-        <Stream
-          width={"60.4125rem"}
-          height={"30.025rem"}
-          $left={"21.5625rem"}
-          $top={"2rem"}
-          ref={videoRef}
-          controls
-          autoPlay
-          muted
-          playsInline
-          className="w-full rounded-xl shadow-lg"
-        />
-      </div>
+      <Stream
+        width={"100%"}
+        height={"100%"}
+        ref={videoRef}
+        controls
+        autoPlay
+        muted
+        playsInline
+        className="w-full rounded-xl shadow-lg"
+      />
     </StyledWrapper>
   );
 }

@@ -109,13 +109,13 @@ function CloudinessCard() {
 
   return (
     <StyledWrapper
-      width={"65.3125rem"}
-      height={"18.5625rem"}
-      $left={"21.5625rem"}
-      $top={"23.5625rem"}
+      width={"72%"}
+      height={"43%"}
+      $left={"25%"}
+      $top={"55%"}
       $backgroundcolor="var(--backgroundCards)"
     >
-      <AgCharts options={options} style={{ height: 302 }} />
+      <AgCharts options={options} style={{ height: "100%" }} />
     </StyledWrapper>
   );
 }

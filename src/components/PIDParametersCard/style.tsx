@@ -15,30 +15,48 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   left: ${(props) => props.$left};
   top: ${(props) => props.$top};
   border-radius: 1.5625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: ${(props) => (props.$left || props.$top ? "absolute" : "static")};
 `;
 
 export const Title = styled.h2<Props>`
   color: ${(props) => props.color};
   text-align: center;
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 2vw, 1.5rem);
   font-family: var(--primaryFont);
   font-weight: 500;
-  margin-top: 0.5rem;
+  line-height: 1.3;
+  margin: 0;
 `;
 
 export const Text = styled.h3<Props>`
   color: ${(props) => props.color};
   text-align: center;
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
   font-family: var(--primaryFont);
   font-weight: 500;
-  margin-top: 2px;
 `;
 
 export const Divider = styled.div`
   background-color: var(--secondaryColor);
   height: 0.04875rem;
-  width: 21.8125rem;
+  width: 100%;
   border-radius: 0.3125rem;
-  margin-left: 0.8125rem;
+`;
+
+export const Line = styled.div`
+  display: flex;
+  align-items: left;
+  justify-content: space-around;
+`;
+
+export const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-around;
+  gap: 0.8rem;
+  width: 90%;
 `;

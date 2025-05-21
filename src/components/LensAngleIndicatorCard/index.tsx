@@ -20,20 +20,13 @@ function LensAngleIndicatorCard() {
 
   return (
     <StyledWrapper
-      width={"17.5rem"}
-      height={"17.5rem"}
-      $left={"21.7625rem"}
-      $top={"25.3375rem"}
+      width={"14rem"}
+      height={"14rem"}
+      $left={"27%"}
+      $top={"62%"}
       $backgroundcolor="var(--backgroundCards)"
     >
-      <Text
-        width={"17rem"}
-        $left={"4.2rem"}
-        $top={"4.775rem"}
-        color={"var(--primaryText)"}
-      >
-        Ângulo da Lente
-      </Text>
+      <Text color={"var(--primaryText)"}>Ângulo da Lente</Text>
 
       <CircularProgress
         value={value}

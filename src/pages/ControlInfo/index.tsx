@@ -9,6 +9,7 @@ import { DateProvider } from "./../../components/MenuLateral/DateContext";
 
 // Estilo
 import { GeneralInfoBackground } from "./style";
+import { FirstRow, SecondRow } from "../ControlInfo/style";
 
 export default function ControlInfo() {
   return (
@@ -17,10 +18,14 @@ export default function ControlInfo() {
       <DateProvider>
         <MenuLateral></MenuLateral>
       </DateProvider>
-      <AnglesCard></AnglesCard>
-      <PIDParametersCard></PIDParametersCard>
-      <LensAngleIndicatorCard></LensAngleIndicatorCard>
-      <ControlSignalsCard></ControlSignalsCard>
+      <FirstRow>
+        <AnglesCard></AnglesCard>
+        <PIDParametersCard></PIDParametersCard>
+      </FirstRow>
+      <SecondRow>
+        <LensAngleIndicatorCard></LensAngleIndicatorCard>
+        <ControlSignalsCard></ControlSignalsCard>
+      </SecondRow>
     </GeneralInfoBackground>
   );
 }

@@ -8,6 +8,7 @@ import { DateProvider } from "../../components/MenuLateral/DateContext";
 
 // Estilo
 import { GeneralInfoBackground } from "./style";
+import { FirstRow, SecondRow } from "../ElectricalInfo/style";
 
 export default function ElectricalInfo() {
   return (
@@ -16,9 +17,13 @@ export default function ElectricalInfo() {
       <DateProvider>
         <MenuLateral></MenuLateral>
       </DateProvider>
-      <SolarIrradiationCard></SolarIrradiationCard>
-      <SolarIrradiationIndicatorCard></SolarIrradiationIndicatorCard>
-      <MotorPowerCard></MotorPowerCard>
+      <FirstRow>
+        <SolarIrradiationCard></SolarIrradiationCard>
+        <SolarIrradiationIndicatorCard></SolarIrradiationIndicatorCard>
+      </FirstRow>
+      <SecondRow>
+        <MotorPowerCard></MotorPowerCard>
+      </SecondRow>
     </GeneralInfoBackground>
   );
 }

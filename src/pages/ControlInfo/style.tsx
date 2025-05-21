@@ -9,3 +9,16 @@ export const GeneralInfoBackground = styled.div`
   left: 0rem;
   margin: 0rem;
 `;
+
+export const FirstRow = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export const SecondRow = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+`;

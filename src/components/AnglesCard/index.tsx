@@ -141,7 +141,12 @@ const AngleDisplay: React.FC<Angles> = ({
   });
 
   return (
-    <svg width={435} height={260}>
+    <svg
+      width={"100%"}
+      height={"95%"}
+      viewBox="0 0 400 240"
+      preserveAspectRatio="xMidYMid meet"
+    >
       {/* Semicírculo principal */}
       <path
         d={`M ${centerX - referenceRadius} ${centerY} A ${referenceRadius} ${referenceRadius} 0 0 1 ${centerX + referenceRadius} ${centerY}`}
@@ -181,10 +186,10 @@ const AngleDisplay: React.FC<Angles> = ({
 function AnglesCard() {
   return (
     <StyledWrapper
-      width={"32.625rem"}
-      height={"15.775rem"}
-      $left={"21.5625rem"}
-      $top={"8.4375rem"}
+      width={"35%"}
+      height={"38%"}
+      $left={"25%"}
+      $top={"21%"}
       $backgroundcolor="var(--backgroundCards)"
     >
       <AngleDisplay

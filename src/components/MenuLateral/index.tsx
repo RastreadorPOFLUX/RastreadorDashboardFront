@@ -6,7 +6,6 @@ import {
   Wrapper,
   Pages,
   Divider,
-  Space,
   Text,
   DateInput,
   Contribuitions,
@@ -116,24 +115,30 @@ function MenuLateral() {
       <Link to="/cameraDisplay">
         <Pages color={getColor(location.pathname)[3]}> Câmera </Pages>
       </Link>
-      <Space></Space>
-      <Text> Período de Análise: </Text>
       <Text>
         Início
-        <DateInput
-          id="begin"
-          type="text"
-          value={BeginDate}
-          onChange={handleBeginDateChange}
-        ></DateInput>
-        Fim
-        <DateInput
-          id="end"
-          value={EndDate}
-          onChange={handleEndDateChange}
-        ></DateInput>
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.5rem",
+          }}
+        >
+          <DateInput
+            id="begin"
+            type="text"
+            value={BeginDate}
+            onChange={handleBeginDateChange}
+          ></DateInput>
+          Fim
+          <DateInput
+            id="end"
+            value={EndDate}
+            onChange={handleEndDateChange}
+          ></DateInput>
+        </div>
       </Text>
-      <Space></Space>
       <Contribuitions>
         @Guilherme N. Matera
         <br />

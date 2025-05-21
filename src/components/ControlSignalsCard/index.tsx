@@ -22,7 +22,7 @@ function ControlSignalsCard() {
   const [options, setOptions] = useState<AgChartOptions>({
     title: {
       text: "Sinais de Controle - (" + intervalTime + ")",
-      fontSize: 24,
+      fontSize: 20,
       fontFamily: "Lato, sans-serif",
       color: "#000000",
     },
@@ -87,13 +87,13 @@ function ControlSignalsCard() {
 
   return (
     <StyledWrapper
-      width={"46.1375rem"}
-      height={"17rem"}
-      $left={"40.5375rem"}
-      $top={"25.5375rem"}
+      width={"50%"}
+      height={"36%"}
+      $left={"47%"}
+      $top={"62%"}
       $backgroundcolor="var(--backgroundCards)"
     >
-      <AgCharts options={options} style={{ height: 285 }} />
+      <AgCharts options={options} style={{ height: "100%" }} />
     </StyledWrapper>
   );
 }

@@ -5,7 +5,21 @@ export const GeneralInfoBackground = styled.div`
   position: fixed;
   height: 100%;
   width: 100%;
-  top: 0rem;
-  left: 0rem;
-  margin: 0rem;
+  top: 0%;
+  left: 0%;
+  margin: 0%;
+`;
+
+export const FirstRow = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  overflow: hidden;
+  gap: 1rem;
+`;
+
+export const SecondRow = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 `;
