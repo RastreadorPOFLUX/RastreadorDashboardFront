@@ -32,12 +32,11 @@ export const CircularProgress = styled(Gauge)(() => ({
 
 export const Text = styled.h3<Props>`
   color: ${(props) => props.color};
-  text-align: left;
-  font-size: 1.25rem;
+  text-align: center;
+  font-size: 1rem;
   font-family: var(--primaryFont);
   font-weight: 500;
   position: absolute;
-  width: ${(props) => props.width};
-  left: ${(props) => props.$left};
-  margin-top: ${(props) => props.$top};
+  left: 25%;
+  margin-top: 30%;
 `;

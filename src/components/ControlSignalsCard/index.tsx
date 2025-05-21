@@ -88,7 +88,7 @@ function ControlSignalsCard() {
   return (
     <StyledWrapper
       width={"50%"}
-      height={"35%"}
+      height={"36%"}
       $left={"47%"}
       $top={"62%"}
       $backgroundcolor="var(--backgroundCards)"

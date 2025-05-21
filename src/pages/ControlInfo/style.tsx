@@ -20,4 +20,5 @@ export const SecondRow = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding: 1rem;
 `;
