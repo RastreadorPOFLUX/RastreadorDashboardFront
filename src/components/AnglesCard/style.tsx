@@ -17,3 +17,13 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   border-radius: 1.5625rem;
   position: absolute;
 `;
+
+export const Title = styled.h2<Props>`
+  color: ${(props) => props.color};
+  text-align: center;
+  font-size: clamp(0.5rem, 2vw, 1.25rem);
+  font-family: var(--primaryFont);
+  margin: 2% 0 0 0;
+  padding:0%;
+  font-weight: 500;
+`;

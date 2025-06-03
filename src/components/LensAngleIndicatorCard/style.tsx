@@ -22,7 +22,7 @@ export const CircularProgress = styled(Gauge)(() => ({
   [`& .${gaugeClasses.valueText}`]: {
     fontSize: 40,
     fontFamily: "var(--primaryFont)",
-    transform: "translate(8px, 10px)",
+    transform: "translate(8px, 30px)",
   },
   [`& .${gaugeClasses.valueArc}`]: {
     fill: "var(--primaryColor)",
@@ -37,6 +37,7 @@ export const Text = styled.h3<Props>`
   font-family: var(--primaryFont);
   font-weight: 500;
   position: absolute;
-  left: 25%;
+  left: 15%;
   margin-top: 30%;
+  width: 10rem;
 `;
