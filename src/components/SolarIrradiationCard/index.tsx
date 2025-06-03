@@ -88,7 +88,7 @@ function SolarIrradiationCard() {
         type: "number",
         position: "left",
         title: {
-          text: "Kwh/m²",
+          text: "KWh/m²",
           fontFamily: "Lato, sans-serif",
         },
         keys: ["value", "expected"],

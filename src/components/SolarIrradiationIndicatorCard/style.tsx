@@ -21,7 +21,7 @@ export const StyledWrapper = styled(Wrapper)<Props>`
 
 export const Text = styled.h3<Props>`
   color: ${(props) => props.color};
-  text-align: left;
+  text-align: center;
   font-size: ${(props) => props.$fontSize};
   font-family: var(--primaryFont);
   font-weight: 500;
