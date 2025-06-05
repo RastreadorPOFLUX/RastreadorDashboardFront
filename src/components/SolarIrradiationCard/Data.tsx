@@ -9,6 +9,15 @@ interface Data {
   eficiency: number;
 }
 
+const apiKeySolarIrradiation = process.env.METEOBLUE_API_KEY;
+
+const latFundao: number = -22.9064;
+const longFundao: number = -43.1822;
+
+'Chamada de API do meteoblue para puxar informações irradiação solar'
+'https://my.meteoblue.com/packages/solar-1h?apikey=${apiKeySolarIrradiation}&lat=${latFundao}&lon=${longFundao}&asl=50&format=json'
+
+
 export default function getData(): Data[] {
   return [
     {
