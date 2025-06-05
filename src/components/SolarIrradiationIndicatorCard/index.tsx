@@ -63,7 +63,7 @@ function SolarIrradiationIndicatorCard() {
         $top={"10.975rem"}
         color={"var(--primaryText)"}
       >
-        KWh/m²
+        Wh/m²
       </Text>
       <Text
         width={"12rem"}
@@ -72,7 +72,7 @@ function SolarIrradiationIndicatorCard() {
         color={"var(--primaryText)"}
         $fontSize={"0.8rem"}
       >
-        Valor esperado: {getData()[getData().length - 1].expected} KWh/m²
+        Valor esperado: {getData()[getData().length - 1].expected} Wh/m²
       </Text>
       <CircularProgress
         value={value}
