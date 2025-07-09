@@ -1,11 +1,20 @@
 //Estilo
 import { useState } from "react";
-import { StyledWrapper, Button, Text, Title, SecondRow } from "./style";
+import {
+  StyledWrapper,
+  Button,
+  Text,
+  Row,
+  StyledInput,
+  StyledSubmitButton,
+} from "./style";
 
 function OperationModeCard() {
   const [isActivedAuto, setActivatedAuto] = useState(true);
   const [isActiveManual, setActivatedManual] = useState(false);
+  const [manualSetpoint, setManualSetpoint] = useState("0");
   const [isActiveHalt, setActivatedHalt] = useState(false);
+  const [isActivePresentation, setActivatedPresentation] = useState(false);
 
   const handleClickButtonAuto = () => {
     isActivedAuto == false
@@ -13,6 +22,7 @@ function OperationModeCard() {
       : setActivatedAuto(isActivedAuto);
     setActivatedManual(false);
     setActivatedHalt(false);
+    setActivatedPresentation(false);
   };
   const handleClickButtonManual = () => {
     setActivatedAuto(false);
@@ -20,6 +30,19 @@ function OperationModeCard() {
       ? setActivatedManual(!isActiveManual)
       : setActivatedManual(isActiveManual);
     setActivatedHalt(false);
+    setActivatedPresentation(false);
+  };
+  const handleSetpointChange = (e: any) => {
+    setManualSetpoint(e.target.value);
+  };
+  const handleSubmitSetpoint = () => {
+    const value = parseFloat(manualSetpoint);
+    if (!isNaN(value) && value >= -90 && value <= 90) {
+      // Aqui você pode fazer algo com o valor, como enviar para um backend
+      console.log("Setpoint manual definido:", value);
+    } else {
+      alert("Por favor, insira um valor entre -90 e 90 graus.");
+    }
   };
   const handleClickButtonHalt = () => {
     setActivatedAuto(false);
@@ -27,6 +50,15 @@ function OperationModeCard() {
     isActiveHalt == false
       ? setActivatedHalt(!isActiveHalt)
       : setActivatedHalt(isActiveHalt);
+    setActivatedPresentation(false);
+  };
+  const handleClickButtonPresentation = () => {
+    setActivatedAuto(false);
+    setActivatedManual(false);
+    setActivatedHalt(false);
+    isActivePresentation == false
+      ? setActivatedPresentation(!isActivePresentation)
+      : setActivatedPresentation(isActivePresentation);
   };
 
   return (
@@ -37,8 +69,7 @@ function OperationModeCard() {
       $top={"21%"}
       $backgroundcolor="var(--backgroundCards)"
     >
-      <Title color={"var(--primaryText)"}> Modos de Operação</Title>
-      <SecondRow>
+      <Row>
         <Button
           onClick={handleClickButtonAuto}
           color={
@@ -47,6 +78,7 @@ function OperationModeCard() {
         >
           <Text color={"var(--white)"}>Auto</Text>
         </Button>
+
         <Button
           onClick={handleClickButtonManual}
           color={
@@ -55,13 +87,42 @@ function OperationModeCard() {
         >
           <Text color={"var(--white)"}>Manual</Text>
         </Button>
+      </Row>
+      <Row>
         <Button
           onClick={handleClickButtonHalt}
           color={isActiveHalt ? "var(--primaryColor)" : "var(--secondaryColor)"}
         >
           <Text color={"var(--white)"}>Halt</Text>
         </Button>
-      </SecondRow>
+
+        <Button
+          onClick={handleClickButtonPresentation}
+          color={
+            isActivePresentation
+              ? "var(--primaryColor)"
+              : "var(--secondaryColor)"
+          }
+        >
+          <Text color={"var(--white)"}>Presentation</Text>
+        </Button>
+      </Row>
+
+      {isActiveManual && (
+        <Row>
+          <Text color={"var(--primaryText)"}>Manual SetPoint:</Text>
+          <StyledInput
+            type="number"
+            min={-90}
+            max={90}
+            value={manualSetpoint}
+            onChange={handleSetpointChange}
+          />
+          <StyledSubmitButton onClick={handleSubmitSetpoint}>
+            Confirmar
+          </StyledSubmitButton>
+        </Row>
+      )}
     </StyledWrapper>
   );
 }

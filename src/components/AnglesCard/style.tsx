@@ -24,6 +24,6 @@ export const Title = styled.h2<Props>`
   font-size: clamp(0.5rem, 2vw, 1.25rem);
   font-family: var(--primaryFont);
   margin: 2% 0 0 0;
-  padding:0%;
+  padding: 0%;
   font-weight: 500;
 `;

@@ -17,7 +17,7 @@ export const StyledWrapper = styled(Wrapper)<Props>`
   border-radius: 1.5625rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   position: ${(props) => (props.$left || props.$top ? "absolute" : "static")};
 `;
 
@@ -57,6 +57,27 @@ export const Box = styled.div`
   flex-direction: column;
   align-items: stretch;
   justify-content: space-around;
-  gap: 0.8rem;
   width: 90%;
+  height: 95%;
+`;
+
+export const StyledInput = styled.input`
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1.25rem;
+  font-family: var(--primaryFont);
+  background-color: transparent;
+  color: var(--primaryText);
+  text-align: center;
+
+  /* Remove as setinhas (spinner) no Chrome, Safari, Edge */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Remove o spinner no Firefox */
+  -moz-appearance: textfield;
 `;
