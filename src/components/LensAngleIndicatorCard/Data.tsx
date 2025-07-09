@@ -8,7 +8,7 @@ export default function getData(): Data[] {
       value: 60,
     },
     {
-      value: 100,
+      value: 80,
     },
   ];
 }

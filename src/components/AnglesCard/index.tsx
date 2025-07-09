@@ -1,5 +1,5 @@
 // Estilo
-import { StyledWrapper } from "./style";
+import { StyledWrapper, Title } from "./style";
 
 // Dados
 import getData from "./Data";
@@ -143,16 +143,15 @@ const AngleDisplay: React.FC<Angles> = ({
   return (
     <svg
       width={"100%"}
-      height={"95%"}
-      viewBox="0 0 400 240"
+      height={"85%"}
+      viewBox="0 10 400 240"
       preserveAspectRatio="xMidYMid meet"
     >
       {/* Semicírculo principal */}
       <path
         d={`M ${centerX - referenceRadius} ${centerY} A ${referenceRadius} ${referenceRadius} 0 0 1 ${centerX + referenceRadius} ${centerY}`}
         fill="none"
-        stroke="black"
-      />
+        stroke="black" />
 
       {/* Linhas de ângulo */}
       {angleLines}
@@ -192,6 +191,8 @@ function AnglesCard() {
       $top={"21%"}
       $backgroundcolor="var(--backgroundCards)"
     >
+      <Title color={"var(--primaryText)"}> Ângulos Azimutais Personalizados</Title>
+
       <AngleDisplay
         sunPosition={getData().sunPosition}
         lensAngle={getData().lensAngle}
