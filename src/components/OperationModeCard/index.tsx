@@ -1,10 +1,19 @@
 //Estilo
 import { useState } from "react";
-import { StyledWrapper, Button, Text, Title, SecondRow } from "./style";
+import {
+  StyledWrapper,
+  Button,
+  Text,
+  Title,
+  Row,
+  StyledInput,
+  StyledSubmitButton,
+} from "./style";
 
 function OperationModeCard() {
   const [isActivedAuto, setActivatedAuto] = useState(true);
   const [isActiveManual, setActivatedManual] = useState(false);
+  const [manualSetpoint, setManualSetpoint] = useState("0");
   const [isActiveHalt, setActivatedHalt] = useState(false);
   const [isActivePresentation, setActivatedPresentation] = useState(false);
 
@@ -24,6 +33,18 @@ function OperationModeCard() {
     setActivatedHalt(false);
     setActivatedPresentation(false);
   };
+  const handleSetpointChange = (e: any) => {
+    setManualSetpoint(e.target.value);
+  };
+  const handleSubmitSetpoint = () => {
+    const value = parseFloat(manualSetpoint);
+    if (!isNaN(value) && value >= -90 && value <= 90) {
+      // Aqui você pode fazer algo com o valor, como enviar para um backend
+      console.log("Setpoint manual definido:", value);
+    } else {
+      alert("Por favor, insira um valor entre -90 e 90 graus.");
+    }
+  };
   const handleClickButtonHalt = () => {
     setActivatedAuto(false);
     setActivatedManual(false);
@@ -32,7 +53,7 @@ function OperationModeCard() {
       : setActivatedHalt(isActiveHalt);
     setActivatedPresentation(false);
   };
-    const handleClickButtonPresentation = () => {
+  const handleClickButtonPresentation = () => {
     setActivatedAuto(false);
     setActivatedManual(false);
     setActivatedHalt(false);
@@ -49,9 +70,7 @@ function OperationModeCard() {
       $top={"21%"}
       $backgroundcolor="var(--backgroundCards)"
     >
-      <Title color={"var(--primaryText)"}> Modos de Operação</Title>
-      <SecondRow>
-
+      <Row>
         <Button
           onClick={handleClickButtonAuto}
           color={
@@ -69,7 +88,8 @@ function OperationModeCard() {
         >
           <Text color={"var(--white)"}>Manual</Text>
         </Button>
-
+      </Row>
+      <Row>
         <Button
           onClick={handleClickButtonHalt}
           color={isActiveHalt ? "var(--primaryColor)" : "var(--secondaryColor)"}
@@ -79,12 +99,31 @@ function OperationModeCard() {
 
         <Button
           onClick={handleClickButtonPresentation}
-          color={isActivePresentation ? "var(--primaryColor)" : "var(--secondaryColor)"}
+          color={
+            isActivePresentation
+              ? "var(--primaryColor)"
+              : "var(--secondaryColor)"
+          }
         >
           <Text color={"var(--white)"}>Presentation</Text>
         </Button>
+      </Row>
 
-      </SecondRow>
+      {isActiveManual && (
+        <Row>
+          <Text color={"var(--primaryText)"}>Manual SetPoint:</Text>
+          <StyledInput
+            type="number"
+            min={-90}
+            max={90}
+            value={manualSetpoint}
+            onChange={handleSetpointChange}
+          />
+          <StyledSubmitButton onClick={handleSubmitSetpoint}>
+            Confirmar
+          </StyledSubmitButton>
+        </Row>
+      )}
     </StyledWrapper>
   );
 }
