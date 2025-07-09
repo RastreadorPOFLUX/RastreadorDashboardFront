@@ -6,6 +6,7 @@ function OperationModeCard() {
   const [isActivedAuto, setActivatedAuto] = useState(true);
   const [isActiveManual, setActivatedManual] = useState(false);
   const [isActiveHalt, setActivatedHalt] = useState(false);
+  const [isActivePresentation, setActivatedPresentation] = useState(false);
 
   const handleClickButtonAuto = () => {
     isActivedAuto == false
@@ -13,6 +14,7 @@ function OperationModeCard() {
       : setActivatedAuto(isActivedAuto);
     setActivatedManual(false);
     setActivatedHalt(false);
+    setActivatedPresentation(false);
   };
   const handleClickButtonManual = () => {
     setActivatedAuto(false);
@@ -20,6 +22,7 @@ function OperationModeCard() {
       ? setActivatedManual(!isActiveManual)
       : setActivatedManual(isActiveManual);
     setActivatedHalt(false);
+    setActivatedPresentation(false);
   };
   const handleClickButtonHalt = () => {
     setActivatedAuto(false);
@@ -27,6 +30,15 @@ function OperationModeCard() {
     isActiveHalt == false
       ? setActivatedHalt(!isActiveHalt)
       : setActivatedHalt(isActiveHalt);
+    setActivatedPresentation(false);
+  };
+    const handleClickButtonPresentation = () => {
+    setActivatedAuto(false);
+    setActivatedManual(false);
+    setActivatedHalt(false);
+    isActivePresentation == false
+      ? setActivatedPresentation(!isActivePresentation)
+      : setActivatedPresentation(isActivePresentation);
   };
 
   return (
@@ -39,6 +51,7 @@ function OperationModeCard() {
     >
       <Title color={"var(--primaryText)"}> Modos de Operação</Title>
       <SecondRow>
+
         <Button
           onClick={handleClickButtonAuto}
           color={
@@ -47,6 +60,7 @@ function OperationModeCard() {
         >
           <Text color={"var(--white)"}>Auto</Text>
         </Button>
+
         <Button
           onClick={handleClickButtonManual}
           color={
@@ -55,12 +69,21 @@ function OperationModeCard() {
         >
           <Text color={"var(--white)"}>Manual</Text>
         </Button>
+
         <Button
           onClick={handleClickButtonHalt}
           color={isActiveHalt ? "var(--primaryColor)" : "var(--secondaryColor)"}
         >
           <Text color={"var(--white)"}>Halt</Text>
         </Button>
+
+        <Button
+          onClick={handleClickButtonPresentation}
+          color={isActivePresentation ? "var(--primaryColor)" : "var(--secondaryColor)"}
+        >
+          <Text color={"var(--white)"}>Presentation</Text>
+        </Button>
+
       </SecondRow>
     </StyledWrapper>
   );

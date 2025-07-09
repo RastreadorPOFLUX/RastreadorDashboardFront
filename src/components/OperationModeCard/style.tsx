@@ -39,7 +39,7 @@ export const Button = styled.button<Props>`
 
 export const Text = styled.h3<Props>`
   color: ${(props) => props.color};
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(1rem, 2vw, 1rem);
   font-family: var(--primaryFont);
   font-weight: 500;
   margin: 0;
