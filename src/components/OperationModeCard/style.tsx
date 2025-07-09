@@ -47,14 +47,6 @@ export const Text = styled.h3<Props>`
   text-align: center;
 `;
 
-export const Title = styled.h2<Props>`
-  color: ${(props) => props.color};
-  text-align: center;
-  font-size: clamp(1rem, 2vw, 1.75rem);
-  font-family: var(--primaryFont);
-  font-weight: 500;
-`;
-
 export const Row = styled.div`
   display: flex;
   align-items: center;

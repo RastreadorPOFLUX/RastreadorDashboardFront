@@ -4,7 +4,6 @@ import {
   StyledWrapper,
   Button,
   Text,
-  Title,
   Row,
   StyledInput,
   StyledSubmitButton,

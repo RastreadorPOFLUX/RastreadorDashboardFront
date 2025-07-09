@@ -151,7 +151,8 @@ const AngleDisplay: React.FC<Angles> = ({
       <path
         d={`M ${centerX - referenceRadius} ${centerY} A ${referenceRadius} ${referenceRadius} 0 0 1 ${centerX + referenceRadius} ${centerY}`}
         fill="none"
-        stroke="black" />
+        stroke="black"
+      />
 
       {/* Linhas de ângulo */}
       {angleLines}
@@ -191,7 +192,10 @@ function AnglesCard() {
       $top={"21%"}
       $backgroundcolor="var(--backgroundCards)"
     >
-      <Title color={"var(--primaryText)"}> Ângulos Azimutais Personalizados</Title>
+      <Title color={"var(--primaryText)"}>
+        {" "}
+        Ângulos Azimutais Personalizados
+      </Title>
 
       <AngleDisplay
         sunPosition={getData().sunPosition}

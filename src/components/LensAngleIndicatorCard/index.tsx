@@ -3,13 +3,12 @@ import { useState, useEffect } from "react";
 import { CircularProgress, StyledWrapper, Text } from "./style";
 import getData from "./Data";
 
-const valueMax: number = 270;
+const valueMax: number = 180;
 
 function LensAngleIndicatorCard() {
   const [value, setValue] = useState<number>(
     getData()[getData().length - 1].value,
   );
-
 
   const handleChangeValue = () => {
     setValue(value);
