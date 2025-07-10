@@ -5,10 +5,10 @@ interface Data {
 export default function getData(): Data[] {
   return [
     {
-      value: 60,
+      value: -45,
     },
     {
-      value: 80,
+      value:  10,
     },
   ];
 }

@@ -75,7 +75,7 @@ const AngleDisplay: React.FC<Angles> = ({
   const centerY = 200;
 
   const toXY = (angleDeg: number, radius: number) => {
-    const angleRad = (Math.PI * angleDeg) / 180;
+    const angleRad = (Math.PI * (angleDeg+90)) / 180;
     const x = centerX + radius * Math.cos(Math.PI - angleRad);
     const y = centerY - radius * Math.sin(angleRad);
     return { x, y };
@@ -113,7 +113,7 @@ const AngleDisplay: React.FC<Angles> = ({
 
   const referenceRadius = 150;
 
-  const angleLines = [0, 30, 60, 90, 120, 150, 180].map((deg) => {
+  const angleLines = [-90, -60, -30, 0, 30, 60, 90].map((deg) => {
     const lineEnd = toXY(deg, referenceRadius);
     const labelPos = toXY(deg, referenceRadius + 15);
 
@@ -194,7 +194,7 @@ function AnglesCard() {
     >
       <Title color={"var(--primaryText)"}>
         {" "}
-        Ângulos Azimutais Personalizados
+        Ângulos de Posicionamento
       </Title>
 
       <AngleDisplay

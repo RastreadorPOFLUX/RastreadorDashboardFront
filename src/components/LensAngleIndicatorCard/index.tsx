@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { CircularProgress, StyledWrapper, Text } from "./style";
 import getData from "./Data";
 
-const valueMax: number = 180;
+const valueMax: number = 45;
 
 function LensAngleIndicatorCard() {
   const [value, setValue] = useState<number>(
@@ -26,13 +26,13 @@ function LensAngleIndicatorCard() {
       $top={"62%"}
       $backgroundcolor="var(--backgroundCards)"
     >
-      <Text color={"var(--primaryText)"}>Ângulo da Lente Azimutal</Text>
+      <Text color={"var(--primaryText)"}>Ângulo da Lente</Text>
 
       <CircularProgress
-        value={value + 90}
+        value={value}
         startAngle={0}
         endAngle={360}
-        valueMin={90}
+        valueMin={-valueMax}
         valueMax={valueMax}
         innerRadius="80%"
         outerRadius="100%"
