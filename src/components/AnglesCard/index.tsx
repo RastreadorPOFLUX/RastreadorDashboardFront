@@ -94,7 +94,7 @@ const AngleDisplay: React.FC<Angles> = ({
     {
       angle: lensAngle,
       color: "deepskyblue",
-      label: "Ângulo da Lente",
+      label: "Azimute da Lente",
       radius: 85,
       icon: function (x: number = 0, y: number = 0) {
         return lensIcon(x, y);
@@ -172,7 +172,7 @@ const AngleDisplay: React.FC<Angles> = ({
 
       {/* Legenda */}
       {layers.map(({ icon, label }, i) => (
-        <g key={`legend-${i}`} transform={`translate(${40 + i * 120}, 220)`}>
+        <g key={`legend-${i}`} transform={`translate(${20 + i * 130}, 220)`}>
           {icon(0, 5)}
           <text x={15} y={10} fontSize={12} fill="#000">
             {label}

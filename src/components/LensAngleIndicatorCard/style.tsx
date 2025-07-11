@@ -37,7 +37,7 @@ export const Text = styled.h3<Props>`
   font-family: var(--primaryFont);
   font-weight: 500;
   position: absolute;
-  left: 15%;
+  left: 18%;
   margin-top: 30%;
-  width: 10rem;
+  width: 9rem;
 `;

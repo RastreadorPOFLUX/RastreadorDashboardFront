@@ -26,7 +26,7 @@ function LensAngleIndicatorCard() {
       $top={"62%"}
       $backgroundcolor="var(--backgroundCards)"
     >
-      <Text color={"var(--primaryText)"}>Ângulo da Lente</Text>
+      <Text color={"var(--primaryText)"}>Ângulo de Azimute da Lente</Text>
 
       <CircularProgress
         value={value}
