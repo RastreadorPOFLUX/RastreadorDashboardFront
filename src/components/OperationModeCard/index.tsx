@@ -45,7 +45,7 @@ function OperationModeCard() {
       // Aqui você pode fazer algo com o valor, como enviar para um backend
       console.log("Setpoint manual definido:", value);
     } else {
-      alert("Por favor, insira um valor entre -90 e 90 graus.");
+      alert("Por favor, insira um valor entre -45 e 45 graus.");
     }
   };
   const handleClickButtonHalt = () => {
@@ -117,8 +117,9 @@ function OperationModeCard() {
           <Text color={"var(--primaryText)"}>Manual SetPoint:</Text>
           <StyledInput
             type="number"
-            min={-90}
-            max={90}
+            min={-45}
+            max={45}
+            step={5}
             value={manualSetpoint}
             onChange={handleSetpointChange}
           />
