@@ -36,8 +36,8 @@ function OperationModeCard() {
     setManualSetpoint(e.target.value);
   };
 
-  const minAngleValue: number = -45;
-  const maxAngleValue: number = 45;
+  const minAngleValue: number = -40;
+  const maxAngleValue: number = 40;
 
   const handleSubmitSetpoint = () => {
     const value = parseFloat(manualSetpoint);
@@ -45,7 +45,7 @@ function OperationModeCard() {
       // Aqui você pode fazer algo com o valor, como enviar para um backend
       console.log("Setpoint manual definido:", value);
     } else {
-      alert("Por favor, insira um valor entre -45 e 45 graus.");
+      alert("Por favor, insira um valor entre -40 e 40 graus.");
     }
   };
   const handleClickButtonHalt = () => {
