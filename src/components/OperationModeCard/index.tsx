@@ -1,5 +1,5 @@
 //Estilo
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   StyledWrapper,
   Button,
@@ -8,13 +8,17 @@ import {
   StyledInput,
   StyledSubmitButton,
 } from "./style";
+import { useOperationMode } from '../../hooks/useOperationMode';
+
 
 function OperationModeCard() {
   const [isActivedAuto, setActivatedAuto] = useState(true);
   const [isActiveManual, setActivatedManual] = useState(false);
-  const [manualSetpoint, setManualSetpoint] = useState("0");
+  const [manualSetpoint, setManualSetpoint] = useState(0);
   const [isActiveHalt, setActivatedHalt] = useState(false);
   const [isActivePresentation, setActivatedPresentation] = useState(false);
+
+  const { isLoading, isOnline, setMode } = useOperationMode();
 
   const handleClickButtonAuto = () => {
     isActivedAuto == false
@@ -23,6 +27,7 @@ function OperationModeCard() {
     setActivatedManual(false);
     setActivatedHalt(false);
     setActivatedPresentation(false);
+    setMode('auto', 0);
   };
   const handleClickButtonManual = () => {
     setActivatedAuto(false);
@@ -31,7 +36,9 @@ function OperationModeCard() {
       : setActivatedManual(isActiveManual);
     setActivatedHalt(false);
     setActivatedPresentation(false);
+    setMode('manual', manualSetpoint);
   };
+
   const handleSetpointChange = (e: any) => {
     setManualSetpoint(e.target.value);
   };
@@ -40,10 +47,9 @@ function OperationModeCard() {
   const maxAngleValue: number = 40;
 
   const handleSubmitSetpoint = () => {
-    const value = parseFloat(manualSetpoint);
-    if (!isNaN(value) && value >= minAngleValue && value <= maxAngleValue) {
-      // Aqui você pode fazer algo com o valor, como enviar para um backend
-      console.log("Setpoint manual definido:", value);
+    if (!isNaN(manualSetpoint) && manualSetpoint >= minAngleValue && manualSetpoint <= maxAngleValue) {
+      setMode('manual', manualSetpoint);
+      console.log("Setpoint manual definido:", manualSetpoint);
     } else {
       alert("Por favor, insira um valor entre -40 e 40 graus.");
     }
@@ -55,6 +61,7 @@ function OperationModeCard() {
       ? setActivatedHalt(!isActiveHalt)
       : setActivatedHalt(isActiveHalt);
     setActivatedPresentation(false);
+    setMode('halt', 0);
   };
   const handleClickButtonPresentation = () => {
     setActivatedAuto(false);
@@ -63,7 +70,21 @@ function OperationModeCard() {
     isActivePresentation == false
       ? setActivatedPresentation(!isActivePresentation)
       : setActivatedPresentation(isActivePresentation);
+    setMode('presentation', 0);
   };
+
+const hasInitialized = useRef(false);
+
+useEffect(() => {
+  if (!hasInitialized.current && !isLoading && isOnline) {
+    hasInitialized.current = true;
+    setActivatedAuto(true);
+    setActivatedManual(false);
+    setActivatedHalt(false);
+    setActivatedPresentation(false);
+    setMode('auto', 0);
+  }
+}, [isLoading, isOnline]);
 
   return (
     <StyledWrapper
@@ -117,8 +138,8 @@ function OperationModeCard() {
           <Text color={"var(--primaryText)"}>Manual SetPoint:</Text>
           <StyledInput
             type="number"
-            min={-45}
-            max={45}
+            min={-40}
+            max={40}
             step={5}
             value={manualSetpoint}
             onChange={handleSetpointChange}
