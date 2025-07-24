@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import useCheckConnection  from "../../hooks/useCheckConnection";
 
 // Estilo
 import {
@@ -43,11 +43,7 @@ const Offline = () => (
 
 function MenuSuperior() {
   // Lógica para ícone de conexão de internet
-  const [isOn, setIsOn] = useState(false);
-
-  const toggleIcon = () => {
-    setIsOn(!isOn);
-  };
+  const { isConnected } = useCheckConnection();
 
   // Lógica de Data
   const date = new Date();
@@ -76,8 +72,8 @@ function MenuSuperior() {
       <DateDisplay>
         {year}, {day} de {month}
       </DateDisplay>
-      <TrackerConnectionIcon onClick={toggleIcon}>
-        {isOn ? (
+      <TrackerConnectionIcon>
+        {isConnected ? (
           <>
             <Online />
             <ConnectionText> ON </ConnectionText>
