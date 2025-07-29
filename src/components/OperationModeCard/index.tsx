@@ -27,7 +27,7 @@ function OperationModeCard() {
     setActivatedManual(false);
     setActivatedHalt(false);
     setActivatedPresentation(false);
-    setMode('auto', 0);
+    setMode('auto', 0, { rtc: Math.floor(Date.now() / 1000) });
   };
   const handleClickButtonManual = () => {
     setActivatedAuto(false);
@@ -36,7 +36,7 @@ function OperationModeCard() {
       : setActivatedManual(isActiveManual);
     setActivatedHalt(false);
     setActivatedPresentation(false);
-    setMode('manual', manualSetpoint);
+    setMode('manual', manualSetpoint, { rtc: Math.floor(Date.now() / 1000) });
   };
 
   const handleSetpointChange = (e: any) => {
@@ -48,7 +48,7 @@ function OperationModeCard() {
 
   const handleSubmitSetpoint = () => {
     if (!isNaN(manualSetpoint) && manualSetpoint >= minAngleValue && manualSetpoint <= maxAngleValue) {
-      setMode('manual', manualSetpoint);
+      setMode('manual', manualSetpoint, { rtc: Math.floor(Date.now() / 1000) });
       console.log("Setpoint manual definido:", manualSetpoint);
     } else {
       alert("Por favor, insira um valor entre -40 e 40 graus.");
@@ -61,7 +61,7 @@ function OperationModeCard() {
       ? setActivatedHalt(!isActiveHalt)
       : setActivatedHalt(isActiveHalt);
     setActivatedPresentation(false);
-    setMode('halt', 0);
+    setMode('halt', 0, { rtc: Math.floor(Date.now() / 1000) });
   };
   const handleClickButtonPresentation = () => {
     setActivatedAuto(false);
@@ -70,7 +70,7 @@ function OperationModeCard() {
     isActivePresentation == false
       ? setActivatedPresentation(!isActivePresentation)
       : setActivatedPresentation(isActivePresentation);
-    setMode('presentation', 0);
+    setMode('presentation', 0, { rtc: Math.floor(Date.now() / 1000) });
   };
 
 const hasInitialized = useRef(false);
@@ -82,7 +82,7 @@ useEffect(() => {
     setActivatedManual(false);
     setActivatedHalt(false);
     setActivatedPresentation(false);
-    setMode('auto', 0);
+    setMode('auto', 0, { rtc: Math.floor(Date.now() / 1000) });
   }
 }, [isLoading, isOnline]);
 

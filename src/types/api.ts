@@ -1,10 +1,15 @@
 // Tipos para os modos de operação
 export type OperationMode = 'auto' | 'manual' | 'halt' | 'presentation';
 
+export type RTCAdjustRequest = {
+  rtc: number; // Unix timestamp em segundos
+}
+
 // Interface para requisição de mudança de modo
 export interface ModeRequest {
   mode: OperationMode;
   manual_setpoint: number;
+  adjust: RTCAdjustRequest;
 }
 
 // Interface para resposta do status do sistema

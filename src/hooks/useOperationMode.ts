@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { OperationMode } from '../types/api';
+import { OperationMode, RTCAdjustRequest } from '../types/api';
 import { operationModeApi } from '../services/operationModeApi';
 
 interface UseOperationModeReturn {
@@ -7,7 +7,7 @@ interface UseOperationModeReturn {
   isLoading: boolean;
   isOnline: boolean;
   error: string | null;
-  setMode: (mode: OperationMode, manual_setpoint: number) => Promise<void>;
+  setMode: (mode: OperationMode, manual_setpoint: number, adjust: RTCAdjustRequest) => Promise<void>;
 }
 
 export const useOperationMode = (): UseOperationModeReturn => {
@@ -31,12 +31,12 @@ export const useOperationMode = (): UseOperationModeReturn => {
   }, []);
 
   // Função para alterar modo
-  const setMode = useCallback(async (mode: OperationMode, manual_setpoint: number) => {
+  const setMode = useCallback(async (mode: OperationMode, manual_setpoint: number, adjust: RTCAdjustRequest) => {
     setIsLoading(true);
     setError(null);
     
     try {
-      await operationModeApi.setMode(mode, manual_setpoint);
+      await operationModeApi.setMode(mode, manual_setpoint, adjust);
       setCurrentMode(mode);
       setIsOnline(true);
     } catch (err) {

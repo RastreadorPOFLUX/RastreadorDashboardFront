@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { OperationMode, ModeRequest, SystemStatusResponse } from '../types/api';
+import { OperationMode, ModeRequest, RTCAdjustRequest, SystemStatusResponse } from '../types/api';
 
 // Configuração base da API
 const API_BASE_URL = 'http://localhost:8000';
@@ -22,8 +22,8 @@ export const operationModeApi = {
   },
 
   // Alterar modo de operação
-  setMode: async (mode: OperationMode, manual_setpoint: number): Promise<void> => {
-    const request: ModeRequest = { mode, manual_setpoint };
+  setMode: async (mode: OperationMode, manual_setpoint: number, adjust: RTCAdjustRequest): Promise<void> => {
+    const request: ModeRequest = { mode, manual_setpoint, adjust};
     await api.patch('/api/mode', request);
   },
 
