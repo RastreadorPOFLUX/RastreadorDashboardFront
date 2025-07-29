@@ -12,6 +12,12 @@ export interface ModeRequest {
   adjust: RTCAdjustRequest;
 }
 
+export interface AnglesResponse{
+  sun_position: number; // Posição do sol em graus
+  lens_angle: number; // Ângulo atual da lente em graus
+  manual_setpoint: number; // Setpoint manual em graus
+}
+
 // Interface para resposta do status do sistema
 export interface SystemStatusResponse {
   mode: OperationMode;

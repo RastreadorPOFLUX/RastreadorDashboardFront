@@ -3,6 +3,7 @@ import { StyledWrapper, Title } from "./style";
 
 // Dados
 import getData from "./Data";
+import { useAnglesData } from '../../hooks/useAngles';
 
 interface Angles {
   sunPosition: number;
@@ -184,6 +185,8 @@ const AngleDisplay: React.FC<Angles> = ({
 };
 
 function AnglesCard() {
+  const { angles, loading, error } = useAnglesData();
+
   return (
     <StyledWrapper
       width={"35%"}
@@ -193,15 +196,21 @@ function AnglesCard() {
       $backgroundcolor="var(--backgroundCards)"
     >
       <Title color={"var(--primaryText)"}>
-        {" "}
-        Ângulos de Posicionamento
+        {" Ângulos de Posicionamento"}
       </Title>
 
-      <AngleDisplay
-        sunPosition={getData().sunPosition}
-        lensAngle={getData().lensAngle}
-        manualSetpoint={getData().manualSetpoint}
-      />
+      {loading && <div>Carregando...</div>}
+      {error && <div style={{ color: 'red' }}>{error}</div>}
+      {angles && (
+        <AngleDisplay
+          sunPosition={angles.sun_position}
+          lensAngle={angles.lens_angle}
+          manualSetpoint={angles.manual_setpoint}
+        />
+      )}
+      {!loading && !angles && !error && (
+        <div>Nenhum dado disponível</div>
+      )}
     </StyledWrapper>
   );
 }
