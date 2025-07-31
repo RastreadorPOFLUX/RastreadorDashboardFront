@@ -19,5 +19,11 @@ export const anglesApi = {
   getCurrentAngles: async (): Promise<AnglesResponse> => {
     const response = await api.get('/api/angles');
     return response.data as AnglesResponse;
+  },
+
+  // Obter ângulos atuais do sistema
+  getCurrentLensAngle: async (): Promise<AnglesResponse> => {
+    const response = await api.get('/api/angles');
+    return response.data.lens_angle as AnglesResponse;
   }
 };

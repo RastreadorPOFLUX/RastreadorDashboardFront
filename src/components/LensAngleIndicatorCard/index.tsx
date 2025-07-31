@@ -1,22 +1,15 @@
 //Estilo
-import { useState, useEffect } from "react";
 import { CircularProgress, StyledWrapper, Text } from "./style";
-import getData from "./Data";
+import { useAnglesData } from '../../hooks/useAngles';
+
+
 
 const valueMax: number = 45;
 
 function LensAngleIndicatorCard() {
-  const [value, setValue] = useState<number>(
-    getData()[getData().length - 1].value,
-  );
-
-  const handleChangeValue = () => {
-    setValue(value);
-  };
-
-  useEffect(() => {
-    handleChangeValue();
-  }, [value]);
+  const { angles } = useAnglesData();
+  // Busca o valor do ângulo da lente do hook
+  const value = angles?.lens_angle ?? 0;
 
   return (
     <StyledWrapper
@@ -27,9 +20,8 @@ function LensAngleIndicatorCard() {
       $backgroundcolor="var(--backgroundCards)"
     >
       <Text color={"var(--primaryText)"}>Ângulo de Azimute da Lente</Text>
-
       <CircularProgress
-        value={value}
+        value={Math.ceil(value)}
         startAngle={0}
         endAngle={360}
         valueMin={-valueMax}

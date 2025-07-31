@@ -1,14 +1,13 @@
 // Estilo
 import { StyledWrapper, Title } from "./style";
 
-// Dados
-import getData from "./Data";
+// Hooks
 import { useAnglesData } from '../../hooks/useAngles';
 
 interface Angles {
-  sunPosition: number;
-  lensAngle: number;
-  manualSetpoint: number;
+  sun_position: number;
+  lens_angle: number;
+  manual_setpoint: number;
 }
 
 const sunIcon = (x: number, y: number) => (
@@ -68,9 +67,9 @@ const setPointIcon = (x: number, y: number) => (
 );
 
 const AngleDisplay: React.FC<Angles> = ({
-  sunPosition,
-  lensAngle,
-  manualSetpoint,
+  sun_position,
+  lens_angle,
+  manual_setpoint,
 }) => {
   const centerX = 200;
   const centerY = 200;
@@ -84,7 +83,7 @@ const AngleDisplay: React.FC<Angles> = ({
 
   const layers = [
     {
-      angle: sunPosition,
+      angle: sun_position,
       color: "orange",
       label: "Posição do Sol",
       radius: 120,
@@ -93,7 +92,7 @@ const AngleDisplay: React.FC<Angles> = ({
       },
     },
     {
-      angle: lensAngle,
+      angle: lens_angle,
       color: "deepskyblue",
       label: "Azimute da Lente",
       radius: 85,
@@ -102,7 +101,7 @@ const AngleDisplay: React.FC<Angles> = ({
       },
     },
     {
-      angle: manualSetpoint,
+      angle: manual_setpoint,
       color: "red",
       label: "SetPoint Manual",
       radius: 50,
@@ -198,14 +197,11 @@ function AnglesCard() {
       <Title color={"var(--primaryText)"}>
         {" Ângulos de Posicionamento"}
       </Title>
-
-      {loading && <div>Carregando...</div>}
-      {error && <div style={{ color: 'red' }}>{error}</div>}
       {angles && (
         <AngleDisplay
-          sunPosition={angles.sun_position}
-          lensAngle={angles.lens_angle}
-          manualSetpoint={angles.manual_setpoint}
+          sun_position={angles.sun_position ?? 0}
+          lens_angle={angles.lens_angle ?? 0}
+          manual_setpoint={angles.manual_setpoint ?? 0}
         />
       )}
       {!loading && !angles && !error && (
