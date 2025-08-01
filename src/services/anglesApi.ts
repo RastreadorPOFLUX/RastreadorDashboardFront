@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AnglesResponse } from '../types/api';
+import { AnglesRequest } from '../types/api';
 
 // Configuração base da API
 const API_BASE_URL = 'http://localhost:8000';
@@ -16,14 +16,14 @@ const api = axios.create({
 export const anglesApi = {
 
 // Obter ângulos atuais do sistema
-  getCurrentAngles: async (): Promise<AnglesResponse> => {
+  getCurrentAngles: async (): Promise<AnglesRequest> => {
     const response = await api.get('/api/angles');
-    return response.data as AnglesResponse;
+    return response.data as AnglesRequest;
   },
 
   // Obter ângulos atuais do sistema
-  getCurrentLensAngle: async (): Promise<AnglesResponse> => {
+  getCurrentLensAngle: async (): Promise<AnglesRequest> => {
     const response = await api.get('/api/angles');
-    return response.data.lens_angle as AnglesResponse;
+    return response.data.lens_angle as AnglesRequest;
   }
 };

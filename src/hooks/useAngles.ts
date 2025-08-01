@@ -1,19 +1,19 @@
 import { useState, useEffect, useCallback } from 'react';
-import { AnglesResponse } from '../types/api';
+import { AnglesRequest } from '../types/api';
 import { anglesApi } from '../services/anglesApi';
 
 
 export interface UseAnglesData {
-  angles: AnglesResponse | null;
-  lensAngle: AnglesResponse | null;
+  angles: AnglesRequest | null;
+  lensAngle: AnglesRequest | null;
   loading: boolean;
   error: string | null;
-  fetchAngles: () => Promise<AnglesResponse | null>;
-  fetchLensAngles: () => Promise<AnglesResponse | null>;
+  fetchAngles: () => Promise<AnglesRequest | null>;
+  fetchLensAngles: () => Promise<AnglesRequest | null>;
 }
 export const useAnglesData = () => {
-  const [angles, setAngles] = useState<AnglesResponse | null>(null);
-  const [lensAngle, setLensAngle] = useState<AnglesResponse | null>(null);
+  const [angles, setAngles] = useState<AnglesRequest | null>(null);
+  const [lensAngle, setLensAngle] = useState<AnglesRequest | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

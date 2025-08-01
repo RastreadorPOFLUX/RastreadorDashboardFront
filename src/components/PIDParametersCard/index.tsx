@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import getData from "./Data";
+
 import {
   Divider,
   StyledWrapper,
@@ -10,13 +10,15 @@ import {
   StyledInput,
 } from "./style";
 
+import { usePidData } from "../../hooks/usePid";
+
 const PIDParametersCard = () => {
-  const pidData = getData();
+  const pidData = usePidData().pid;
 
   const [pidParams, setPidParams] = useState({
-    Kp: pidData.Kp,
-    Ki: pidData.Ki,
-    Kd: pidData.Kd,
+    Kp: pidData?.kp || 0,
+    Ki: pidData?.ki || 0,
+    Kd: pidData?.kd || 0,
   });
 
   const handleParamChange = (

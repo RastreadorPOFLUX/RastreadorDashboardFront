@@ -8,6 +8,7 @@ const valueMax: number = 45;
 
 function LensAngleIndicatorCard() {
   const { angles } = useAnglesData();
+  
   // Busca o valor do ângulo da lente do hook
   const value = angles?.lens_angle ?? 0;
 
