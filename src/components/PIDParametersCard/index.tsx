@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import {
   Divider,
   StyledWrapper,
@@ -13,17 +12,28 @@ import {
 import { usePidData } from "../../hooks/usePid";
 
 const PIDParametersCard = () => {
-  const pidData = usePidData().pid;
+  const { pid, isLoading, error, setPidParameters } = usePidData();
 
   const [pidParams, setPidParams] = useState({
-    Kp: pidData?.kp || 0,
-    Ki: pidData?.ki || 0,
-    Kd: pidData?.kd || 0,
+    Kp: 0,
+    Ki: 0,
+    Kd: 0,
   });
+
+  // Atualizar estado local quando dados do backend forem carregados
+  useEffect(() => {
+    if (pid) {
+      setPidParams({
+        Kp: pid.kp,
+        Ki: pid.ki,
+        Kd: pid.kd,
+      });
+    }
+  }, [pid]);
 
   const handleParamChange = (
     paramName: keyof typeof pidParams,
-    Value: string,
+    Value: string
   ) => {
     const cleaned = Value.replace(",", ".");
     const numericValue = parseFloat(cleaned);
@@ -32,8 +42,12 @@ const PIDParametersCard = () => {
       const newParams = { ...pidParams, [paramName]: numericValue };
       setPidParams(newParams);
 
-      // Enviar valor imediatamente (substitua por chamada de API se necessário)
-      console.log(`Novo valor de ${paramName}:`, numericValue);
+      // Atualizar backend
+      setPidParameters({
+        kp: paramName === "Kp" ? numericValue : newParams.Kp,
+        ki: paramName === "Ki" ? numericValue : newParams.Ki,
+        kd: paramName === "Kd" ? numericValue : newParams.Kd,
+      });
     }
   };
 
@@ -53,43 +67,43 @@ const PIDParametersCard = () => {
     >
       <Box>
         <Title color="var(--primaryText)">Parâmetros PID</Title>
-        {params.map((param, index) => (
-          <React.Fragment key={param.label}>
-            <Line>
-              <StyledWrapper
-                width="15%"
-                height="2rem"
-                $backgroundcolor="var(--primaryColor)"
-              >
-                <Text color="var(--white)">{param.label}</Text>
-              </StyledWrapper>
+        {!isLoading &&
+          params.map((param, index) => (
+            <React.Fragment key={param.label}>
+              <Line>
+                <StyledWrapper
+                  width="15%"
+                  height="2rem"
+                  $backgroundcolor="var(--primaryColor)"
+                >
+                  <Text color="var(--white)">{param.label}</Text>
+                </StyledWrapper>
 
-              <StyledWrapper
-                width="30%"
-                height="2rem"
-                $backgroundcolor="var(--backgroundColor)"
-              >
-                <StyledInput
-                  type="text"
-                  defaultValue={param.value}
-                  onKeyDown={(e) => {
-                    // Bloqueia digitação de vírgula
-                    if (e.key === ",") {
-                      e.preventDefault();
+                <StyledWrapper
+                  width="30%"
+                  height="2rem"
+                  $backgroundcolor="var(--backgroundColor)"
+                >
+                  <StyledInput
+                    type="text"
+                    value={param.value}
+                    onKeyDown={(e) => {
+                      if (e.key === ",") {
+                        e.preventDefault();
+                      }
+                    }}
+                    onChange={(e) =>
+                      handleParamChange(
+                        param.label as "Kp" | "Ki" | "Kd",
+                        e.target.value
+                      )
                     }
-                  }}
-                  onChange={(e) =>
-                    handleParamChange(
-                      param.label as "Kp" | "Ki" | "Kd",
-                      e.target.value,
-                    )
-                  }
-                />
-              </StyledWrapper>
-            </Line>
-            {index < params.length - 1 && <Divider />}
-          </React.Fragment>
-        ))}
+                  />
+                </StyledWrapper>
+              </Line>
+              {index < params.length - 1 && <Divider />}
+            </React.Fragment>
+          ))}
       </Box>
     </StyledWrapper>
   );

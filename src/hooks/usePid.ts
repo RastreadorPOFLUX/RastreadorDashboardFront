@@ -1,17 +1,18 @@
 import { useState, useEffect, useCallback } from 'react';
-import { PIDRequest } from '../types/api';
+import { ControlRequest, PidAdjustRequest } from '../types/api';
 import { pidApi } from '../services/pidApi';
 
 
 export interface UsePidData {
-  pid: PIDRequest | null;
+  pid: ControlRequest | null;
   loading: boolean;
   error: string | null;
-  fetchPid: () => Promise<PIDRequest | null>;
+  fetchPid: () => Promise<ControlRequest | null>;
+  setPidParameters: ( adjust: PidAdjustRequest) => Promise<void>;
 }
 export const usePidData = () => {
-  const [pid, setPid] = useState<PIDRequest | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [pid, setPid] = useState<ControlRequest | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // Buscar parâmetros PID do backend
@@ -25,9 +26,26 @@ export const usePidData = () => {
       setError('Erro ao buscar parâmetros PID.');
       return null;
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   }, []);
+
+    // Função para alterar modo
+    const setPidParameters = useCallback(async (adjust: PidAdjustRequest) => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        await pidApi.setCurrentParameters(adjust);
+        setPid(adjust);
+      } catch (err) {
+        setError('Erro ao alteraros parâmetros PID');
+        console.error('Erro ao alterar parâmetros PID:', err);
+        // Recarregar modo atual em caso de erro
+        await fetchPid();
+      } finally {
+        setIsLoading(false);
+      }
+    }, [fetchPid]);
 
 
   useEffect(() => {
@@ -42,8 +60,9 @@ export const usePidData = () => {
 
   return {
     pid,
-    loading,
+    isLoading,
     error,
-    fetchPid
+    fetchPid,
+    setPidParameters
   };
 };

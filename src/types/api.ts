@@ -5,6 +5,12 @@ export type RTCAdjustRequest = {
   rtc: number; // Unix timestamp em segundos
 }
 
+export type PidAdjustRequest = {
+  kp: number;
+  ki: number;
+  kd: number;
+}
+
 // Interface para requisição de mudança de modo
 export interface ModeRequest {
   mode: OperationMode;
@@ -18,7 +24,7 @@ export interface AnglesRequest{
   manual_setpoint?: number; // Setpoint manual em graus
 }
 
-export interface PIDRequest{
+export interface ControlRequest{
   kp: number; // Ganho proporcional
   ki: number; // Ganho integral
   kd: number; // Ganho derivativo
@@ -27,6 +33,10 @@ export interface PIDRequest{
   d?: number; // Saída derivativa
   error?: number; // Erro atual do sistema
   output?: number; // Saída total do PID
+}
+
+export interface PidRequest{
+  adjust: PidAdjustRequest
 }
 
 // Interface para resposta do status do sistema
