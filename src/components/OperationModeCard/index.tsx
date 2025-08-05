@@ -28,6 +28,7 @@ function OperationModeCard() {
     setActivatedHalt(false);
     setActivatedPresentation(false);
     setMode('auto', 0, { rtc: Math.floor(Date.now() / 1000) });
+    localStorage.setItem("operation_mode", "auto");
   };
   const handleClickButtonManual = () => {
     setActivatedAuto(false);
@@ -37,6 +38,7 @@ function OperationModeCard() {
     setActivatedHalt(false);
     setActivatedPresentation(false);
     setMode('manual', manualSetpoint, { rtc: Math.floor(Date.now() / 1000) });
+    localStorage.setItem("operation_mode", "manual");
   };
 
   const handleSetpointChange = (e: any) => {
@@ -62,6 +64,7 @@ function OperationModeCard() {
       : setActivatedHalt(isActiveHalt);
     setActivatedPresentation(false);
     setMode('halt', 0, { rtc: Math.floor(Date.now() / 1000) });
+    localStorage.setItem("operation_mode", "halt");
   };
   const handleClickButtonPresentation = () => {
     setActivatedAuto(false);
@@ -71,6 +74,7 @@ function OperationModeCard() {
       ? setActivatedPresentation(!isActivePresentation)
       : setActivatedPresentation(isActivePresentation);
     setMode('presentation', 0, { rtc: Math.floor(Date.now() / 1000) });
+    localStorage.setItem("operation_mode", "presentation");
   };
 
 const hasInitialized = useRef(false);
@@ -78,11 +82,39 @@ const hasInitialized = useRef(false);
 useEffect(() => {
   if (!hasInitialized.current && !isLoading && isOnline) {
     hasInitialized.current = true;
-    setActivatedAuto(true);
-    setActivatedManual(false);
-    setActivatedHalt(false);
-    setActivatedPresentation(false);
-    setMode('auto', 0, { rtc: Math.floor(Date.now() / 1000) });
+
+    const savedMode = localStorage.getItem("operation_mode");
+
+    switch (savedMode) {
+      case "manual":
+        setActivatedAuto(false);
+        setActivatedManual(true);
+        setActivatedHalt(false);
+        setActivatedPresentation(false);
+        setMode("manual", manualSetpoint, { rtc: Math.floor(Date.now() / 1000) });
+        break;
+      case "halt":
+        setActivatedAuto(false);
+        setActivatedManual(false);
+        setActivatedHalt(true);
+        setActivatedPresentation(false);
+        setMode("halt", 0, { rtc: Math.floor(Date.now() / 1000) });
+        break;
+      case "presentation":
+        setActivatedAuto(false);
+        setActivatedManual(false);
+        setActivatedHalt(false);
+        setActivatedPresentation(true);
+        setMode("presentation", 0, { rtc: Math.floor(Date.now() / 1000) });
+        break;
+      default:
+        // default to auto
+        setActivatedAuto(true);
+        setActivatedManual(false);
+        setActivatedHalt(false);
+        setActivatedPresentation(false);
+        setMode("auto", 0, { rtc: Math.floor(Date.now() / 1000) });
+    }
   }
 }, [isLoading, isOnline]);
 
