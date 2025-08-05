@@ -92,12 +92,23 @@ const PIDParametersCard = () => {
                         e.preventDefault();
                       }
                     }}
-                    onChange={(e) =>
-                      handleParamChange(
-                        param.label as "Kp" | "Ki" | "Kd",
-                        e.target.value
-                      )
+                   onChange={(e) => {
+                    const cleaned = e.target.value.replace(",", ".");
+                    const numericValue = parseFloat(cleaned);
+                    if (!isNaN(numericValue)) {
+                      setPidParams((prev) => ({
+                        ...prev,
+                        [param.label]: numericValue,
+                      }));
                     }
+                  }}
+                  onBlur={() => {
+                    setPidParameters({
+                      kp: pidParams.Kp,
+                      ki: pidParams.Ki,
+                      kd: pidParams.Kd,
+                    });
+                  }}
                   />
                 </StyledWrapper>
               </Line>
