@@ -52,6 +52,11 @@ export interface SystemStatusResponse {
   is_online: boolean;
 }
 
+export interface MotorResponse {
+  power: number; // Potência do motor em porcentagem (0 a 100)
+  raw_value: number; // Valor bruto do PWM (0 a 255)
+}
+
 // Interface para resposta padrão da API
 export interface ApiResponse<T> {
   data: T;

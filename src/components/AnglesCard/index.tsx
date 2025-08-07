@@ -204,9 +204,6 @@ function AnglesCard() {
           manual_setpoint={angles.manual_setpoint ?? 0}
         />
       )}
-      {!loading && !angles && !error && (
-        <div>Nenhum dado disponível</div>
-      )}
     </StyledWrapper>
   );
 }
