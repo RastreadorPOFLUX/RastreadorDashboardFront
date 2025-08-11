@@ -1,17 +1,17 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ControlRequest, PidAdjustRequest } from '../types/api';
+import { ControlResponse, PidAdjustRequest } from '../types/api';
 import { pidApi } from '../services/pidApi';
 
 
 export interface UsePidData {
-  pid: ControlRequest | null;
+  pid: ControlResponse | null;
   loading: boolean;
   error: string | null;
-  fetchPid: () => Promise<ControlRequest | null>;
+  fetchPid: () => Promise<ControlResponse | null>;
   setPidParameters: ( adjust: PidAdjustRequest) => Promise<void>;
 }
 export const usePidData = () => {
-  const [pid, setPid] = useState<ControlRequest | null>(null);
+  const [pid, setPid] = useState<ControlResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
