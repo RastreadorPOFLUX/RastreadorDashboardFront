@@ -1,18 +1,15 @@
 // Hooks
-import { useMotorData } from '../../hooks/useMotor';
+import { useMotorDataWS } from "../../hooks/useMotor";
+
+
 
 //Estilo
 import { StyledWrapper, GradientLinearProgress, Text } from "./style";
 import { Box, Typography } from "@mui/material";
 
 
-interface Motor {
-  power: number; // Potência do motor em porcentagem (0 a 100)
-  raw_value?: number; // Valor bruto do PWM (0 a 255)
-}
-
 function MotorPowerCard() {
-  const { power, loading, error } = useMotorData();
+  const { power, loading, error } = useMotorDataWS();
   const progress: number = power ? power.power : 0;
 
   return (
