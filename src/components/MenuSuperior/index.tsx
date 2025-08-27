@@ -55,7 +55,7 @@ function MenuSuperior() {
     "Maio",
     "Junho",
     "Julho",
-    "Agusto",
+    "Agosto",
     "Setembro",
     "Outubro",
     "Novembro",
