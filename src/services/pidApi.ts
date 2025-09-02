@@ -12,7 +12,7 @@ const api = axios.create({
   },
 });
 
-// Serviços específicos para modos de operação
+// Serviços específicos para controlador PID
 export const pidApi = {
 // Obter parâmetros do atuais do controlador PID
   getCurrentParameters: async (): Promise<ControlRequest> => {

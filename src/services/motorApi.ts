@@ -12,7 +12,7 @@ const api = axios.create({
   },
 });
 
-// Serviços específicos para modos de operação
+// Serviços específicos para motor
 export const motorApi = {
 
 // Obter ângulos atuais do sistema

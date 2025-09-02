@@ -18,7 +18,8 @@
     "types": ["vite/client"],
     "paths": {
       "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
-    }
+    },
+    "ignoreDeprecations": "6.0"
   },
   "include": ["src"]
 }
