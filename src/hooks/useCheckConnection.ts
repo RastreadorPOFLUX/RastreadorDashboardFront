@@ -21,7 +21,7 @@ export default function useCheckConnection() {
     };
 
     fetchStatus();
-    const interval = setInterval(fetchStatus, 5000); // verifica a cada 5 segundos
+    const interval = setInterval(fetchStatus, 10000); // verifica a cada 10 segundos
 
     return () => clearInterval(interval);
   }, []);

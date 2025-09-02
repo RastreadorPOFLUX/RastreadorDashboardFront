@@ -4,17 +4,38 @@ import { dataApi } from '../services/dataApi';
 export interface UseData {
   loading: boolean;
   error: string | null;
-  success: boolean; // Novo estado para sucesso
-  downloadCsv: (filename?: string) => Promise<boolean>; // Agora retorna boolean indicando sucesso
+  success: boolean;
+  downloadCsv: (filename?: string) => Promise<boolean>;
+  destroyData: () => Promise<boolean>; // Agora retorna boolean indicando sucesso
 }
 
 export const useData = () => {
-  const [loading, setLoading] = useState(false);
+  const [loadingDownload, setLoadingDownload] = useState(false);
+  const [loadingDestroy, setLoadingDestroy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false); // Novo estado
+  const [success, setSuccess] = useState(false);
+
+  const destroyData = useCallback(async (): Promise<boolean> => {
+    setLoadingDestroy(true);
+    setError(null);
+    setSuccess(false);
+    
+    try {
+      await dataApi.destroyData();
+      setSuccess(true);
+      return true; // Retorna sucesso
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Erro ao apagar dados.';
+      setError(errorMessage);
+      console.error('Erro ao apagar dados:', err);
+      return false; // Retorna falha
+    } finally {
+      setLoadingDestroy(false);
+    }
+  }, []);
 
   const downloadCsv = useCallback(async (filename: string = 'tracking.csv'): Promise<boolean> => {
-    setLoading(true);
+    setLoadingDownload(true);
     setError(null);
     setSuccess(false);
     
@@ -36,23 +57,25 @@ export const useData = () => {
       
       setTimeout(() => window.URL.revokeObjectURL(url), 100);
       
-      setSuccess(true); // Marca como sucesso
-      return true; // Retorna sucesso
+      setSuccess(true);
+      return true;
       
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Erro ao baixar dados CSV.';
       setError(errorMessage);
       console.error('Erro no download:', err);
-      return false; // Retorna falha
+      return false;
     } finally {
-      setLoading(false);
+      setLoadingDownload(false);
     }
   }, []);
 
   return {
-    loading,
+    loadingDownload,
+    loadingDestroy,
     error,
-    success, // Exporta o estado de sucesso
-    downloadCsv
+    success,
+    downloadCsv,
+    destroyData
   };
 };

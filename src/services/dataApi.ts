@@ -15,4 +15,11 @@ export const dataApi = {
     });
     return response.data;
   },
+
+  destroyData: async (): Promise<void> => {
+    const response = await api.delete('/api/tracking-data');
+    if (response.status !== 200) {
+      throw new Error('Failed to clear tracking data');
+    }
+  }
 };
