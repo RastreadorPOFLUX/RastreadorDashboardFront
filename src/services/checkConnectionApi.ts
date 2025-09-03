@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { SystemStatusResponse } from '../types/api';
 
 // Configuração base da API
 const API_BASE_URL = 'http://localhost:8000';

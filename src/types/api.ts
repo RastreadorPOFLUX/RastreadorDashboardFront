@@ -18,13 +18,13 @@ export interface ModeRequest {
   adjust: RTCAdjustRequest;
 }
 
-export interface AnglesRequest{
+export interface AnglesResponse{
   sun_position?: number; // Posição do sol em graus
   lens_angle: number; // Ângulo atual da lente em graus
   manual_setpoint?: number; // Setpoint manual em graus
 }
 
-export interface ControlRequest{
+export interface ControlResponse{
   kp: number; // Ganho proporcional
   ki: number; // Ganho integral
   kd: number; // Ganho derivativo
@@ -35,7 +35,7 @@ export interface ControlRequest{
   output?: number; // Saída total do PID
 }
 
-export interface PidRequest{
+export interface PidResponse{
   adjust: PidAdjustRequest
 }
 

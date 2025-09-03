@@ -12,23 +12,13 @@ import { useOperationMode } from '../../hooks/useOperationMode';
 
 
 function OperationModeCard() {
-
-  const [manualSetpoint, setManualSetpoint] = useState(()=>{
-    return localStorage.getItem("manual_setpoint") ? Number(localStorage.getItem("manual_setpoint")) : 0;
-  });
-
   const [isActivedAuto, setActivatedAuto] = useState(true);
   const [isActiveManual, setActivatedManual] = useState(false);
+  const [manualSetpoint, setManualSetpoint] = useState(0);
   const [isActiveHalt, setActivatedHalt] = useState(false);
   const [isActivePresentation, setActivatedPresentation] = useState(false);
 
   const { isLoading, isOnline, setMode } = useOperationMode();
-
-  const minAngleValue: number = -40;
-  const maxAngleValue: number = 40;
-
-  const hasInitialized = useRef(false);
-
 
   const handleClickButtonAuto = () => {
     isActivedAuto == false
@@ -37,11 +27,9 @@ function OperationModeCard() {
     setActivatedManual(false);
     setActivatedHalt(false);
     setActivatedPresentation(false);
-    setMode('auto', manualSetpoint, { rtc: Math.floor(Date.now() / 1000) });
+    setMode('auto', 0, { rtc: Math.floor(Date.now() / 1000) });
     localStorage.setItem("operation_mode", "auto");
   };
-
-
   const handleClickButtonManual = () => {
     setActivatedAuto(false);
     isActiveManual == false
@@ -57,6 +45,8 @@ function OperationModeCard() {
     setManualSetpoint(e.target.value);
   };
 
+  const minAngleValue: number = -40;
+  const maxAngleValue: number = 40;
 
   const handleSubmitSetpoint = () => {
     if (!isNaN(manualSetpoint) && manualSetpoint >= minAngleValue && manualSetpoint <= maxAngleValue) {
@@ -73,7 +63,7 @@ function OperationModeCard() {
       ? setActivatedHalt(!isActiveHalt)
       : setActivatedHalt(isActiveHalt);
     setActivatedPresentation(false);
-    setMode('halt', manualSetpoint, { rtc: Math.floor(Date.now() / 1000) });
+    setMode('halt', 0, { rtc: Math.floor(Date.now() / 1000) });
     localStorage.setItem("operation_mode", "halt");
   };
   const handleClickButtonPresentation = () => {
@@ -83,16 +73,11 @@ function OperationModeCard() {
     isActivePresentation == false
       ? setActivatedPresentation(!isActivePresentation)
       : setActivatedPresentation(isActivePresentation);
-    setMode('presentation', manualSetpoint, { rtc: Math.floor(Date.now() / 1000) });
+    setMode('presentation', 0, { rtc: Math.floor(Date.now() / 1000) });
     localStorage.setItem("operation_mode", "presentation");
   };
 
-
-
-  useEffect(() => {
-    localStorage.setItem("manual_setpoint", manualSetpoint.toString());
-  }, [manualSetpoint]);
-
+const hasInitialized = useRef(false);
 
 useEffect(() => {
   if (!hasInitialized.current && !isLoading && isOnline) {
@@ -113,14 +98,14 @@ useEffect(() => {
         setActivatedManual(false);
         setActivatedHalt(true);
         setActivatedPresentation(false);
-        setMode("halt", manualSetpoint, { rtc: Math.floor(Date.now() / 1000) });
+        setMode("halt", 0, { rtc: Math.floor(Date.now() / 1000) });
         break;
       case "presentation":
         setActivatedAuto(false);
         setActivatedManual(false);
         setActivatedHalt(false);
         setActivatedPresentation(true);
-        setMode("presentation", manualSetpoint, { rtc: Math.floor(Date.now() / 1000) });
+        setMode("presentation", 0, { rtc: Math.floor(Date.now() / 1000) });
         break;
       default:
         // default to auto
@@ -128,7 +113,7 @@ useEffect(() => {
         setActivatedManual(false);
         setActivatedHalt(false);
         setActivatedPresentation(false);
-        setMode("auto", manualSetpoint, { rtc: Math.floor(Date.now() / 1000) });
+        setMode("auto", 0, { rtc: Math.floor(Date.now() / 1000) });
     }
   }
 }, [isLoading, isOnline]);

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ControlRequest, PidAdjustRequest, PidRequest } from '../types/api';
+import { ControlResponse, PidAdjustRequest, PidResponse } from '../types/api';
 
 // Configuração base da API
 const API_BASE_URL = 'http://localhost:8000';
@@ -15,13 +15,13 @@ const api = axios.create({
 // Serviços específicos para controlador PID
 export const pidApi = {
 // Obter parâmetros do atuais do controlador PID
-  getCurrentParameters: async (): Promise<ControlRequest> => {
+  getCurrentParameters: async (): Promise<ControlResponse> => {
     const response = await api.get('/api/pid');
-    return response.data as ControlRequest;
+    return response.data as ControlResponse;
   },
 
   setCurrentParameters: async (adjust: PidAdjustRequest): Promise<void> => {
-      const request: PidRequest = {adjust};
+      const request: PidResponse = {adjust};
       await api.patch('/api/adjustPid', request);
   }
 };
