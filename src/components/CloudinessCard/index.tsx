@@ -22,22 +22,23 @@ function CloudinessCard() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetchHistoricalCloudiness();
-      const fetchedData = result
-        .map((dt: string, index: number) => ({
-          date: new Date(result[index].dt * 1000 - 10800000)
-            .toISOString()
-            .split("T")[0],
-          cloudiness: result[index].clouds.all,
-          hour: new Date(result[index].dt * 1000).getHours() + "h",
-          time:
-            new Date(result[index].dt * 1000).toLocaleDateString() +
-            "-" +
-            new Date(result[index].dt * 1000).getHours() +
-            "h",
+      const fetchedData = result.hourly.time.map((timeStr: string, index: string | number) => ({
+        date: timeStr.split("T")[0],
+        cloudiness: result.hourly.cloud_cover[index],
+        hour: timeStr.split("T")[1].slice(0,2) + "h",
+        time: timeStr.split("T")[0].slice(8,10) + 
+              timeStr.split("T")[0].slice(4,8) + 
+              timeStr.split("T")[0].slice(0,4) + "-" +
+              timeStr.split("T")[1].slice(0,2) + "h",
+        timestamp: new Date(timeStr).getTime()
         }))
-        .filter((item: WeatherData) => item.date <= EndDate);
+        .filter((item: { timestamp: string | number | Date; }) => {
+        const itemDate = new Date(item.timestamp);
+        const now = new Date();
+        return itemDate <= now;
+      });
       startTransition(() => {
-        setData(fetchedData);
+      setData(fetchedData);
       });
     };
     fetchData();
@@ -80,7 +81,7 @@ function CloudinessCard() {
           fontFamily: "Lato, sans-serif",
         },
         label: {
-          formatter: ({ value }) => `${value.split("-")[1]}`,
+          formatter: ({ value }) => `${value.split("-")[3]}`,
         },
         gridLine: {
           enabled: false,
