@@ -12,9 +12,9 @@ export default function CameraDisplay() {
     <GeneralInfoBackground>
       <MenuSuperior></MenuSuperior>
       <DateProvider>
-        <MenuLateral></MenuLateral>
-      </DateProvider>
+        <MenuLateral screen="camera"></MenuLateral>
       <CameraCard streamUrl=""></CameraCard>
+      </DateProvider>
     </GeneralInfoBackground>
   );
 }

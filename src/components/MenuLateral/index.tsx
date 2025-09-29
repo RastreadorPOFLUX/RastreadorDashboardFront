@@ -11,47 +11,79 @@ import {
   Contribuitions,
 } from "./style";
 
-function MenuLateral() {
+interface MenuLateralProps {
+  screen?: string; // "general" | "electrical" | "control" | "camera"
+}
+
+function MenuLateral({ screen = "general" }: MenuLateralProps) {
   const { BeginDate, setBeginDate, EndDate, setEndDate } = useDateContext();
 
   const handleBeginDateChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    if (
-      new Date(event.target.value) <= new Date() &&
-      new Date(event.target.value) <= new Date(EndDate)
-    ) {
-      setBeginDate(event.target.value);
-      //Valor em milisegundos de 1 semana e correção de fuso horário
+    const newBeginDate = event.target.value;
+    const newBeginDateObj = new Date(newBeginDate);
+    const today = new Date();
+
+    if (screen === "electrical") {
+      // Para página electrical: sempre mantém BeginDate e EndDate iguais
+      if (newBeginDateObj <= today) {
+        setBeginDate(newBeginDate);
+        setEndDate(newBeginDate); // Mantém EndDate igual a BeginDate
+      }
+    } else {
+      // Lógica original para general e outras páginas
+      const endDateObj = new Date(EndDate);
       if (
-        new Date(EndDate).getTime() +
-          93600000 -
-          new Date(event.target.value).getTime() +
-          10800000 >
-        612000000
+        newBeginDateObj <= today &&
+        newBeginDateObj <= endDateObj
       ) {
-        let date = new Date(new Date(event.target.value).getTime() + 612000000);
-        setEndDate(formatDate(date));
+        setBeginDate(newBeginDate);
+        //Valor em milisegundos de 1 semana e correção de fuso horário
+        if (
+          endDateObj.getTime() +
+            93600000 -
+            newBeginDateObj.getTime() +
+            10800000 >
+          612000000
+        ) {
+          let date = new Date(newBeginDateObj.getTime() + 612000000);
+          setEndDate(formatDate(date));
+        }
       }
     }
   };
 
   const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (
-      new Date(event.target.value) <= new Date() &&
-      new Date(event.target.value) >= new Date(BeginDate)
-    ) {
-      setEndDate(event.target.value);
+    const newEndDate = event.target.value;
+    const newEndDateObj = new Date(newEndDate);
+    const today = new Date();
 
+    if (screen === "electrical") {
+      // Para página electrical: sempre mantém BeginDate e EndDate iguais
+      if (newEndDateObj <= today) {
+        setEndDate(newEndDate);
+        setBeginDate(newEndDate); // Mantém BeginDate igual a EndDate
+      }
+    } else {
+      // Lógica original para general e outras páginas
+      const beginDateObj = new Date(BeginDate);
       if (
-        new Date(event.target.value).getTime() +
-          93600000 -
-          new Date(BeginDate).getTime() +
-          10800000 >
-        612000000
+        newEndDateObj <= today &&
+        newEndDateObj >= beginDateObj
       ) {
-        let date = new Date(new Date(event.target.value).getTime() - 507600000);
-        setBeginDate(formatDate(date));
+        setEndDate(newEndDate);
+
+        if (
+          newEndDateObj.getTime() +
+            93600000 -
+            beginDateObj.getTime() +
+            10800000 >
+          612000000
+        ) {
+          let date = new Date(newEndDateObj.getTime() - 507600000);
+          setBeginDate(formatDate(date));
+        }
       }
     }
   };
@@ -125,19 +157,19 @@ function MenuLateral() {
             gap: "0.5rem",
           }}
         >
-          <DateInput
-            id="begin"
-            type="text"
-            value={BeginDate}
-            onChange={handleBeginDateChange}
-          ></DateInput>
-          Fim
-          <DateInput
-            id="end"
-            value={EndDate}
-            onChange={handleEndDateChange}
-          ></DateInput>
-        </div>
+         <DateInput
+           id="begin"
+           type="text"
+           value={BeginDate}
+           onChange={handleBeginDateChange}
+         ></DateInput>
+         Fim
+         <DateInput
+           id="end"
+           value={EndDate}
+           onChange={handleEndDateChange}
+         ></DateInput>
+      </div>
       </Text>
       <Contribuitions>
         @Guilherme N. Matera

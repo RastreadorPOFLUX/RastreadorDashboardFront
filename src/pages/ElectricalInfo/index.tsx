@@ -14,9 +14,8 @@ export default function ElectricalInfo() {
   return (
     <GeneralInfoBackground>
       <MenuSuperior></MenuSuperior>
-      <DateProvider>
-        <MenuLateral></MenuLateral>
-      </DateProvider>
+      <DateProvider screen="electrical">
+        <MenuLateral screen="electrical"></MenuLateral>
       <FirstRow>
         <SolarIrradiationCard></SolarIrradiationCard>
         <SolarIrradiationIndicatorCard></SolarIrradiationIndicatorCard>
@@ -24,6 +23,7 @@ export default function ElectricalInfo() {
       <SecondRow>
         <MotorPowerCard></MotorPowerCard>
       </SecondRow>
+      </DateProvider>
     </GeneralInfoBackground>
   );
 }

@@ -16,8 +16,7 @@ export default function ControlInfo() {
     <GeneralInfoBackground>
       <MenuSuperior></MenuSuperior>
       <DateProvider>
-        <MenuLateral></MenuLateral>
-      </DateProvider>
+        <MenuLateral screen="control"></MenuLateral>
       <FirstRow>
         <AnglesCard></AnglesCard>
         <PIDParametersCard></PIDParametersCard>
@@ -26,6 +25,7 @@ export default function ControlInfo() {
         <LensAngleIndicatorCard></LensAngleIndicatorCard>
         <ControlSignalsCard></ControlSignalsCard>
       </SecondRow>
+      </DateProvider>
     </GeneralInfoBackground>
   );
 }

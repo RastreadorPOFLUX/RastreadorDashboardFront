@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 // Definindo os tipos para o contexto
 interface DateContextType {
@@ -6,6 +6,7 @@ interface DateContextType {
   setBeginDate: React.Dispatch<React.SetStateAction<string>>;
   EndDate: string;
   setEndDate: React.Dispatch<React.SetStateAction<string>>;
+  screen?: string; // Adicionando screen ao contexto
 }
 
 // Criando o contexto com os tipos definidos
@@ -23,6 +24,7 @@ export const useDateContext = (): DateContextType => {
 // Componente que provê o Date para os componentes filhos
 interface DateProviderProps {
   children: ReactNode;
+  screen?: string; // Adicionando screen como prop
 }
 
 export const formatDate = (date: Date) => {
@@ -32,7 +34,7 @@ export const formatDate = (date: Date) => {
   return `${year}-${month}-${day}`;
 };
 
-export const DateProvider: React.FC<DateProviderProps> = ({ children }) => {
+export const DateProvider: React.FC<DateProviderProps> = ({ children, screen = "general" }) => {
   const today = new Date();
   const yesterday = new Date(today);
   yesterday.setDate(today.getDate() - 1);
@@ -40,12 +42,31 @@ export const DateProvider: React.FC<DateProviderProps> = ({ children }) => {
   const todayFormatted = formatDate(today);
   const yesterdayFormatted = formatDate(yesterday);
 
-  const [BeginDate, setBeginDate] = useState(yesterdayFormatted);
-  const [EndDate, setEndDate] = useState(todayFormatted);
+  // Estado inicial baseado na screen
+  const [BeginDate, setBeginDate] = useState(
+    screen === "electrical" ? todayFormatted : yesterdayFormatted
+  );
+  const [EndDate, setEndDate] = useState(
+    screen === "electrical" ? todayFormatted : todayFormatted
+  );
+
+  // Efeito para atualizar as datas quando a screen mudar
+  useEffect(() => {
+    if (screen === "electrical") {
+      // Para electrical: ambas as datas são a data atual
+      const currentDate = formatDate(new Date());
+      setBeginDate(currentDate);
+      setEndDate(currentDate);
+    } else {
+      // Para outras screens: comportamento padrão
+      setBeginDate(yesterdayFormatted);
+      setEndDate(todayFormatted);
+    }
+  }, [screen, todayFormatted, yesterdayFormatted]);
 
   return (
     <DateContext.Provider
-      value={{ BeginDate, setBeginDate, EndDate, setEndDate }}
+      value={{ BeginDate, setBeginDate, EndDate, setEndDate, screen }}
     >
       {children}
     </DateContext.Provider>
