@@ -11,7 +11,7 @@ interface WeatherData {
   time: string;
   timestamp: number;
   solarIrradianceReference: number;
-  solarIrradiancePyranometer?: number; // Adicionando propriedades faltantes
+  solarIrradiancePyranometer?: number; 
   solarIrradiancePhotodetector?: number;
   efficiency?: number;
 };

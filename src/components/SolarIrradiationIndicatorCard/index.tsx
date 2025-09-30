@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import getData from "../SolarIrradiationCard/Data";
+import { fetchHistoricalSolarIrradiance } from "../SolarIrradiationCard/Data";
 
 //Estilo
 import { StyledWrapper, Text, CircularProgress } from "./style";
@@ -7,11 +8,15 @@ import { useGaugeState } from "@mui/x-charts";
 
 const valueMax: number = 1500;
 
+interface WeatherData {
+  solarIrradiancePhotodetector: number;
+  solarIrradianceReference: number;
+  timestamp: number;
+};
+
 function GaugePointer() {
   const { valueAngle, outerRadius, innerRadius, cx, cy } = useGaugeState();
-  const [expectedValue, setExpectedValue] = useState<number>(
-    getData()[getData().length - 1].expected,
-  );
+  const [expectedValue, setExpectedValue] = useState<number>(0);
 
   if (valueAngle === null) {
     return null;
@@ -40,6 +45,8 @@ function SolarIrradiationIndicatorCard() {
   const [value, setValue] = useState<number>(
     getData()[getData().length - 1].value,
   );
+  const [data, setData] = useState<WeatherData[]>([]);
+  const [isPending, startTransition] = useTransition();
 
   const handleChangeValue = () => {
     setValue(value);
@@ -48,6 +55,26 @@ function SolarIrradiationIndicatorCard() {
   useEffect(() => {
     handleChangeValue();
   }, [value]);
+
+  useEffect(() => {
+  const fetchData = async () => {
+    const result = await fetchHistoricalSolarIrradiance();
+    const fetchedData = result.hourly.time.map((timeStr: string) => ({
+        solarIrradiancePhotodetector: result[0].hourly.direct_normal_irradiance,
+        solarIrradianceReference: result[0].hourly.direct_normal_irradiance[0], // Valor de referência (usando o valor real)
+        timestamp: new Date(timeStr).getTime()
+        }))
+        .filter((item: { timestamp: string | number | Date; }) => {
+          const itemDate = new Date(item.timestamp);
+          const now = new Date();
+          return itemDate <= now;
+        });
+            startTransition(() => {
+            setData(fetchedData);
+            });
+        };
+          fetchData();
+        }, []);
 
   return (
     <StyledWrapper
@@ -72,10 +99,10 @@ function SolarIrradiationIndicatorCard() {
         color={"var(--primaryText)"}
         $fontSize={"0.8rem"}
       >
-        Valor esperado: {getData()[getData().length - 1].expected} Wh/m²
+        Valor esperado: {data.length > 0 ? data[data.length - 1].solarIrradianceReference : null} Wh/m²
       </Text>
       <CircularProgress
-        value={value}
+        value={data.length > 0 ? data[data.length - 1].solarIrradiancePhotodetector : null}
         startAngle={0}
         endAngle={360}
         valueMin={0}
