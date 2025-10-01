@@ -21,7 +21,6 @@ export const StyledWrapper = styled(Wrapper)<Props>`
 
 export const Text = styled.h3<Props>`
   color: ${(props) => props.color};
-  text-align: center;
   font-size: ${(props) => props.$fontSize};
   font-family: var(--primaryFont);
   font-weight: 500;
@@ -31,14 +30,18 @@ export const Text = styled.h3<Props>`
   margin-top: ${(props) => props.$top};
 `;
 
-export const CircularProgress = styled(Gauge)(() => ({
+interface CircularProgressProps {
+  $valueColor?: string;
+}
+
+export const CircularProgress = styled(Gauge)<CircularProgressProps>(({ $valueColor }) => ({
   [`& .${gaugeClasses.valueText}`]: {
     fontSize: 40,
     fontFamily: "var(--primaryFont)",
-    transform: "translate(0px, -10px)",
+    transform: "translate(0px, -20px)",
   },
   [`& .${gaugeClasses.valueArc}`]: {
-    fill: "var(--primaryColor)",
+     fill: $valueColor || "var(--primaryColor)"
   },
   [`& .${gaugeClasses.referenceArc}`]: {},
 }));

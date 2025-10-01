@@ -90,7 +90,7 @@ function SolarIrradiationCard() {
         xKey: "time",
         yKey: "solarIrradiancePhotodetector",
         yName: "Fotodetector",
-        fill: "#C62E2E",
+        fill: "#DD702C",
         cornerRadius: 10,
         tooltip: {
           renderer: tooltipRenderer,
@@ -101,7 +101,7 @@ function SolarIrradiationCard() {
         xKey: "time",
         yKey: "solarIrradiancePyranometer",
         yName: "Piranômetro",
-        fill: "#DD702C",
+        fill: "#C62E2E",
         cornerRadius: 10,
         tooltip: {
           renderer: tooltipRenderer,

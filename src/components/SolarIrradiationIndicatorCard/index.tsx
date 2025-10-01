@@ -1,6 +1,5 @@
 import { useEffect, useState, useTransition } from "react";
-import getData from "../SolarIrradiationCard/Data";
-import { fetchHistoricalSolarIrradiance } from "../SolarIrradiationCard/Data";
+import { fetchLastSolarIrradiance } from "../SolarIrradiationIndicatorCard/Data";
 
 //Estilo
 import { StyledWrapper, Text, CircularProgress } from "./style";
@@ -9,32 +8,62 @@ import { useGaugeState } from "@mui/x-charts";
 const valueMax: number = 1500;
 
 interface WeatherData {
-  solarIrradiancePhotodetector: number;
   solarIrradianceReference: number;
+  solarIrradiancePhotodetector: number;
+  solarIrradiancePyranometer: number;
   timestamp: number;
 };
 
-function GaugePointer() {
-  const { valueAngle, outerRadius, innerRadius, cx, cy } = useGaugeState();
-  const [expectedValue, setExpectedValue] = useState<number>(0);
+// Componente único que renderiza múltiplos ponteiros
+function DualGaugePointer({ 
+  expectedValue1, 
+  expectedValue2, 
+  color1, 
+  color2 
+}: { 
+  expectedValue1: number;
+  expectedValue2: number;
+  color1: string;
+  color2: string;
+}) {
+  const { outerRadius, innerRadius, cx, cy } = useGaugeState();
 
-  if (valueAngle === null) {
-    return null;
-  }
+  // Calcular ângulos para ambos os valores
+  const targetAngle1 = (expectedValue1 * 360) / valueMax;
+  const targetAngle2 = (expectedValue2 * 360) / valueMax;
 
-  const start = {
-    x: cx + innerRadius * Math.sin((expectedValue * 2 * Math.PI) / valueMax),
-    y: cy - innerRadius * Math.cos((expectedValue * 2 * Math.PI) / valueMax),
+  // Primeiro ponteiro (Pyranometer)
+  const start1 = {
+    x: cx + innerRadius * Math.sin((targetAngle1 * Math.PI) / 180),
+    y: cy - innerRadius * Math.cos((targetAngle1 * Math.PI) / 180),
   };
-  const target = {
-    x: cx + outerRadius * Math.sin((expectedValue * 2 * Math.PI) / valueMax),
-    y: cy - outerRadius * Math.cos((expectedValue * 2 * Math.PI) / valueMax),
+  const target1 = {
+    x: cx + outerRadius * Math.sin((targetAngle1 * Math.PI) / 180),
+    y: cy - outerRadius * Math.cos((targetAngle1 * Math.PI) / 180),
   };
+
+  // Segundo ponteiro (Reference) - com offset para não sobrepor completamente
+  const start2 = {
+    x: cx + innerRadius * Math.sin((targetAngle2 * Math.PI) / 180),
+    y: cy - innerRadius * Math.cos((targetAngle2 * Math.PI) / 180),
+  };
+  const target2 = {
+    x: cx + outerRadius * Math.sin((targetAngle2 * Math.PI) / 180),
+    y: cy - outerRadius * Math.cos((targetAngle2 * Math.PI) / 180),
+  };
+  
   return (
     <g>
+      {/* Primeiro ponteiro (Pyranometer) */}
       <path
-        d={`M ${start.x} ${start.y} L ${target.x} ${target.y}`}
-        stroke="black"
+        d={`M ${start1.x} ${start1.y} L ${target1.x} ${target1.y}`}
+        stroke={color1}
+        strokeWidth={4}
+      />
+      {/* Segundo ponteiro (Reference) */}
+      <path
+        d={`M ${start2.x} ${start2.y} L ${target2.x} ${target2.y}`}
+        stroke={color2}
         strokeWidth={4}
       />
     </g>
@@ -42,39 +71,52 @@ function GaugePointer() {
 }
 
 function SolarIrradiationIndicatorCard() {
-  const [value, setValue] = useState<number>(
-    getData()[getData().length - 1].value,
-  );
   const [data, setData] = useState<WeatherData[]>([]);
   const [isPending, startTransition] = useTransition();
+  const [expectedValue, setExpectedValue] = useState<WeatherData | null>(null);
+  const [lastUpdate, setLastUpdate] = useState<string>("");
 
-  const handleChangeValue = () => {
-    setValue(value);
+  const fetchData = async () => {
+    try {
+      const result = await fetchLastSolarIrradiance();
+      const now = new Date();
+      const currentHour = now.getHours();
+      
+      const fetchedData = result.hourly.time
+        .map((timeStr: string, index: number) => ({
+          solarIrradianceReference: result.hourly.direct_normal_irradiance_instant[index],
+          solarIrradiancePhotodetector: result.hourly.direct_normal_irradiance_instant[index] * 0.6,
+          solarIrradiancePyranometer: result.hourly.direct_normal_irradiance_instant[index] * 0.8,
+          timestamp: new Date(timeStr).getTime()
+        }))
+        .filter((item: { timestamp: number }) => {
+          const itemDate = new Date(item.timestamp);
+          const itemHour = itemDate.getHours();
+          return itemHour === currentHour;
+        });
+
+      startTransition(() => {
+        setData(fetchedData);
+        if (fetchedData.length > 0) {
+          setExpectedValue(fetchedData[fetchedData.length - 1]);
+        } else {
+          setExpectedValue(null);
+        }
+        setLastUpdate(new Date().toLocaleTimeString());
+        console.log("Dados atualizados:", new Date().toLocaleTimeString(), fetchedData);
+      });
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+    }
   };
 
   useEffect(() => {
-    handleChangeValue();
-  }, [value]);
-
-  useEffect(() => {
-  const fetchData = async () => {
-    const result = await fetchHistoricalSolarIrradiance();
-    const fetchedData = result.hourly.time.map((timeStr: string) => ({
-        solarIrradiancePhotodetector: result[0].hourly.direct_normal_irradiance,
-        solarIrradianceReference: result[0].hourly.direct_normal_irradiance[0], // Valor de referência (usando o valor real)
-        timestamp: new Date(timeStr).getTime()
-        }))
-        .filter((item: { timestamp: string | number | Date; }) => {
-          const itemDate = new Date(item.timestamp);
-          const now = new Date();
-          return itemDate <= now;
-        });
-            startTransition(() => {
-            setData(fetchedData);
-            });
-        };
-          fetchData();
-        }, []);
+    fetchData();
+    const intervalId = setInterval(fetchData, 30000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <StyledWrapper
@@ -87,10 +129,19 @@ function SolarIrradiationIndicatorCard() {
       <Text
         width={"17rem"}
         $left={"2rem"}
-        $top={"10.975rem"}
+        $top={"9.975rem"}
         color={"var(--primaryText)"}
       >
         Wh/m²
+      </Text>
+      <Text
+        width={"12rem"}
+        $left={"4rem"}
+        $top={"11.975rem"}
+        color={"var(--primaryText)"}
+        $fontSize={"0.8rem"}
+      >
+        Piranômetro: {data.length > 0 ? data[data.length - 1].solarIrradiancePyranometer : 0} Wh/m²
       </Text>
       <Text
         width={"12rem"}
@@ -99,19 +150,32 @@ function SolarIrradiationIndicatorCard() {
         color={"var(--primaryText)"}
         $fontSize={"0.8rem"}
       >
-        Valor esperado: {data.length > 0 ? data[data.length - 1].solarIrradianceReference : null} Wh/m²
+        Referência: {data.length > 0 ? data[data.length - 1].solarIrradianceReference : 0} Wh/m²
       </Text>
+      <Text
+        width={"12rem"}
+        $left={"4rem"}
+        $top={"14rem"}
+        color={"var(--secondaryText)"}
+        $fontSize={"0.6rem"}
+      >
+      </Text>
+      
       <CircularProgress
-        value={data.length > 0 ? data[data.length - 1].solarIrradiancePhotodetector : null}
+        value={data.length > 0 ? data[data.length - 1].solarIrradiancePhotodetector : 0}
         startAngle={0}
         endAngle={360}
         valueMin={0}
         valueMax={valueMax}
         innerRadius="80%"
         outerRadius="100%"
-        cornerRadius="50%"
       >
-        <GaugePointer />
+        <DualGaugePointer 
+          expectedValue1={expectedValue ? expectedValue.solarIrradiancePyranometer : 0}
+          expectedValue2={expectedValue ? expectedValue.solarIrradianceReference : 0}
+          color1="#C62E2E"
+          color2="#c3c62e"
+        />
       </CircularProgress>
     </StyledWrapper>
   );
