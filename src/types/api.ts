@@ -24,6 +24,11 @@ export interface AnglesResponse{
   manual_setpoint?: number; // Setpoint manual em graus
 }
 
+export interface SensorsResponse{
+  pyranometer_power: number; 
+  photodetector_power: number; 
+}
+
 export interface ControlResponse{
   kp: number; // Ganho proporcional
   ki: number; // Ganho integral

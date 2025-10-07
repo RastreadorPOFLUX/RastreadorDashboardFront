@@ -160,7 +160,7 @@ function SolarIrradiationCard() {
           fontFamily: "Lato, sans-serif",
         },
         keys: ["solarIrradiancePyranometer", "solarIrradiancePhotodetector", "solarIrradianceReference"],
-        max: 1500,
+        max: 2000,
         gridLine: {
           enabled: false,
         },

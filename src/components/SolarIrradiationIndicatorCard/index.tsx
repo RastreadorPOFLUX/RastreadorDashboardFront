@@ -5,7 +5,10 @@ import { fetchLastSolarIrradiance } from "../SolarIrradiationIndicatorCard/Data"
 import { StyledWrapper, Text, CircularProgress } from "./style";
 import { useGaugeState } from "@mui/x-charts";
 
-const valueMax: number = 1500;
+// Hooks 
+import { useSensorsData } from "../../hooks/useSensors";
+
+const valueMax: number = 2000;
 
 interface WeatherData {
   solarIrradianceReference: number;
@@ -75,6 +78,7 @@ function SolarIrradiationIndicatorCard() {
   const [isPending, startTransition] = useTransition();
   const [expectedValue, setExpectedValue] = useState<WeatherData | null>(null);
   const [lastUpdate, setLastUpdate] = useState<string>("");
+  const {sensors, error, loading} = useSensorsData();
 
   const fetchData = async () => {
     try {
@@ -85,8 +89,8 @@ function SolarIrradiationIndicatorCard() {
       const fetchedData = result.hourly.time
         .map((timeStr: string, index: number) => ({
           solarIrradianceReference: result.hourly.direct_normal_irradiance_instant[index],
-          solarIrradiancePhotodetector: result.hourly.direct_normal_irradiance_instant[index] * 0.6,
-          solarIrradiancePyranometer: result.hourly.direct_normal_irradiance_instant[index] * 0.8,
+          solarIrradiancePhotodetector: sensors?.pyranometer_power ?? 0,
+          solarIrradiancePyranometer: sensors?.photodetector_power ?? 0,
           timestamp: new Date(timeStr).getTime()
         }))
         .filter((item: { timestamp: number }) => {
@@ -141,7 +145,7 @@ function SolarIrradiationIndicatorCard() {
         color={"var(--primaryText)"}
         $fontSize={"0.8rem"}
       >
-        Piranômetro: {data.length > 0 ? data[data.length - 1].solarIrradiancePyranometer : 0} Wh/m²
+        Piranômetro: {expectedValue ? expectedValue.solarIrradiancePyranometer : 0} Wh/m²
       </Text>
       <Text
         width={"12rem"}
@@ -162,7 +166,7 @@ function SolarIrradiationIndicatorCard() {
       </Text>
       
       <CircularProgress
-        value={data.length > 0 ? data[data.length - 1].solarIrradiancePhotodetector : 0}
+        value={expectedValue ? expectedValue.solarIrradiancePhotodetector : 0}
         startAngle={0}
         endAngle={360}
         valueMin={0}
