@@ -4,6 +4,7 @@ import MenuLateral from "../../components/MenuLateral/index";
 import SolarIrradiationCard from "../../components/SolarIrradiationCard";
 import SolarIrradiationIndicatorCard from "../../components/SolarIrradiationIndicatorCard";
 import MotorPowerCard from "../../components/MotorPowerCard";
+import FloodingIndicatorCard from "../../components/FloodingIndicatorCard";
 import { DateProvider } from "../../components/MenuLateral/DateContext";
 
 // Estilo
@@ -22,6 +23,7 @@ export default function ElectricalInfo() {
       </FirstRow>
       <SecondRow>
         <MotorPowerCard></MotorPowerCard>
+        <FloodingIndicatorCard></FloodingIndicatorCard>
       </SecondRow>
       </DateProvider>
     </GeneralInfoBackground>

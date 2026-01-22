@@ -34,7 +34,7 @@ function DataCard() {
     <StyledWrapper
       width={"35%"}
       height={"14%"}
-      $left={"62%"}
+      $left={"25%"}
       $top={"38.5%"}
       $backgroundcolor="var(--backgroundCards)"
     >

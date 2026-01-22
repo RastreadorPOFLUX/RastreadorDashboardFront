@@ -17,7 +17,7 @@ function MotorPowerCard() {
 
   return (
     <StyledWrapper
-      width={"72%"}
+      width={"45%"}
       height={"20%"}
       $left={"25%"}
       $top={"78%"}

@@ -126,8 +126,8 @@ function SolarIrradiationIndicatorCard() {
     <StyledWrapper
       width={"20rem"}
       height={"20rem"}
-      $left={"74%"}
-      $top={"25%"}
+      $left={"73%"}
+      $top={"22%"}
       $backgroundcolor="var(--backgroundCards)"
     >
       <Text

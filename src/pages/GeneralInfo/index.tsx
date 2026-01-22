@@ -5,6 +5,7 @@ import ClimateCard from "./../../components/ClimateCard/index";
 import DataCard from "../../components/DataCard";
 import OperationModeCard from "../../components/OperationModeCard";
 import CloudinessCard from "../../components/CloudinessCard";
+import TemperatureCard from "../../components/TemperatureCard";
 import { DateProvider } from "../../components/MenuLateral/DateContext";
 
 // Estilo
@@ -20,6 +21,7 @@ export default function GeneralInfo() {
           <OperationModeCard></OperationModeCard>
           <ClimateCard></ClimateCard>
           <DataCard></DataCard>
+          <TemperatureCard></TemperatureCard>
         </FirstRow>
         <SecondRow>
           <CloudinessCard></CloudinessCard>

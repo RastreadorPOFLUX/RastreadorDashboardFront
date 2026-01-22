@@ -121,7 +121,7 @@ useEffect(() => {
   return (
     <StyledWrapper
       width={"35%"}
-      height={"31.5%"}
+      height={"15%"}
       $left={"25%"}
       $top={"21%"}
       $backgroundcolor="var(--backgroundCards)"
@@ -144,8 +144,6 @@ useEffect(() => {
         >
           <Text color={"var(--white)"}>Manual</Text>
         </Button>
-      </Row>
-      <Row>
         <Button
           onClick={handleClickButtonHalt}
           color={isActiveHalt ? "var(--primaryColor)" : "var(--secondaryColor)"}
