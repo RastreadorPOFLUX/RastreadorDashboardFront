@@ -1,9 +1,8 @@
 import axios from "axios";
+import { lat, long } from "../../constants";
 
 export const fetchHistoricalCloudiness = async () => {
 
-  const lat: number = -22.51;
-  const long: number = -43.22;
   let beginDate = (document.getElementById("begin") as HTMLInputElement).value;
   let endDate = (document.getElementById("end") as HTMLInputElement).value;
 
