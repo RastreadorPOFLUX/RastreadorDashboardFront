@@ -25,29 +25,29 @@ function CloudinessCard() {
       const fetchedData = result.hourly.time.map((timeStr: string, index: string | number) => ({
         date: timeStr.split("T")[0],
         cloudiness: result.hourly.cloud_cover[index],
-        hour: timeStr.split("T")[1].slice(0,2) + "h",
-        time: timeStr.split("T")[0].slice(8,10) + 
-              timeStr.split("T")[0].slice(4,8) + 
-              timeStr.split("T")[0].slice(0,4) + "-" +
-              timeStr.split("T")[1].slice(0,2) + "h",
+        hour: timeStr.split("T")[1].slice(0, 2) + "h",
+        time: timeStr.split("T")[0].slice(8, 10) +
+          timeStr.split("T")[0].slice(4, 8) +
+          timeStr.split("T")[0].slice(0, 4) + "-" +
+          timeStr.split("T")[1].slice(0, 2) + "h",
         timestamp: new Date(timeStr).getTime()
-        }))
+      }))
         .filter((item: { timestamp: string | number | Date; }) => {
-        const itemDate = new Date(item.timestamp);
-        const now = new Date();
-        return itemDate <= now;
-      });
+          const itemDate = new Date(item.timestamp);
+          const now = new Date();
+          return itemDate <= now;
+        });
       startTransition(() => {
-      setData(fetchedData);
+        setData(fetchedData);
       });
     };
     fetchData();
   }, [BeginDate, EndDate]);
 
-  const titleRange =
-    Data.length > 0
-      ? `${Data[0].time.slice(0, 10)} - ${Data[Data.length - 1].time.slice(0, 10)}`
-      : "Carregando...";
+  let titleRange = "";
+  if (Data.length > 0) {
+    titleRange = `${Data[0].time.slice(0, 10).replaceAll("-", "/")} - ${Data[Data.length - 1].time.slice(0, 10).replaceAll("-", "/")}`;
+  }
 
   const options: AgChartOptions = {
     data: Data,

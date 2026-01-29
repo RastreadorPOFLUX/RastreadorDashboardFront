@@ -174,8 +174,6 @@ function MenuLateral({ screen = "general" }: MenuLateralProps) {
       <Contribuitions>
         @Guilherme N. Matera
         <br />
-        @Mateus Lima
-        <br />
         @Vinicius F. Neves
       </Contribuitions>
     </Wrapper>

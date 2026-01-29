@@ -11,7 +11,7 @@ interface WeatherData {
   time: string;
   timestamp: number;
   solarIrradianceReference: number;
-  solarIrradiancePyranometer?: number; 
+  solarIrradiancePyranometer?: number;
   solarIrradiancePhotodetector?: number;
   efficiency?: number;
 };
@@ -23,40 +23,40 @@ function SolarIrradiationCard() {
   const [isPending, startTransition] = useTransition();
   const [data, setData] = useState<WeatherData[]>([]);
   const { BeginDate, EndDate } = useDateContext();
-  
+
   useEffect(() => {
-  const fetchData = async () => {
-    const result = await fetchHistoricalSolarIrradiance();
-    const fetchedData = result.hourly.time.map((timeStr: string, index: number) => ({
+    const fetchData = async () => {
+      const result = await fetchHistoricalSolarIrradiance();
+      const fetchedData = result.hourly.time.map((timeStr: string, index: number) => ({
         date: timeStr.split("T")[0],
         solarIrradianceUnit: result.hourly_units.direct_normal_irradiance,
-        hour: timeStr.split("T")[1].slice(0,2) + "h",
-        time: timeStr.split("T")[0].slice(8,10) + 
-              timeStr.split("T")[0].slice(4,8) + 
-              timeStr.split("T")[0].slice(0,4) + "-" +
-              timeStr.split("T")[1].slice(0,2) + "h",
+        hour: timeStr.split("T")[1].slice(0, 2) + "h",
+        time: timeStr.split("T")[0].slice(8, 10) +
+          timeStr.split("T")[0].slice(4, 8) +
+          timeStr.split("T")[0].slice(0, 4) + "-" +
+          timeStr.split("T")[1].slice(0, 2) + "h",
         // Adicionando os dados que as séries precisam
         solarIrradianceReference: result.hourly.direct_normal_irradiance[index], // Valor de referência (usando o valor real)
         solarIrradiancePyranometer: result.hourly.direct_normal_irradiance[index] * 0.8, // Simulação do piranômetro (80% do valor)
         solarIrradiancePhotodetector: result.hourly.direct_normal_irradiance[index] * 0.6, // Simulação do fotodetector (60% do valor)
         efficiency: Math.min(100, (result.hourly.direct_normal_irradiance[index] * 0.6 / (result.hourly.direct_normal_irradiance[index] * 0.8)) * 100), // Eficiência calculada
         timestamp: new Date(timeStr).getTime()
-        }))
+      }))
         .filter((item: { timestamp: string | number | Date; }) => {
           const itemDate = new Date(item.timestamp);
           const now = new Date();
           return itemDate <= now;
         });
-            startTransition(() => {
-            setData(fetchedData);
-            });
-        };
-          fetchData();
-        }, [BeginDate, EndDate]);
-      
+      startTransition(() => {
+        setData(fetchedData);
+      });
+    };
+    fetchData();
+  }, [BeginDate, EndDate]);
+
   const titleRange =
     data.length > 0
-      ? `${data[0].time.slice(0, 10)}`
+      ? `${data[0].time.slice(0, 10).replaceAll("-", "/")}`
       : "Carregando...";
 
   // Tooltip renderer melhorado
@@ -85,7 +85,7 @@ function SolarIrradiationCard() {
       color: "#000000",
     },
     series: [
-        {
+      {
         type: "bar",
         xKey: "time",
         yKey: "solarIrradiancePhotodetector",
@@ -121,7 +121,7 @@ function SolarIrradiationCard() {
       {
         type: "line",
         xKey: "time",
-        yKey: "efficiency", 
+        yKey: "efficiency",
         yName: "Eficiência",
         stroke: "black",
         marker: {
@@ -172,7 +172,7 @@ function SolarIrradiationCard() {
           text: "(%)",
           fontFamily: "Lato, sans-serif",
         },
-        keys: ["efficiency"], 
+        keys: ["efficiency"],
         max: 100,
         gridLine: {
           enabled: false,

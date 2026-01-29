@@ -10,9 +10,7 @@ import {
   AdjustButton,
   ColumnsContainer,
   Column,
-  ParamsSection,
-  BracketColumn,
-  StyledBracket,
+  ParamsSection
 } from "./style";
 
 import { usePidData } from "../../hooks/usePid";
@@ -139,10 +137,6 @@ const PIDParametersCard = () => {
                 </ParamsSection>
               </Column>
 
-              <BracketColumn>
-                <StyledBracket />
-              </BracketColumn>
-
               <Column className="button-column">
                 <AdjustButton
                   onClick={handleAdjust}
@@ -160,7 +154,7 @@ const PIDParametersCard = () => {
               <React.Fragment key={param.label}>
                 <Line>
                   <StyledWrapper
-                    width="15%"
+                    width="20%"
                     height="2rem"
                     $backgroundcolor="var(--secondaryColor)"
                   >

@@ -49,16 +49,14 @@ export const StyledWrapper = styled(Wrapper) <Props>`
 
 export const Text = styled.h3<Props>`
   color: var(--primaryText);
-  text-align: left;
+  text-align: center;
   font-size: clamp(1rem, 2vw, 1.4rem);
   font-family: var(--primaryFont);
   font-weight: 500;
   margin: 0;
   line-height: 1.2;
   position: relative;
-  width: ${(props) => props.width};
-  left: ${(props) => props.$left};
-  margin-top: ${(props) => props.$top};
+  width: 100%;
 `;
 
 export const TemperatureValue = styled.span<TemperatureProps>`
@@ -73,7 +71,6 @@ export const TemperatureValue = styled.span<TemperatureProps>`
 
 export const TextWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: left;
+  justify-content: center;
+  align-items: center;
 `;
-;

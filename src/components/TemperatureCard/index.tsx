@@ -1,6 +1,6 @@
 
 //Estilo
-import { StyledWrapper, Text, TemperatureValue } from "./style";
+import { StyledWrapper, Text, TextWrapper, TemperatureValue } from "./style";
 
 
 function TemperatureCard() {
@@ -14,9 +14,11 @@ function TemperatureCard() {
       $top={"38.5%"}
       $backgroundcolor="var(--backgroundCards)"
     >
-      <Text width={"80%"} $left={"10%"}>
-        Temperatura do Rastreador: <TemperatureValue $temperature={value}>{value} °C</TemperatureValue>
-      </Text>
+      <TextWrapper>
+        <Text width="100%">
+          Temperatura do Rastreador: <TemperatureValue $temperature={value}>{value} °C</TemperatureValue>
+        </Text>
+      </TextWrapper>
 
     </StyledWrapper>
   );

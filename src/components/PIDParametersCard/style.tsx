@@ -144,18 +144,4 @@ export const ParamsSection = styled.div`
   width: 100%;
 `;
 
-export const BracketColumn = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  padding-right: 0.5rem;
-`;
 
-export const StyledBracket = styled.div`
-  width: 1.5rem;
-  height: 100%;
-  border-right: 1px solid var(--primaryText);
-  border-top-right-radius: 50% 10%;
-  border-bottom-right-radius: 50% 10%;
-`;
