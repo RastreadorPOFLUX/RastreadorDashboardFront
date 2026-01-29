@@ -75,7 +75,7 @@ const AngleDisplay: React.FC<Angles> = ({
   const centerY = 200;
 
   const toXY = (angleDeg: number, radius: number) => {
-    const angleRad = (Math.PI * (angleDeg+90)) / 180;
+    const angleRad = (Math.PI * (angleDeg + 90)) / 180;
     const x = centerX + radius * Math.cos(Math.PI - angleRad);
     const y = centerY - radius * Math.sin(angleRad);
     return { x, y };
@@ -188,7 +188,7 @@ function AnglesCard() {
 
   return (
     <StyledWrapper
-      width={"35%"}
+      width={"40%"}
       height={"38%"}
       $left={"25%"}
       $top={"21%"}

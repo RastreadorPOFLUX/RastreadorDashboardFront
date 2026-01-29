@@ -22,7 +22,7 @@ export const Divider = styled.div`
   position: relative;
 `;
 
-export const Pages = styled.h3`
+export const Screens = styled.h3`
   color: ${(props) => props.color};
   margin-left: 10%;
   text-align: left;

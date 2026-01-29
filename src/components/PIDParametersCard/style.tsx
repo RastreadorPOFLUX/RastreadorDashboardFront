@@ -9,7 +9,7 @@ interface Props {
   $top?: string;
 }
 
-export const StyledWrapper = styled(Wrapper)<Props>`
+export const StyledWrapper = styled(Wrapper) <Props>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   left: ${(props) => props.$left};
@@ -80,4 +80,82 @@ export const StyledInput = styled.input`
 
   /* Remove o spinner no Firefox */
   -moz-appearance: textfield;
+`;
+
+export const AdjustButton = styled.button`
+  background-color: var(--acceptColor);
+  color: var(--white);
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  margin-top: 50%;
+  font-family: var(--primaryFont);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  height: fit-content;
+
+  &:hover {
+    background-color: #2d8e47;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  &:disabled {
+    background-color: var(--secondaryColor);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+`;
+
+export const ColumnsContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  width: 100%;
+`;
+
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+
+  &.button-column {
+    flex: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+`;
+
+export const ParamsSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+`;
+
+export const BracketColumn = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding-right: 0.5rem;
+`;
+
+export const StyledBracket = styled.div`
+  width: 1.5rem;
+  height: 100%;
+  border-right: 1px solid var(--primaryText);
+  border-top-right-radius: 50% 10%;
+  border-bottom-right-radius: 50% 10%;
 `;

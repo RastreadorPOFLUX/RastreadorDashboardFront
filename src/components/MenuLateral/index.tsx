@@ -4,7 +4,7 @@ import { formatDate, useDateContext } from "./DateContext";
 // Estilo
 import {
   Wrapper,
-  Pages,
+  Screens,
   Divider,
   Text,
   DateInput,
@@ -42,9 +42,9 @@ function MenuLateral({ screen = "general" }: MenuLateralProps) {
         //Valor em milisegundos de 1 semana e correção de fuso horário
         if (
           endDateObj.getTime() +
-            93600000 -
-            newBeginDateObj.getTime() +
-            10800000 >
+          93600000 -
+          newBeginDateObj.getTime() +
+          10800000 >
           612000000
         ) {
           let date = new Date(newBeginDateObj.getTime() + 612000000);
@@ -76,9 +76,9 @@ function MenuLateral({ screen = "general" }: MenuLateralProps) {
 
         if (
           newEndDateObj.getTime() +
-            93600000 -
-            beginDateObj.getTime() +
-            10800000 >
+          93600000 -
+          beginDateObj.getTime() +
+          10800000 >
           612000000
         ) {
           let date = new Date(newEndDateObj.getTime() - 507600000);
@@ -133,19 +133,19 @@ function MenuLateral({ screen = "general" }: MenuLateralProps) {
   return (
     <Wrapper>
       <Link to="/">
-        <Pages color={getColor(location.pathname)[0]}>Informações Gerais</Pages>
+        <Screens color={getColor(location.pathname)[0]}>Informações Gerais</Screens>
       </Link>
       <Divider></Divider>
       <Link to="/electricalInfo">
-        <Pages color={getColor(location.pathname)[1]}> Elétrica </Pages>
+        <Screens color={getColor(location.pathname)[1]}> Elétrica </Screens>
       </Link>
       <Divider></Divider>
       <Link to="/controlInfo">
-        <Pages color={getColor(location.pathname)[2]}> Controlador </Pages>
+        <Screens color={getColor(location.pathname)[2]}> Controlador </Screens>
       </Link>
       <Divider></Divider>
       <Link to="/cameraDisplay">
-        <Pages color={getColor(location.pathname)[3]}> Câmera </Pages>
+        <Screens color={getColor(location.pathname)[3]}> Câmera </Screens>
       </Link>
       <Text>
         Início
@@ -157,19 +157,19 @@ function MenuLateral({ screen = "general" }: MenuLateralProps) {
             gap: "0.5rem",
           }}
         >
-         <DateInput
-           id="begin"
-           type="text"
-           value={BeginDate}
-           onChange={handleBeginDateChange}
-         ></DateInput>
-         Fim
-         <DateInput
-           id="end"
-           value={EndDate}
-           onChange={handleEndDateChange}
-         ></DateInput>
-      </div>
+          <DateInput
+            id="begin"
+            type="text"
+            value={BeginDate}
+            onChange={handleBeginDateChange}
+          ></DateInput>
+          Fim
+          <DateInput
+            id="end"
+            value={EndDate}
+            onChange={handleEndDateChange}
+          ></DateInput>
+        </div>
       </Text>
       <Contribuitions>
         @Guilherme N. Matera

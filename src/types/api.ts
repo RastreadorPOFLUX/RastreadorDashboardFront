@@ -18,29 +18,29 @@ export interface ModeRequest {
   adjust: RTCAdjustRequest;
 }
 
-export interface AnglesResponse{
+export interface AnglesResponse {
   sun_position?: number; // Posição do sol em graus
   lens_angle: number; // Ângulo atual da lente em graus
   manual_setpoint?: number; // Setpoint manual em graus
 }
 
-export interface SensorsResponse{
-  pyranometer_power: number; 
-  photodetector_power: number; 
+export interface SensorsResponse {
+  pyranometer_power: number;
+  photodetector_power: number;
 }
 
-export interface ControlResponse{
+export interface ControlResponse {
   kp: number; // Ganho proporcional
   ki: number; // Ganho integral
   kd: number; // Ganho derivativo
-  p?: number; // Saída proporcional
-  i?: number; // Saída integral
-  d?: number; // Saída derivativa
-  error?: number; // Erro atual do sistema
-  output?: number; // Saída total do PID
+  p: number; // Saída proporcional
+  i: number; // Saída integral
+  d: number; // Saída derivativa
+  error: number; // Erro atual do sistema
+  output: number; // Saída total do PID
 }
 
-export interface PidResponse{
+export interface PidResponse {
   adjust: PidAdjustRequest
 }
 
