@@ -21,19 +21,9 @@ function ClimateCard() {
   const [isPending, startTransition] = useTransition();
   const [Data, setData] = useState<WeatherData>();
   const [Icon, setIcon] = useState<WeatherData>();
-  const [time, setTime] = useState(new Date().toLocaleTimeString("pt-BR"));
 
-  useEffect(() => {
-    const Time = () => {
-      const event = new Date();
-      setTime(event.toLocaleTimeString("pt-BR"));
-    };
-    const intervalId = setInterval(Time, 1000);
 
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,9 +53,6 @@ function ClimateCard() {
           {Data?.name},{" "}
           {Data?.main.temp != null ? Math.trunc(Data?.main.temp) : "-"}
           °C
-        </Text>
-        <Text width={"20%"} $left={"30%"} $top={"4%"}>
-          {time}
         </Text>
       </TextWrapper>
       <WeatherIcon>

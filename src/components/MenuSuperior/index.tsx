@@ -12,6 +12,7 @@ import {
 
 // Imagens
 import lifLogo from "./../../assets/lif-logo.svg";
+import { useEffect, useState } from "react";
 
 const Online = () => (
   <svg
@@ -44,6 +45,20 @@ const Offline = () => (
 function MenuSuperior() {
   // Lógica para ícone de conexão de internet
   const { isConnected } = useCheckConnection();
+  const [time, setTime] = useState(new Date().toLocaleTimeString("pt-BR"));
+
+
+    useEffect(() => {
+      const Time = () => {
+        const event = new Date();
+        setTime(event.toLocaleTimeString("pt-BR"));
+      };
+      const intervalId = setInterval(Time, 1000);
+  
+      return () => {
+        clearInterval(intervalId);
+      };
+    }, []);
 
   // Lógica de Data
   const date = new Date();
@@ -70,7 +85,10 @@ function MenuSuperior() {
       <Image src={lifLogo} />
       <Title>Rastreador POF LUX</Title>
       <DateDisplay>
-        {year}, {day} de {month}
+        {year}, {day} de {month} 
+      </DateDisplay>
+      <DateDisplay>
+        {time}
       </DateDisplay>
       <TrackerConnectionIcon>
         {isConnected ? (
