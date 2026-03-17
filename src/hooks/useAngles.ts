@@ -48,6 +48,7 @@ export const useAnglesData = () => {
 
   // Buscar ao montar
   useEffect(() => {
+    
     fetchAngles();
     fetchLensAngle();
   }, [fetchAngles]);

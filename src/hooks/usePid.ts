@@ -36,7 +36,7 @@ export const usePidData = () => {
       setError(null);
       try {
         await pidApi.setCurrentParameters(adjust);
-        setPid(adjust);
+        await fetchPid();
       } catch (err) {
         setError('Erro ao alteraros parâmetros PID');
         console.error('Erro ao alterar parâmetros PID:', err);

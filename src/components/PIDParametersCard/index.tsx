@@ -166,7 +166,7 @@ const PIDParametersCard = () => {
                     height="2rem"
                     $backgroundcolor="var(--backgroundColor)"
                   >
-                    <Text color="var(--primaryText)">{param.value.toFixed(2)}</Text>
+                    <Text color="var(--primaryText)">{Number.isFinite(param.value) ? param.value.toFixed(2) : "0.00"}</Text>
                   </StyledWrapper>
                 </Line>
                 {index < readOnlyParams.length - 1 && <Divider />}
