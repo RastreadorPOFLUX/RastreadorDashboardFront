@@ -10,6 +10,8 @@ import {
 } from "./style";
 import { useOperationMode } from '../../hooks/useOperationMode';
 
+// WebSocket do backend FastAPI para dados em tempo real
+const WS_BACKEND_URL = "ws://localhost:8000/ws/live";
 
 function OperationModeCard() {
   const [isActivedAuto, setActivatedAuto] = useState(() => {
@@ -112,6 +114,38 @@ function OperationModeCard() {
       setMode(savedMode as 'auto' | 'manual' | 'halt' | 'presentation', manualSetpoint, { rtc: Math.floor(Date.now() / 1000) });
     }
   }, [isLoading, isOnline]);
+
+  // --- WebSocket para modo de operação em tempo real ---
+  useEffect(() => {
+    const ws = new WebSocket(WS_BACKEND_URL);
+    ws.onopen = () => {
+      console.log("WebSocket conectado ao backend para modo de operação");
+    };
+    ws.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (data.system_status && data.system_status.mode) {
+          setActivatedAuto(data.system_status.mode === "auto");
+          setActivatedManual(data.system_status.mode === "manual");
+          setActivatedHalt(data.system_status.mode === "halt");
+          setActivatedPresentation(data.system_status.mode === "presentation");
+          localStorage.setItem("operation_mode", data.system_status.mode);
+        }
+        if (data.system_status && data.system_status.manual_setpoint !== undefined) {
+          setManualSetpoint(data.system_status.manual_setpoint);
+          localStorage.setItem("manual_setpoint", String(data.system_status.manual_setpoint));
+        }
+      } catch (e) {
+        // Ignora mensagens não JSON
+      }
+    };
+    ws.onerror = (err) => {
+      console.error("Erro no WebSocket do backend:", err);
+    };
+    return () => {
+      ws.close();
+    };
+  }, []);
 
   return (
     <StyledWrapper

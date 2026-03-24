@@ -112,7 +112,7 @@ const PIDParametersCard = () => {
                         >
                           <StyledInput
                             type="text"
-                            value={param.value.toFixed(2)}
+                            value={param.value.toFixed(3)}
                             onKeyDown={(e) => {
                               if (e.key === ",") {
                                 e.preventDefault();
@@ -166,7 +166,7 @@ const PIDParametersCard = () => {
                     height="2rem"
                     $backgroundcolor="var(--backgroundColor)"
                   >
-                    <Text color="var(--primaryText)">{Number.isFinite(param.value) ? param.value.toFixed(2) : "0.00"}</Text>
+                    <Text color="var(--primaryText)">{Number.isFinite(param.value) ? param.value.toFixed(3) : "0.000"}</Text>
                   </StyledWrapper>
                 </Line>
                 {index < readOnlyParams.length - 1 && <Divider />}

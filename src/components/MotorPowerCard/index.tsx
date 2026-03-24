@@ -13,7 +13,8 @@ interface Motor {
 
 function MotorPowerCard() {
   const { power, loading, error } = useMotorData();
-  const progress: number = power ? power.power : 0;
+  // Garantir que progress é sempre um número entre 0 e 100
+  const progress: number = Math.max(0, Math.min(100, Number(power && !isNaN(power.power) ? power.power : 0)));
 
   return (
     <StyledWrapper
