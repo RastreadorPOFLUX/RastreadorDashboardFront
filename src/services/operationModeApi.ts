@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { OperationMode, ModeRequest, RTCAdjustRequest, SystemStatusResponse } from '../types/api';
+import { OperationMode, ModeRequest, RTCAdjustRequest, } from '../types/api';
 
 // Configuração base da API
 const API_BASE_URL = 'http://localhost:8000';
@@ -17,7 +17,7 @@ export const operationModeApi = {
 
     // Obter modo atual do sistema
   getCurrentMode: async (): Promise<OperationMode> => {
-    const response = await api.get<SystemStatusResponse>('/api/system-status');
+    const response = await api.get<ModeRequest>('/api/mode');
     return response.data.mode;
   },
 
