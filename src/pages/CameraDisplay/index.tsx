@@ -7,13 +7,16 @@ import CameraCard from "../../components/CameraCard";
 import { GeneralInfoBackground } from "./style";
 import { DateProvider } from "../../components/MenuLateral/DateContext";
 
+// Constantes
+import { CAMERA_STREAM_URL } from "../../constants";
+
 export default function CameraDisplay() {
   return (
     <GeneralInfoBackground>
       <MenuSuperior></MenuSuperior>
       <DateProvider>
         <MenuLateral screen="camera"></MenuLateral>
-      <CameraCard streamUrl=""></CameraCard>
+        <CameraCard streamUrl={CAMERA_STREAM_URL}></CameraCard>
       </DateProvider>
     </GeneralInfoBackground>
   );
