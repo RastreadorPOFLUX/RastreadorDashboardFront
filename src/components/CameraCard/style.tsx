@@ -30,9 +30,9 @@ export const Stream = styled.video<Props>`
 `;
 
 export const StatusBadge = styled.span<{ $live: boolean }>`
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
+  position: fixed;
+  top: 2.5rem;
+  right: 3rem;
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
   font-size: 0.75rem;
