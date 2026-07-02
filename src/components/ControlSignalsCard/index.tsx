@@ -1,32 +1,48 @@
-//Estilo
 import { AgCharts } from "ag-charts-react";
-import { useState } from "react";
-import getData from "./Data";
+import { useMemo } from "react";
 import { StyledWrapper } from "./style";
 import { AgChartOptions } from "ag-charts-enterprise";
+import { useControlSignalsHistory } from "../../hooks/useControlSignals";
+
+interface ChartPoint {
+  hour: string;
+  controle: number;
+  erro: number;
+  output: number;
+}
 
 function ControlSignalsCard() {
-  const intervalTime =
-    getData()[0].day +
-    "/" +
-    getData()[0].month +
-    "/" +
-    getData()[0].year +
-    " - " +
-    getData()[getData().length - 1].day +
-    "/" +
-    getData()[getData().length - 1].month +
-    "/" +
-    getData()[getData().length - 1].year;
+  const { history, isLoading, error } = useControlSignalsHistory();
 
-  const [options, setOptions] = useState<AgChartOptions>({
+  const chartData: ChartPoint[] = useMemo(
+    () =>
+      history.map((record) => {
+        const date = new Date(record.timestamp * 1000);
+        return {
+          hour: `${date.getHours()}h${date.getMinutes().toString().padStart(2, "0")}`,
+          controle: record.p + record.i + record.d,
+          erro: record.erro,
+          output: record.saida,
+        };
+      }),
+    [history]
+  );
+
+  const intervalTime =
+    chartData.length > 0
+      ? `${chartData[0].hour} - ${chartData[chartData.length - 1].hour}`
+      : isLoading
+        ? "Carregando..."
+        : "Sem dados";
+
+  const options: AgChartOptions = {
     title: {
       text: "Sinais de Controle - (" + intervalTime + ")",
       fontSize: 20,
       fontFamily: "Lato, sans-serif",
       color: "#000000",
     },
-    data: getData(),
+    data: chartData,
     background: {
       visible: false,
     },
@@ -83,7 +99,7 @@ function ControlSignalsCard() {
         },
       },
     ],
-  });
+  };
 
   return (
     <StyledWrapper
@@ -93,6 +109,9 @@ function ControlSignalsCard() {
       $top={"62%"}
       $backgroundcolor="var(--backgroundCards)"
     >
+      {error && (
+        <span style={{ color: "red", fontSize: "0.75rem" }}>{error}</span>
+      )}
       <AgCharts options={options} style={{ height: "100%" }} />
     </StyledWrapper>
   );

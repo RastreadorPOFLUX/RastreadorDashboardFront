@@ -57,6 +57,16 @@ export interface SystemStatusResponse {
   is_online: boolean;
 }
 
+export interface ControlSignalRecord {
+  id: number;
+  erro: number; // Erro registrado no momento da leitura
+  saida: number; // Saída do controlador PID
+  p: number; // Componente proporcional
+  i: number; // Componente integral
+  d: number; // Componente derivativa
+  timestamp: number; // Timestamp Unix da leitura em segundos
+}
+
 export interface MotorResponse {
   power: number; // Potência do motor em porcentagem (0 a 100)
   raw_value: number; // Valor bruto do PWM (0 a 255)
