@@ -14,8 +14,15 @@ const api = axios.create({
 
 // Serviços específicos para o histórico de sinais de controle (tabela dados_controle)
 export const controlSignalsApi = {
-  getHistory: async (limit = 100): Promise<ControlSignalRecord[]> => {
-    const response = await api.get('/api/control-signals', { params: { limit } });
+  // beginDate/endDate seguem o formato do filtro de datas do MenuLateral (YYYY-MM-DD)
+  getHistory: async (
+    beginDate: string,
+    endDate: string,
+    limit = 25500,
+  ): Promise<ControlSignalRecord[]> => {
+    const response = await api.get('/api/control-signals', {
+      params: { start_date: beginDate, end_date: endDate, limit },
+    });
     return response.data as ControlSignalRecord[];
   },
 };

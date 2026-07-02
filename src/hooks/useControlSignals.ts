@@ -2,14 +2,16 @@ import { useState, useEffect, useCallback } from 'react';
 import { ControlSignalRecord } from '../types/api';
 import { controlSignalsApi } from '../services/controlSignalsApi';
 
-export const useControlSignalsHistory = (limit = 100, pollIntervalMs = 10000) => {
+// beginDate/endDate vêm do filtro de datas do MenuLateral (useDateContext), no formato YYYY-MM-DD
+export const useControlSignalsHistory = (beginDate: string, endDate: string, limit = 25500) => {
   const [history, setHistory] = useState<ControlSignalRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetchHistory = useCallback(async () => {
+    setIsLoading(true);
     try {
-      const data = await controlSignalsApi.getHistory(limit);
+      const data = await controlSignalsApi.getHistory(beginDate, endDate, limit);
       setHistory(data);
       setError(null);
     } catch (err) {
@@ -17,13 +19,11 @@ export const useControlSignalsHistory = (limit = 100, pollIntervalMs = 10000) =>
     } finally {
       setIsLoading(false);
     }
-  }, [limit]);
+  }, [beginDate, endDate, limit]);
 
   useEffect(() => {
     fetchHistory();
-    const interval = setInterval(fetchHistory, pollIntervalMs);
-    return () => clearInterval(interval);
-  }, [fetchHistory, pollIntervalMs]);
+  }, [fetchHistory]);
 
   return { history, isLoading, error };
 };
