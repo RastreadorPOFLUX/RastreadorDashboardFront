@@ -1,58 +1,52 @@
-import { useEffect, useState, useTransition } from "react";
+import { useMemo } from "react";
 import { AgCharts } from "ag-charts-react";
 import { AgChartOptions } from "ag-charts-community";
-import { fetchHistoricalSolarIrradiance } from "./Data";
 import { useDateContext } from "../MenuLateral/DateContext";
+import { useSolarDataHistory } from "../../hooks/useSolarData";
 
-interface WeatherData {
+interface SolarData {
   date: string;
-  solarIrradianceUnit: string;
   hour: string;
   time: string;
   timestamp: number;
   solarIrradianceReference: number;
-  solarIrradiancePyranometer?: number;
-  solarIrradiancePhotodetector?: number;
-  efficiency?: number;
-};
+  solarIrradiancePyranometer: number;
+  solarIrradiancePhotodetector: number;
+  efficiency: number;
+}
 
 //Estilo
 import { StyledWrapper } from "./style";
 
 function SolarIrradiationCard() {
-  const [isPending, startTransition] = useTransition();
-  const [data, setData] = useState<WeatherData[]>([]);
   const { BeginDate, EndDate } = useDateContext();
+  const { history, error } = useSolarDataHistory(BeginDate, EndDate);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetchHistoricalSolarIrradiance();
-      const fetchedData = result.hourly.time.map((timeStr: string, index: number) => ({
-        date: timeStr.split("T")[0],
-        solarIrradianceUnit: result.hourly_units.direct_normal_irradiance,
-        hour: timeStr.split("T")[1].slice(0, 2) + "h",
-        time: timeStr.split("T")[0].slice(8, 10) +
-          timeStr.split("T")[0].slice(4, 8) +
-          timeStr.split("T")[0].slice(0, 4) + "-" +
-          timeStr.split("T")[1].slice(0, 2) + "h",
-        // Adicionando os dados que as séries precisam
-        solarIrradianceReference: result.hourly.direct_normal_irradiance[index], // Valor de referência (usando o valor real)
-        solarIrradiancePyranometer: result.hourly.direct_normal_irradiance[index] * 0.8, // Simulação do piranômetro (80% do valor)
-        solarIrradiancePhotodetector: result.hourly.direct_normal_irradiance[index] * 0.6, // Simulação do fotodetector (60% do valor)
-        efficiency: Math.min(100, (result.hourly.direct_normal_irradiance[index] * 0.6 / (result.hourly.direct_normal_irradiance[index] * 0.8)) * 100), // Eficiência calculada
-        timestamp: new Date(timeStr).getTime()
-      }))
-        .filter((item: { timestamp: string | number | Date; }) => {
-          const itemDate = new Date(item.timestamp);
-          const now = new Date();
-          return itemDate <= now;
-        });
-      startTransition(() => {
-        setData(fetchedData);
-      });
-    };
-    fetchData();
-  }, [BeginDate, EndDate]);
+  const data: SolarData[] = useMemo(
+    () =>
+      history.map((record) => {
+        const date = new Date(record.timestamp * 1000);
+        const day = String(date.getDate()).padStart(2, "0");
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const year = date.getFullYear();
+        const hourStr = String(date.getHours()).padStart(2, "0");
+
+        return {
+          date: `${year}-${month}-${day}`,
+          hour: `${hourStr}h`,
+          time: `${day}-${month}-${year}-${hourStr}h`,
+          timestamp: record.timestamp * 1000,
+          solarIrradianceReference: record.referencia,
+          solarIrradiancePyranometer: record.valor_piranometro,
+          solarIrradiancePhotodetector: record.valor_fotodetector,
+          efficiency:
+            record.valor_piranometro > 0
+              ? Math.min(100, (record.valor_fotodetector / record.valor_piranometro) * 100)
+              : 0,
+        };
+      }),
+    [history]
+  );
 
   const titleRange =
     data.length > 0
@@ -156,7 +150,7 @@ function SolarIrradiationCard() {
         type: "number",
         position: "left",
         title: {
-          text: data[0]?.solarIrradianceUnit || "W/m²",
+          text: "W/m²",
           fontFamily: "Lato, sans-serif",
         },
         keys: ["solarIrradiancePyranometer", "solarIrradiancePhotodetector", "solarIrradianceReference"],
@@ -189,6 +183,9 @@ function SolarIrradiationCard() {
       $top={"21%"}
       $backgroundcolor="var(--backgroundCards)"
     >
+      {error && (
+        <span style={{ color: "red", fontSize: "0.75rem" }}>{error}</span>
+      )}
       <AgCharts options={options} style={{ height: "100%" }} />
     </StyledWrapper>
   );

@@ -83,31 +83,19 @@ function SolarIrradiationIndicatorCard() {
   const fetchData = async () => {
     try {
       const result = await fetchLastSolarIrradiance();
-      const now = new Date();
-      const currentHour = now.getHours();
-      
-      const fetchedData = result.hourly.time
-        .map((timeStr: string, index: number) => ({
-          solarIrradianceReference: result.hourly.direct_normal_irradiance_instant[index],
-          solarIrradiancePhotodetector: sensors?.pyranometer_power ?? 0,
-          solarIrradiancePyranometer: sensors?.photodetector_power ?? 0,
-          timestamp: new Date(timeStr).getTime()
-        }))
-        .filter((item: { timestamp: number }) => {
-          const itemDate = new Date(item.timestamp);
-          const itemHour = itemDate.getHours();
-          return itemHour === currentHour;
-        });
+
+      const currentPoint: WeatherData = {
+        solarIrradianceReference: result.current.direct_normal_irradiance_instant,
+        solarIrradiancePhotodetector: sensors?.pyranometer_power ?? 0,
+        solarIrradiancePyranometer: sensors?.photodetector_power ?? 0,
+        timestamp: new Date(result.current.time).getTime(),
+      };
 
       startTransition(() => {
-        setData(fetchedData);
-        if (fetchedData.length > 0) {
-          setExpectedValue(fetchedData[fetchedData.length - 1]);
-        } else {
-          setExpectedValue(null);
-        }
+        setData([currentPoint]);
+        setExpectedValue(currentPoint);
         setLastUpdate(new Date().toLocaleTimeString());
-        console.log("Dados atualizados:", new Date().toLocaleTimeString(), fetchedData);
+        console.log("Dados atualizados:", new Date().toLocaleTimeString(), currentPoint);
       });
     } catch (error) {
       console.error("Erro ao buscar dados:", error);

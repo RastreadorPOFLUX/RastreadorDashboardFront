@@ -67,6 +67,14 @@ export interface ControlSignalRecord {
   timestamp: number; // Timestamp Unix da leitura em segundos
 }
 
+export interface SolarDataRecord {
+  id: number;
+  valor_piranometro: number; // Leitura do piranômetro em W/m²
+  valor_fotodetector: number; // Leitura do fotodetector em W/m²
+  referencia: number; // Valor de referência externo (Open-Meteo) em W/m²
+  timestamp: number; // Timestamp Unix da leitura em segundos
+}
+
 export interface MotorResponse {
   power: number; // Potência do motor em porcentagem (0 a 100)
   raw_value: number; // Valor bruto do PWM (0 a 255)
