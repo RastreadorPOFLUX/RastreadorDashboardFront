@@ -2,9 +2,12 @@
 //Estilo
 import { StyledWrapper, Text, TextWrapper, TemperatureValue } from "./style";
 
+// Hooks
+import { useSensorsData } from "../../hooks/useSensors";
 
 function TemperatureCard() {
-  const value = 30;
+  const { sensors } = useSensorsData();
+  const value = sensors?.temperature ?? 0;
 
   return (
     <StyledWrapper

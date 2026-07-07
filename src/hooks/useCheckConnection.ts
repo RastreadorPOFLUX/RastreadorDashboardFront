@@ -1,30 +1,7 @@
 // hooks/useCheckConnection.ts
-import { useEffect, useState } from "react";
-import { checkConnectionApi } from "../services/checkConnectionApi";
+import { useLiveData } from "../contexts/LiveDataContext";
 
 export default function useCheckConnection() {
-  const [isConnected, setIsConnected] = useState(false);
-
-  useEffect(() => {
-    const fetchStatus = async () => {
-      try {
-        const data = await checkConnectionApi();
-        setIsConnected(data.is_online === true); // pega o campo 'is_online' da resposta
-      } catch (error: any) {
-          if (error.response?.status === 503) {
-            console.warn("ESP ainda não registrado no backend.");
-        } else {
-            console.error("Erro ao verificar conexão com ESP:", error);
-  }
-        setIsConnected(false);
-      }
-    };
-
-    fetchStatus();
-    const interval = setInterval(fetchStatus, 10000); // verifica a cada 10 segundos
-
-    return () => clearInterval(interval);
-  }, []);
-
+  const { isConnected } = useLiveData();
   return { isConnected };
 }

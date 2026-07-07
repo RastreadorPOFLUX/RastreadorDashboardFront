@@ -12,10 +12,8 @@ const api = axios.create({
   },
 });
 
-// Serviços específicos para ângulos
-export const SensorsApi = {
-
-// Obter ângulos atuais do sistema
+// Serviços específicos para sensores (usado como fallback quando o WebSocket não está disponível)
+export const sensorsApi = {
   getCurrentSensors: async (): Promise<SensorsResponse> => {
     const response = await api.get('/api/sensorsData');
     return response.data as SensorsResponse;

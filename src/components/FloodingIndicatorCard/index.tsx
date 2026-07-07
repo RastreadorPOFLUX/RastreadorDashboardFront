@@ -2,12 +2,12 @@
 //Estilo
 import { StyledWrapper, Text, ToggleContainer, ToggleSwitch, ToggleSlider, StatusText } from "./style";
 
-interface FloodingIndicatorCardProps {
-  value?: number; // 0 = desligado, 1 = ligado
-}
+// Hooks
+import { useSensorsData } from "../../hooks/useSensors";
 
-function FloodingIndicatorCard({ value = 0 }: FloodingIndicatorCardProps) {
-  const isOff = value === 0;
+function FloodingIndicatorCard() {
+  const { sensors } = useSensorsData();
+  const isOff = !sensors?.flooding;
 
   return (
     <StyledWrapper

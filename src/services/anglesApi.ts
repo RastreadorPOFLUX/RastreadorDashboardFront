@@ -12,18 +12,10 @@ const api = axios.create({
   },
 });
 
-// Serviços específicos para ângulos
+// Serviços específicos para ângulos (usado como fallback quando o WebSocket não está disponível)
 export const anglesApi = {
-
-// Obter ângulos atuais do sistema
   getCurrentAngles: async (): Promise<AnglesResponse> => {
     const response = await api.get('/api/angles');
     return response.data as AnglesResponse;
   },
-
-  // Obter ângulos atuais do sistema
-  getCurrentLensAngle: async (): Promise<AnglesResponse> => {
-    const response = await api.get('/api/angles');
-    return response.data.lens_angle as AnglesResponse;
-  }
 };

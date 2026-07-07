@@ -27,6 +27,8 @@ export interface AnglesResponse {
 export interface SensorsResponse {
   pyranometer_power: number;
   photodetector_power: number;
+  temperature: number;
+  flooding: boolean;
 }
 
 export interface ControlResponse {

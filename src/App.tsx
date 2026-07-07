@@ -7,6 +7,9 @@ import ElectricalInfo from "./pages/ElectricalInfo/index";
 import ControlInfo from "./pages/ControlInfo/index";
 import CameraDisplay from "./pages/CameraDisplay/index";
 
+// Contextos
+import { LiveDataProvider } from "./contexts/LiveDataContext";
+
 // Estilo
 import { GlobalStyle } from "./global";
 
@@ -14,12 +17,14 @@ export default function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      <Routes>
-        <Route index path="*" element={<GeneralInfo />} />
-        <Route path="/electricalInfo" element={<ElectricalInfo />} />
-        <Route path="/controlInfo" element={<ControlInfo />} />
-        <Route path="/cameraDisplay" element={<CameraDisplay />} />
-      </Routes>
+      <LiveDataProvider>
+        <Routes>
+          <Route index path="*" element={<GeneralInfo />} />
+          <Route path="/electricalInfo" element={<ElectricalInfo />} />
+          <Route path="/controlInfo" element={<ControlInfo />} />
+          <Route path="/cameraDisplay" element={<CameraDisplay />} />
+        </Routes>
+      </LiveDataProvider>
     </div>
   );
 }

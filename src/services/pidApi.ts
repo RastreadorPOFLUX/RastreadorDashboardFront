@@ -14,7 +14,7 @@ const api = axios.create({
 
 // Serviços específicos para controlador PID
 export const pidApi = {
-// Obter parâmetros do atuais do controlador PID
+  // Usado como fallback quando o WebSocket não está disponível
   getCurrentParameters: async (): Promise<ControlResponse> => {
     const response = await api.get('/api/pid');
     return response.data as ControlResponse;

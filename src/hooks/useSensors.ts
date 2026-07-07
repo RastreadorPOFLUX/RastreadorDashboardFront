@@ -1,52 +1,42 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { SensorsResponse } from '../types/api';
-import { SensorsApi } from '../services/sensorsApi';
-
+import { sensorsApi } from '../services/sensorsApi';
+import { useLiveData } from '../contexts/LiveDataContext';
 
 export interface UseSensorsData {
   sensors: SensorsResponse | null;
-  lensAngle: SensorsResponse | null;
   loading: boolean;
   error: string | null;
-  fetchsensors: () => Promise<SensorsResponse | null>;
-  fetchLenssensors: () => Promise<SensorsResponse | null>;
 }
-export const useSensorsData = () => {
-  const [sensors, setSensors] = useState<SensorsResponse | null>(null);
-  const [loading, setLoading] = useState(false);
+
+// Dados dos sensores (piranômetro, fotodetector, temperatura, alagamento) em
+// tempo real via WebSocket (LiveDataProvider), com fallback para polling
+// HTTP quando o WebSocket não está disponível.
+export const useSensorsData = (): UseSensorsData => {
+  const { sensors: wsSensors, wsConnected } = useLiveData();
+  const [httpSensors, setHttpSensors] = useState<SensorsResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // Buscar sensores do backend
   const fetchSensors = useCallback(async () => {
-    setError(null);
     try {
-      const data = await SensorsApi.getCurrentSensors();
-      setSensors(data);
-      return data;
+      const data = await sensorsApi.getCurrentSensors();
+      setHttpSensors(data);
+      setError(null);
     } catch (err) {
-      setError('Erro ao buscar dados dos sensores');
-      return null;
-    } finally {
-      setLoading(false);
+      setError('Erro ao buscar dados dos sensores.');
     }
   }, []);
 
-    
   useEffect(() => {
+    if (wsConnected) return;
     fetchSensors();
-  }, [fetchSensors]);
-
-  // Pollings a cada 5 segundos
-  useEffect(() => {
     const interval = setInterval(fetchSensors, 5000);
     return () => clearInterval(interval);
-  }, [fetchSensors]);
-
+  }, [wsConnected, fetchSensors]);
 
   return {
-    sensors,
-    loading,
-    error,
-    fetchSensors
+    sensors: wsConnected ? wsSensors : httpSensors,
+    loading: false,
+    error: wsConnected ? null : error,
   };
 };
