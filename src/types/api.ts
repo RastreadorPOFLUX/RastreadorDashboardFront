@@ -18,6 +18,12 @@ export interface ModeRequest {
   adjust: RTCAdjustRequest;
 }
 
+// Resposta de GET /api/mode
+export interface CurrentModeResponse {
+  mode: OperationMode;
+  fail_safe: boolean;
+}
+
 export interface AnglesResponse {
   sun_position?: number; // Posição do sol em graus
   lens_angle: number; // Ângulo atual da lente em graus
@@ -49,6 +55,7 @@ export interface PidResponse {
 // Interface para resposta do status do sistema
 export interface SystemStatusResponse {
   mode: OperationMode;
+  fail_safe: boolean;
   esp_clock: number;
   rtc_day: number;
   rtc_month: number;

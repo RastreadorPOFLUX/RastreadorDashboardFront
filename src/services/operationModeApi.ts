@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { OperationMode, ModeRequest, RTCAdjustRequest, } from '../types/api';
+import { OperationMode, ModeRequest, RTCAdjustRequest, CurrentModeResponse } from '../types/api';
 
 // Configuração base da API
 const API_BASE_URL = 'http://localhost:8000';
@@ -15,10 +15,10 @@ const api = axios.create({
 // Serviços específicos para modos de operação
 export const operationModeApi = {
 
-    // Obter modo atual do sistema
-  getCurrentMode: async (): Promise<OperationMode> => {
-    const response = await api.get<ModeRequest>('/api/mode');
-    return response.data.mode;
+    // Obter modo atual do sistema (e estado do failSafe)
+  getCurrentMode: async (): Promise<CurrentModeResponse> => {
+    const response = await api.get<CurrentModeResponse>('/api/mode');
+    return response.data;
   },
 
   // Alterar modo de operação

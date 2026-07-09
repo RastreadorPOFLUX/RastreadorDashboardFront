@@ -9,6 +9,7 @@ import CameraDisplay from "./pages/CameraDisplay/index";
 
 // Contextos
 import { LiveDataProvider } from "./contexts/LiveDataContext";
+import { OperationModeProvider } from "./contexts/OperationModeContext";
 
 // Estilo
 import { GlobalStyle } from "./global";
@@ -18,12 +19,14 @@ export default function App() {
     <div className="App">
       <GlobalStyle />
       <LiveDataProvider>
-        <Routes>
-          <Route index path="*" element={<GeneralInfo />} />
-          <Route path="/electricalInfo" element={<ElectricalInfo />} />
-          <Route path="/controlInfo" element={<ControlInfo />} />
-          <Route path="/cameraDisplay" element={<CameraDisplay />} />
-        </Routes>
+        <OperationModeProvider>
+          <Routes>
+            <Route index path="*" element={<GeneralInfo />} />
+            <Route path="/electricalInfo" element={<ElectricalInfo />} />
+            <Route path="/controlInfo" element={<ControlInfo />} />
+            <Route path="/cameraDisplay" element={<CameraDisplay />} />
+          </Routes>
+        </OperationModeProvider>
       </LiveDataProvider>
     </div>
   );

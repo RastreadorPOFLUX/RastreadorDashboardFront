@@ -35,6 +35,11 @@ export const Button = styled.button<Props>`
   padding: 0 1rem;
   box-sizing: border-box;
   overflow: hidden;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;
 
 export const Text = styled.h3<Props>`
