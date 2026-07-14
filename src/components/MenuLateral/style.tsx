@@ -83,3 +83,34 @@ export const Contribuitions = styled.h3`
   font-weight: 500;
   position: relative;
 `;
+
+export const ReportButton = styled.button`
+  margin: 0.5rem 10% 0;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 0.4rem;
+  background-color: var(--primaryColor);
+  color: var(--white);
+  font-family: var(--primaryFont);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: 80%;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+`;
+
+export const ReportError = styled.span`
+  margin-left: 10%;
+  color: var(--alertColor);
+  font-size: 0.7rem;
+  font-family: var(--primaryFont);
+`;

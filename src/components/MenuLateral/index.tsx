@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router";
 import { formatDate, useDateContext } from "./DateContext";
+import { useSummaryReport } from "../../hooks/useSummaryReport";
 
 // Estilo
 import {
@@ -9,6 +10,8 @@ import {
   Text,
   DateInput,
   Contribuitions,
+  ReportButton,
+  ReportError,
 } from "./style";
 
 interface MenuLateralProps {
@@ -17,6 +20,14 @@ interface MenuLateralProps {
 
 function MenuLateral({ screen = "general" }: MenuLateralProps) {
   const { BeginDate, setBeginDate, EndDate, setEndDate } = useDateContext();
+  const { loading: loadingReport, error: reportError, generateReport } = useSummaryReport();
+
+  const handleGenerateReport = async () => {
+    const success = await generateReport(BeginDate, EndDate);
+    if (!success) {
+      alert("Erro ao gerar o relatório. Por favor, tente novamente.");
+    }
+  };
 
   const handleBeginDateChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -171,6 +182,14 @@ function MenuLateral({ screen = "general" }: MenuLateralProps) {
           ></DateInput>
         </div>
       </Text>
+      <ReportButton
+        type="button"
+        onClick={handleGenerateReport}
+        disabled={loadingReport}
+      >
+        {loadingReport ? "Gerando relatório..." : "Baixar Relatório (PDF)"}
+      </ReportButton>
+      {reportError && <ReportError>{reportError}</ReportError>}
       <Contribuitions>
         @Guilherme N. Matera
       </Contribuitions>
