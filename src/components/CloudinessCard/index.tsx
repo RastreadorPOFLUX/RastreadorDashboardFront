@@ -1,11 +1,9 @@
-import { useState, useEffect, useTransition } from "react";
+import { useState, useEffect, useRef, useTransition } from "react";
 import { AgCharts } from "ag-charts-react";
-import { AgChartOptions } from "ag-charts-enterprise";
+import { AgChartInstance, AgChartOptions } from "ag-charts-enterprise";
 import { fetchHistoricalCloudiness } from "./Data";
 import { useDateContext } from "./../MenuLateral/DateContext";
-
-//Estilo
-import { StyledWrapper } from "./style";
+import ChartCard from "../ChartCard";
 
 interface WeatherData {
   date: string;
@@ -18,6 +16,7 @@ function CloudinessCard() {
   const [isPending, startTransition] = useTransition();
   const [Data, setData] = useState<WeatherData[]>([]);
   const { BeginDate, EndDate } = useDateContext();
+  const chartRef = useRef<AgChartInstance<AgChartOptions>>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -109,15 +108,16 @@ function CloudinessCard() {
   };
 
   return (
-    <StyledWrapper
+    <ChartCard
       width={"72%"}
       height={"43%"}
-      $left={"25%"}
-      $top={"55%"}
-      $backgroundcolor="var(--backgroundCards)"
+      left={"25%"}
+      top={"55%"}
+      title="nebulosidade"
+      chartRef={chartRef}
     >
-      <AgCharts options={options} style={{ height: "100%" }} />
-    </StyledWrapper>
+      <AgCharts ref={chartRef} options={options} style={{ height: "100%" }} />
+    </ChartCard>
   );
 }
 

@@ -1,8 +1,9 @@
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { AgCharts } from "ag-charts-react";
-import { AgChartOptions } from "ag-charts-community";
+import { AgChartInstance, AgChartOptions } from "ag-charts-community";
 import { useDateContext } from "../MenuLateral/DateContext";
 import { useSolarDataHistory } from "../../hooks/useSolarData";
+import ChartCard from "../ChartCard";
 
 interface SolarData {
   date: string;
@@ -15,12 +16,10 @@ interface SolarData {
   efficiency: number;
 }
 
-//Estilo
-import { StyledWrapper } from "./style";
-
 function SolarIrradiationCard() {
   const { BeginDate, EndDate } = useDateContext();
   const { history, error } = useSolarDataHistory(BeginDate, EndDate);
+  const chartRef = useRef<AgChartInstance<AgChartOptions>>(null);
 
   const data: SolarData[] = useMemo(
     () =>
@@ -176,18 +175,19 @@ function SolarIrradiationCard() {
   };
 
   return (
-    <StyledWrapper
+    <ChartCard
       width={"45%"}
       height={"55%"}
-      $left={"25%"}
-      $top={"21%"}
-      $backgroundcolor="var(--backgroundCards)"
+      left={"25%"}
+      top={"21%"}
+      title="irradiacao_solar"
+      chartRef={chartRef}
     >
       {error && (
         <span style={{ color: "red", fontSize: "0.75rem" }}>{error}</span>
       )}
-      <AgCharts options={options} style={{ height: "100%" }} />
-    </StyledWrapper>
+      <AgCharts ref={chartRef} options={options} style={{ height: "100%" }} />
+    </ChartCard>
   );
 }
 

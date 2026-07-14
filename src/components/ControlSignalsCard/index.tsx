@@ -1,9 +1,9 @@
 import { AgCharts } from "ag-charts-react";
-import { useMemo } from "react";
-import { StyledWrapper } from "./style";
-import { AgChartOptions } from "ag-charts-enterprise";
+import { useMemo, useRef } from "react";
+import { AgChartInstance, AgChartOptions } from "ag-charts-enterprise";
 import { useControlSignalsHistory } from "../../hooks/useControlSignals";
 import { useDateContext } from "../MenuLateral/DateContext";
+import ChartCard from "../ChartCard";
 
 interface ChartPoint {
   hour: string;
@@ -21,6 +21,7 @@ const toBrDate = (isoDate: string) => {
 function ControlSignalsCard() {
   const { BeginDate, EndDate } = useDateContext();
   const { history, error } = useControlSignalsHistory(BeginDate, EndDate);
+  const chartRef = useRef<AgChartInstance<AgChartOptions>>(null);
 
   const chartData: ChartPoint[] = useMemo(
     () =>
@@ -106,18 +107,19 @@ function ControlSignalsCard() {
   };
 
   return (
-    <StyledWrapper
+    <ChartCard
       width={"40%"}
       height={"36%"}
-      $left={"25%"}
-      $top={"62%"}
-      $backgroundcolor="var(--backgroundCards)"
+      left={"25%"}
+      top={"62%"}
+      title="sinais_de_controle"
+      chartRef={chartRef}
     >
       {error && (
         <span style={{ color: "red", fontSize: "0.75rem" }}>{error}</span>
       )}
-      <AgCharts options={options} style={{ height: "100%" }} />
-    </StyledWrapper>
+      <AgCharts ref={chartRef} options={options} style={{ height: "100%" }} />
+    </ChartCard>
   );
 }
 
