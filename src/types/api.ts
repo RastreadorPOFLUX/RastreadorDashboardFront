@@ -84,6 +84,18 @@ export interface SolarDataRecord {
   timestamp: number; // Timestamp Unix da leitura em segundos
 }
 
+export interface TemperatureRecord {
+  id: number;
+  valor_temperatura: number; // Temperatura em °C
+  dt_temperatura: number; // Timestamp Unix da leitura em segundos
+  acima_recomendado: boolean; // Acima do recomendado para o bom funcionamento dos componentes
+}
+
+export interface FloodingRecord {
+  id: number;
+  dt_alagamento: number; // Timestamp Unix de quando o sensor de alagamento ficou ON
+}
+
 export interface MotorResponse {
   power: number; // Potência do motor em porcentagem (0 a 100)
   raw_value: number; // Valor bruto do PWM (0 a 255)

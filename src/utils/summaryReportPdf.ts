@@ -98,6 +98,44 @@ class ReportWriter {
     });
   }
 
+  private gridRow(values: string[], colX: number[], usableWidth: number, rowHeight: number, bold: boolean) {
+    const top = this.y;
+    this.doc.setFont('helvetica', bold ? 'bold' : 'normal');
+    this.doc.setFontSize(10);
+    this.doc.setDrawColor(160);
+    if (bold) {
+      this.doc.setFillColor(235, 235, 235);
+      this.doc.rect(MARGIN_X, top, usableWidth, rowHeight, 'FD');
+    } else {
+      this.doc.rect(MARGIN_X, top, usableWidth, rowHeight, 'S');
+    }
+    values.forEach((value, index) => {
+      const x = colX[index];
+      if (index > 0) {
+        this.doc.line(x, top, x, top + rowHeight);
+      }
+      this.doc.text(value, x + 6, top + rowHeight - 7);
+    });
+    this.y += rowHeight;
+  }
+
+  dataTable(headers: string[], rows: string[][]) {
+    const usableWidth = this.pageWidth - MARGIN_X * 2;
+    const colWidth = usableWidth / headers.length;
+    const colX = headers.map((_, index) => MARGIN_X + colWidth * index);
+    const rowHeight = LINE_HEIGHT + 6;
+
+    this.ensureSpace(rowHeight);
+    this.gridRow(headers, colX, usableWidth, rowHeight, true);
+
+    rows.forEach((row) => {
+      this.ensureSpace(rowHeight);
+      this.gridRow(row, colX, usableWidth, rowHeight, false);
+    });
+
+    this.y += 8;
+  }
+
   paragraph(text: string) {
     this.ensureSpace(LINE_HEIGHT);
     this.doc.setFont('helvetica', 'italic');
@@ -143,37 +181,26 @@ export function buildSummaryReportPdf(
     writer.keyValueRow('Registros no período', `${data.controlStats.erro.count}`);
   }
 
-  if (data.angles) {
-    writer.sectionTitle('Ângulos de Posicionamento (instantâneo)');
-    writer.keyValueRow('Posição do sol', `${data.angles.sun_position ?? '-'}°`);
-    writer.keyValueRow('Ângulo da lente', `${data.angles.lens_angle}°`);
-    writer.keyValueRow('Setpoint manual', `${data.angles.manual_setpoint ?? '-'}°`);
+  if (data.temperatureStats) {
+    writer.sectionTitle('Temperatura (histórico do período)');
+    writer.statsTable([
+      { label: 'Temperatura', unit: '°C', stats: data.temperatureStats },
+    ]);
+    writer.keyValueRow('Registros no período', `${data.temperatureStats.count}`);
   }
 
-  if (data.sensors) {
-    writer.sectionTitle('Sensores (instantâneo)');
-    writer.keyValueRow('Potência piranômetro', `${formatNumber(data.sensors.pyranometer_power)} W/m²`);
-    writer.keyValueRow('Potência fotodetector', `${formatNumber(data.sensors.photodetector_power)} W/m²`);
-    writer.keyValueRow('Temperatura', `${formatNumber(data.sensors.temperature, 1)} °C`);
-    writer.keyValueRow('Alagamento', data.sensors.flooding ? 'Detectado' : 'Não detectado');
+  if (data.floodingEvents) {
+    writer.sectionTitle('Alagamento - Acionamentos Detectados');
+    if (data.floodingEvents.length > 0) {
+      writer.dataTable(
+        ['Data', 'Hora'],
+        data.floodingEvents.map((event) => [event.date, event.time]),
+      );
+    }
+    writer.keyValueRow('Registros no período', `${data.floodingEvents.length}`);
   }
 
-  if (data.pid) {
-    writer.sectionTitle('Controlador PID (instantâneo)');
-    writer.keyValueRow('Kp / Ki / Kd', `${data.pid.kp} / ${data.pid.ki} / ${data.pid.kd}`);
-    writer.keyValueRow(
-      'P / I / D',
-      `${formatNumber(data.pid.p)} / ${formatNumber(data.pid.i)} / ${formatNumber(data.pid.d)}`,
-    );
-    writer.keyValueRow('Erro atual', formatNumber(data.pid.error));
-    writer.keyValueRow('Saída total', formatNumber(data.pid.output));
-  }
-
-  if (data.motor) {
-    writer.sectionTitle('Motor (instantâneo)');
-    writer.keyValueRow('Potência', `${formatNumber(data.motor.power, 0)}%`);
-    writer.keyValueRow('Valor bruto (PWM)', `${data.motor.raw_value}`);
-  }
+  
 
   if (data.warnings.length > 0) {
     writer.sectionTitle('Avisos');

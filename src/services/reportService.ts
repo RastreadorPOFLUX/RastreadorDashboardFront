@@ -18,6 +18,12 @@ export interface SeriesStats {
   avg: number;
 }
 
+export interface FloodingEvent {
+  timestamp: number;
+  date: string;
+  time: string;
+}
+
 export interface SummaryReportData {
   solarStats: {
     pyranometer: SeriesStats;
@@ -31,10 +37,8 @@ export interface SummaryReportData {
     i: SeriesStats;
     d: SeriesStats;
   } | null;
-  angles: AnglesResponse | null;
-  sensors: SensorsResponse | null;
-  pid: ControlResponse | null;
-  motor: MotorResponse | null;
+  temperatureStats: SeriesStats | null;
+  floodingEvents: FloodingEvent[] | null;
   warnings: string[];
 }
 
@@ -59,14 +63,12 @@ export const reportService = {
   getSummaryData: async (beginDate: string, endDate: string): Promise<SummaryReportData> => {
     const warnings: string[] = [];
 
-    const [solarResult, controlResult, anglesResult, sensorsResult, pidResult, motorResult] =
+    const [solarResult, controlResult, temperatureResult, floodingResult] =
       await Promise.allSettled([
         solarDataApi.getHistory(beginDate, endDate),
         controlSignalsApi.getHistory(beginDate, endDate),
-        anglesApi.getCurrentAngles(),
-        sensorsApi.getCurrentSensors(),
-        pidApi.getCurrentParameters(),
-        motorApi.getCurrentMotorPower(),
+        sensorsApi.getTemperatureHistory(beginDate, endDate),
+        sensorsApi.getFloodingEvents(beginDate, endDate),
       ]);
 
     let solarStats: SummaryReportData['solarStats'] = null;
@@ -95,26 +97,27 @@ export const reportService = {
       warnings.push('Não foi possível obter o histórico de sinais de controle.');
     }
 
-    const angles = anglesResult.status === 'fulfilled' ? anglesResult.value : null;
-    if (anglesResult.status === 'rejected') {
-      warnings.push('Não foi possível obter os ângulos atuais.');
+    let temperatureStats: SummaryReportData['temperatureStats'] = null;
+    if (temperatureResult.status === 'fulfilled') {
+      temperatureStats = statsFromRecords(temperatureResult.value, 'valor_temperatura');
+    } else {
+      warnings.push('Não foi possível obter o histórico de temperatura.');
     }
 
-    const sensors = sensorsResult.status === 'fulfilled' ? sensorsResult.value : null;
-    if (sensorsResult.status === 'rejected') {
-      warnings.push('Não foi possível obter os dados dos sensores.');
+    let floodingEvents: SummaryReportData['floodingEvents'] = null;
+    if (floodingResult.status === 'fulfilled') {
+      floodingEvents = floodingResult.value.map((record) => {
+        const date = new Date(record.dt_alagamento * 1000);
+        return {
+          timestamp: record.dt_alagamento,
+          date: date.toLocaleDateString('pt-BR'),
+          time: date.toLocaleTimeString('pt-BR'),
+        };
+      });
+    } else {
+      warnings.push('Não foi possível obter o histórico de acionamentos do sensor de alagamento.');
     }
 
-    const pid = pidResult.status === 'fulfilled' ? pidResult.value : null;
-    if (pidResult.status === 'rejected') {
-      warnings.push('Não foi possível obter os parâmetros do PID.');
-    }
-
-    const motor = motorResult.status === 'fulfilled' ? motorResult.value : null;
-    if (motorResult.status === 'rejected') {
-      warnings.push('Não foi possível obter os dados do motor.');
-    }
-
-    return { solarStats, controlStats, angles, sensors, pid, motor, warnings };
+    return { solarStats, controlStats, temperatureStats, floodingEvents, warnings };
   },
 };
