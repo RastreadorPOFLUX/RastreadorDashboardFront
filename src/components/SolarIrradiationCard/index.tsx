@@ -67,13 +67,13 @@ function SolarIrradiationCard() {
     },
     title: {
       text: `Irradiação Solar - (${titleRange})`,
-      fontSize: 24,
+      fontSize: 22,
       fontFamily: "Lato, sans-serif",
       color: "#000000",
     },
     subtitle: {
       text: "Captada por: Piranômetro, Fotodetector e Valor de Referência",
-      fontSize: 16,
+      fontSize: 14,
       fontFamily: "Lato, sans-serif",
       color: "#000000",
     },
@@ -84,7 +84,7 @@ function SolarIrradiationCard() {
         yKey: "solarIrradiancePhotodetector",
         yName: "Fotodetector",
         fill: "#DD702C",
-        cornerRadius: 10,
+        cornerRadius: 9,
         tooltip: {
           renderer: tooltipRenderer,
         },
@@ -95,7 +95,7 @@ function SolarIrradiationCard() {
         yKey: "solarIrradiancePyranometer",
         yName: "Piranômetro",
         fill: "#C62E2E",
-        cornerRadius: 10,
+        cornerRadius: 9,
         tooltip: {
           renderer: tooltipRenderer,
         },
@@ -106,7 +106,7 @@ function SolarIrradiationCard() {
         yKey: "solarIrradianceReference",
         yName: "Referência",
         fill: "#c3c62eff",
-        cornerRadius: 10,
+        cornerRadius: 9,
         tooltip: {
           renderer: tooltipRenderer,
         },
@@ -119,7 +119,7 @@ function SolarIrradiationCard() {
         stroke: "black",
         marker: {
           fill: "yellow",
-          size: 8,
+          size: 7,
           stroke: "black",
           strokeWidth: 3,
           shape: "diamond",
@@ -135,7 +135,7 @@ function SolarIrradiationCard() {
         position: "bottom",
         title: {
           text: "Horário",
-          fontSize: 12,
+          fontSize: 11,
           fontFamily: "Lato, sans-serif",
         },
         label: {

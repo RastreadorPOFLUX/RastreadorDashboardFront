@@ -43,7 +43,7 @@ function ControlSignalsCard() {
   const options: AgChartOptions = {
     title: {
       text: "Sinais de Controle - (" + intervalTime + ")",
-      fontSize: 20,
+      fontSize: 18,
       fontFamily: "Lato, sans-serif",
       color: "#000000",
     },
@@ -75,10 +75,10 @@ function ControlSignalsCard() {
       position: "top",
       item: {
         label: {
-          fontSize: 10,
+          fontSize: 9,
         },
         marker: {
-          size: 10,
+          size: 9,
           shape: "circle",
         },
       },

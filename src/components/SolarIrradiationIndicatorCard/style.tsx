@@ -36,9 +36,9 @@ interface CircularProgressProps {
 
 export const CircularProgress = styled(Gauge)<CircularProgressProps>(({ $valueColor }) => ({
   [`& .${gaugeClasses.valueText}`]: {
-    fontSize: 40,
+    fontSize: 36,
     fontFamily: "var(--primaryFont)",
-    transform: "translate(0px, -20px)",
+    transform: "translate(0px, -18px)",
   },
   [`& .${gaugeClasses.valueArc}`]: {
      fill: $valueColor || "var(--primaryColor)"

@@ -22,13 +22,13 @@ export const StyledWrapper = styled(Wrapper)<Props>`
 `;
 
 export const GradientLinearProgress = styled(LinearProgress)(() => ({
-  borderRadius: 5,
+  borderRadius: 4.5,
   [`&.${linearProgressClasses.colorPrimary}`]: {
     backgroundColor: "var(--secondaryColor)",
-    height: 15,
+    height: 13.5,
   },
   [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 55,
+    borderRadius: 49.5,
     background: `linear-gradient(-90deg, var(--acceptColor) ${0}% , var(--primaryColor) ${60}%, var(--alertColor) ${100}%)`,
     backgroundSize: `100%`,
     height: "100%",

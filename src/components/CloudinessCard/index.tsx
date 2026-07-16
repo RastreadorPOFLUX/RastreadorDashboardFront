@@ -60,7 +60,7 @@ function CloudinessCard() {
         yKey: "cloudiness",
         yName: "Nebulosidade",
         fill: "#DD702C",
-        cornerRadius: 10,
+        cornerRadius: 9,
         tooltip: {
           renderer: (params: { datum: WeatherData }) => {
             return {
@@ -101,7 +101,7 @@ function CloudinessCard() {
     ],
     title: {
       text: `Nebulosidade - (${titleRange})`,
-      fontSize: 24,
+      fontSize: 22,
       fontFamily: "Lato, sans-serif",
       color: "#000000",
     },

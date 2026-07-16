@@ -20,9 +20,9 @@ export const StyledWrapper = styled(Wrapper)<Props>`
 
 export const CircularProgress = styled(Gauge)(() => ({
   [`& .${gaugeClasses.valueText}`]: {
-    fontSize: 40,
+    fontSize: 36,
     fontFamily: "var(--primaryFont)",
-    transform: "translate(8px, 30px)",
+    transform: "translate(7px, 27px)",
   },
   [`& .${gaugeClasses.valueArc}`]: {
     fill: "var(--primaryColor)",
