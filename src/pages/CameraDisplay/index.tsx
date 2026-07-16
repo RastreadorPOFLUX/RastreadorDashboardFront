@@ -14,7 +14,7 @@ export default function CameraDisplay() {
   return (
     <GeneralInfoBackground>
       <MenuSuperior></MenuSuperior>
-      <DateProvider>
+      <DateProvider screen="camera">
         <MenuLateral screen="camera"></MenuLateral>
         <CameraCard streamUrl={CAMERA_STREAM_URL}></CameraCard>
       </DateProvider>

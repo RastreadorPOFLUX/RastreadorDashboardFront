@@ -18,7 +18,7 @@ interface MenuLateralProps {
   screen?: string; // "general" | "electrical" | "control" | "camera"
 }
 
-function MenuLateral({ screen = "general" }: MenuLateralProps) {
+function MenuLateral({ screen = "general"}: MenuLateralProps) {
   const { BeginDate, setBeginDate, EndDate, setEndDate } = useDateContext();
   const { loading: loadingReport, error: reportError, generateReport } = useSummaryReport();
 
@@ -36,8 +36,8 @@ function MenuLateral({ screen = "general" }: MenuLateralProps) {
     const newBeginDateObj = new Date(newBeginDate);
     const today = new Date();
 
-    if (screen === "electrical") {
-      // Para página electrical: sempre mantém BeginDate e EndDate iguais
+    if (screen === "camera") {
+      // Para página camera: sempre mantém BeginDate e EndDate iguais
       if (newBeginDateObj <= today) {
         setBeginDate(newBeginDate);
         setEndDate(newBeginDate); // Mantém EndDate igual a BeginDate
@@ -70,7 +70,7 @@ function MenuLateral({ screen = "general" }: MenuLateralProps) {
     const newEndDateObj = new Date(newEndDate);
     const today = new Date();
 
-    if (screen === "electrical") {
+    if (screen === "") {
       // Para página electrical: sempre mantém BeginDate e EndDate iguais
       if (newEndDateObj <= today) {
         setEndDate(newEndDate);
@@ -168,7 +168,7 @@ function MenuLateral({ screen = "general" }: MenuLateralProps) {
             gap: "0.5rem",
           }}
         >
-          <DateInput
+          <DateInput 
             id="begin"
             type="text"
             value={BeginDate}

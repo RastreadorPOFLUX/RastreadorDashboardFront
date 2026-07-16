@@ -14,7 +14,7 @@ export default function ControlInfo() {
   return (
     <GeneralInfoBackground>
       <MenuSuperior></MenuSuperior>
-      <DateProvider>
+      <DateProvider screen="control">
         <MenuLateral screen="control"></MenuLateral>
         <FirstRow>
           <AnglesCard></AnglesCard>

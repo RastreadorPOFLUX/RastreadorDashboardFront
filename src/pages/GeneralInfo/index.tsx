@@ -15,8 +15,8 @@ export default function GeneralInfo() {
   return (
     <GeneralInfoBackground>
       <MenuSuperior></MenuSuperior>
-      <DateProvider>
-        <MenuLateral></MenuLateral>
+      <DateProvider screen="general">
+        <MenuLateral screen="general"></MenuLateral>
         <FirstRow>
           <OperationModeCard></OperationModeCard>
           <ClimateCard></ClimateCard>

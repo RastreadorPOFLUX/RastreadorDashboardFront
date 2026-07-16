@@ -44,16 +44,16 @@ export const DateProvider: React.FC<DateProviderProps> = ({ children, screen = "
 
   // Estado inicial baseado na screen
   const [BeginDate, setBeginDate] = useState(
-    screen === "electrical" ? todayFormatted : yesterdayFormatted
+    screen === "camera" ? todayFormatted : yesterdayFormatted
   );
   const [EndDate, setEndDate] = useState(
-    screen === "electrical" ? todayFormatted : todayFormatted
+    screen === "camera" ? todayFormatted : todayFormatted
   );
 
   // Efeito para atualizar as datas quando a screen mudar
   useEffect(() => {
-    if (screen === "electrical") {
-      // Para electrical: ambas as datas são a data atual
+    if (screen === "camera") {
+      // Para camera: ambas as datas são a data atual
       const currentDate = formatDate(new Date());
       setBeginDate(currentDate);
       setEndDate(currentDate);
