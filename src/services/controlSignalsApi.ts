@@ -18,7 +18,7 @@ export const controlSignalsApi = {
   getHistory: async (
     beginDate: string,
     endDate: string,
-    limit = 25500,
+    limit = 604800,
   ): Promise<ControlSignalRecord[]> => {
     const response = await api.get('/api/control-signals', {
       params: { start_date: beginDate, end_date: endDate, limit },

@@ -2,6 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import { SolarDataRecord } from '../types/api';
 import { solarDataApi } from '../services/solarDataApi';
 
+// Piranômetro/fotodetector são persistidos a cada 60 segundos (ver SOLAR_DATA_SEND_INTERVAL
+// no firmware), então o gráfico atualiza no mesmo intervalo.
+const POLL_INTERVAL_MS = 60000;
+
 // beginDate/endDate vêm do filtro de datas do MenuLateral (useDateContext), no formato YYYY-MM-DD
 export const useSolarDataHistory = (beginDate: string, endDate: string, limit = 25500) => {
   const [history, setHistory] = useState<SolarDataRecord[]>([]);
@@ -23,6 +27,8 @@ export const useSolarDataHistory = (beginDate: string, endDate: string, limit = 
 
   useEffect(() => {
     fetchHistory();
+    const interval = setInterval(fetchHistory, POLL_INTERVAL_MS);
+    return () => clearInterval(interval);
   }, [fetchHistory]);
 
   return { history, isLoading, error };

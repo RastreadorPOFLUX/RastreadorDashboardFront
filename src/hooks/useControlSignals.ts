@@ -2,8 +2,12 @@ import { useState, useEffect, useCallback } from 'react';
 import { ControlSignalRecord } from '../types/api';
 import { controlSignalsApi } from '../services/controlSignalsApi';
 
+// Sinais de controle são persistidos a cada 1 segundo (ver ControlSignalLogger no backend),
+// então o gráfico atualiza no mesmo intervalo.
+const POLL_INTERVAL_MS = 1000;
+
 // beginDate/endDate vêm do filtro de datas do MenuLateral (useDateContext), no formato YYYY-MM-DD
-export const useControlSignalsHistory = (beginDate: string, endDate: string, limit = 25500) => {
+export const useControlSignalsHistory = (beginDate: string, endDate: string, limit = 604800) => {
   const [history, setHistory] = useState<ControlSignalRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -23,6 +27,8 @@ export const useControlSignalsHistory = (beginDate: string, endDate: string, lim
 
   useEffect(() => {
     fetchHistory();
+    const interval = setInterval(fetchHistory, POLL_INTERVAL_MS);
+    return () => clearInterval(interval);
   }, [fetchHistory]);
 
   return { history, isLoading, error };
