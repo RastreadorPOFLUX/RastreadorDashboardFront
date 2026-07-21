@@ -7,7 +7,9 @@ import ChartCard from "../ChartCard";
 import toBrDate from "../../helper/toBrdate";
 
 interface ChartPoint {
+  date: string;
   hour: string;
+  time: string;
   controle: number;
   erro: number;
   output: number;
@@ -23,9 +25,16 @@ function ControlSignalsCard() {
     () =>
       history.map((record) => {
         const date = new Date(record.timestamp * 1000);
-        console.log(date.getMonth());
+        const day = String(date.getDate()).padStart(2, "0");
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const year = date.getFullYear();
+        const hourStr = String(date.getHours()).padStart(2, "0");
+        const minuteStr = String(date.getMinutes()).padStart(2, "0");
+
         return {
-          hour: `${date.getHours()}h${date.getMinutes().toString().padStart(2, "0")}`,
+          date: `${year}-${month}-${day}`,
+          hour: `${hourStr}h${minuteStr}`,
+          time: `${day}-${month}-${year}-${hourStr}h${minuteStr}`,
           controle: record.p + record.i + record.d,
           erro: record.erro,
           output: record.saida,
@@ -35,6 +44,14 @@ function ControlSignalsCard() {
   );
 
   const intervalTime = `${toBrDate(BeginDate)} - ${toBrDate(EndDate)}`;
+
+  // Tooltip renderer melhorado
+  const tooltipRenderer = (params: any) => {
+    return {
+      title: ` ${params.datum.hour}`,
+      heading: ` ${toBrDate(params.datum.date)}`,
+    };
+  };
 
   const options: AgChartOptions = {
     title: {
@@ -50,21 +67,30 @@ function ControlSignalsCard() {
     series: [
       {
         type: "line",
-        xKey: "hour",
+        xKey: "time",
         yKey: "controle",
         yName: "Controle",
+        tooltip: {
+          renderer: tooltipRenderer,
+        },
       },
       {
         type: "line",
-        xKey: "hour",
+        xKey: "time",
         yKey: "erro",
         yName: "Erro",
+        tooltip: {
+          renderer: tooltipRenderer,
+        },
       },
       {
         type: "line",
-        xKey: "hour",
+        xKey: "time",
         yKey: "output",
         yName: "Output",
+        tooltip: {
+          renderer: tooltipRenderer,
+        },
       },
     ],
     legend: {
@@ -88,7 +114,7 @@ function ControlSignalsCard() {
           fontFamily: "Lato, sans-serif",
         },
         label: {
-          formatter: ({ value }) => `${value}`,
+          formatter: ({ value }) => `${value.split("-")[3]}`,
         },
       },
       {

@@ -55,7 +55,7 @@ function SolarIrradiationCard() {
   const tooltipRenderer = (params: any) => {
     return {
       title: ` ${params.datum.hour}`,
-      heading: ` ${params.datum.date}`,
+      heading: ` ${toBrDate(params.datum.date)}`,
     };
   };
 
