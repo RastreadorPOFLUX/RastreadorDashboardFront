@@ -1,16 +1,12 @@
 import jsPDF from 'jspdf';
 import { SeriesStats, SummaryReportData } from '../services/reportService';
+import toBrDate from './../helper/toBrdate';
 
 const MARGIN_X = 40;
 const LINE_HEIGHT = 18;
 
 const formatNumber = (value: number, decimals = 2) =>
   value.toLocaleString('pt-BR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
-
-const toBrDate = (isoDate: string) => {
-  const [year, month, day] = isoDate.split('-');
-  return `${day}/${month}/${year}`;
-};
 
 class ReportWriter {
   readonly doc: jsPDF;

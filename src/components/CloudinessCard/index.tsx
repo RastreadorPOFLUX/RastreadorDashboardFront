@@ -43,9 +43,9 @@ function CloudinessCard() {
     fetchData();
   }, [BeginDate, EndDate]);
 
-  let titleRange = "";
+  let intervalTime = "";
   if (Data.length > 0) {
-    titleRange = `${Data[0].time.slice(0, 10).replaceAll("-", "/")} - ${Data[Data.length - 1].time.slice(0, 10).replaceAll("-", "/")}`;
+    intervalTime = `${(Data[0].time.slice(0, 10).replaceAll("-", "/"))} - ${(Data[Data.length - 1].time.slice(0, 10).replaceAll("-", "/"))}`;
   }
 
   const options: AgChartOptions = {
@@ -100,7 +100,7 @@ function CloudinessCard() {
       },
     ],
     title: {
-      text: `Nebulosidade - (${titleRange})`,
+      text: "Nebulosidade -  (" + intervalTime + ")",
       fontSize: 22,
       fontFamily: "Lato, sans-serif",
       color: "#000000",

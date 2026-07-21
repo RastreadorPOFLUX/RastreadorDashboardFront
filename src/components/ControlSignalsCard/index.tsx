@@ -4,6 +4,7 @@ import { AgChartInstance, AgChartOptions } from "ag-charts-enterprise";
 import { useControlSignalsHistory } from "../../hooks/useControlSignals";
 import { useDateContext } from "../MenuLateral/DateContext";
 import ChartCard from "../ChartCard";
+import toBrDate from "../../helper/toBrdate";
 
 interface ChartPoint {
   hour: string;
@@ -12,11 +13,6 @@ interface ChartPoint {
   output: number;
 }
 
-// Converte YYYY-MM-DD (formato do filtro de datas) para dd/mm/yyyy
-const toBrDate = (isoDate: string) => {
-  const [year, month, day] = isoDate.split("-");
-  return `${day}/${month}/${year}`;
-};
 
 function ControlSignalsCard() {
   const { BeginDate, EndDate } = useDateContext();

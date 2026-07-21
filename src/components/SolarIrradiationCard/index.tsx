@@ -4,6 +4,7 @@ import { AgChartInstance, AgChartOptions } from "ag-charts-community";
 import { useDateContext } from "../MenuLateral/DateContext";
 import { useSolarDataHistory } from "../../hooks/useSolarData";
 import ChartCard from "../ChartCard";
+import toBrDate from "../../helper/toBrdate";
 
 interface SolarData {
   date: string;
@@ -15,6 +16,7 @@ interface SolarData {
   solarIrradiancePhotodetector: number;
   efficiency: number;
 }
+
 
 function SolarIrradiationCard() {
   const { BeginDate, EndDate } = useDateContext();
@@ -47,10 +49,7 @@ function SolarIrradiationCard() {
     [history]
   );
 
-  const titleRange =
-    data.length > 0
-      ? `${data[0].time.slice(0, 10).replaceAll("-", "/")}`
-      : "Carregando...";
+  const intervalTime = `${toBrDate(BeginDate)} - ${toBrDate(EndDate)}`;
 
   // Tooltip renderer melhorado
   const tooltipRenderer = (params: any) => {
@@ -66,7 +65,7 @@ function SolarIrradiationCard() {
       visible: false,
     },
     title: {
-      text: `Irradiação Solar - (${titleRange})`,
+      text: `Irradiação Solar - (${intervalTime})`,
       fontSize: 22,
       fontFamily: "Lato, sans-serif",
       color: "#000000",
