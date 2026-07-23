@@ -10,8 +10,8 @@ import {
 } from "./style";
 import { useOperationMode } from "../../contexts/OperationModeContext";
 
-const minAngleValue = -40;
-const maxAngleValue = 40;
+const minAngleValue = -60;
+const maxAngleValue = 60;
 
 function OperationModeCard() {
   const [manualSetpoint, setManualSetpoint] = useState(() => {
